@@ -2,7 +2,7 @@
 pycrunchbase
 ===============================
 
-| |docs| |travis| |appveyor| |coveralls| |landscape| |scrutinizer|
+| |docs| |travis| |coveralls|
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
 .. |docs| image:: https://readthedocs.org/projects/pycrunchbase/badge/?style=flat
@@ -13,16 +13,8 @@ pycrunchbase
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/ngzhian/pycrunchbase
 
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/ngzhian/pycrunchbase?branch=master
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/ngzhian/pycrunchbase
-
 .. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg
     :target: https://coveralls.io/r/ngzhian/pycrunchbase
-
-.. |landscape| image:: https://landscape.io/github/ngzhian/pycrunchbase/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/ngzhian/pycrunchbase/master
-    :alt: Code Quality Status
 
 .. |version| image:: http://img.shields.io/pypi/v/pycrunchbase.png?style=flat
     :alt: PyPI Package latest release
@@ -43,10 +35,6 @@ pycrunchbase
 .. |supported-implementations| image:: https://pypip.in/implementation/pycrunchbase/badge.png?style=flat
     :alt: Supported imlementations
     :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/ngzhian/pycrunchbase/master.png?style=flat
-    :alt: Scrtinizer Status
-    :target: https://scrutinizer-ci.com/g/ngzhian/pycrunchbase/
 
 Python bindings to CrunchBase
 
