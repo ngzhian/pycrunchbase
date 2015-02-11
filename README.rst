@@ -17,8 +17,7 @@ pycrunchbase
     :alt: AppVeyor Build Status
     :target: https://ci.appveyor.com/project/ngzhian/pycrunchbase
 
-.. |coveralls| image:: http://img.shields.io/coveralls/ngzhian/pycrunchbase/master.png?style=flat
-    :alt: Coverage Status
+.. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg
     :target: https://coveralls.io/r/ngzhian/pycrunchbase
 
 .. |landscape| image:: https://landscape.io/github/ngzhian/pycrunchbase/master/landscape.svg?style=flat
