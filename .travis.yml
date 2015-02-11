@@ -1,21 +1,17 @@
 language: python
-python: 2.7
+python:
+    - "2.7"
+    - "3.4"
 sudo: false
 env:
   global:
     LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
   matrix:
     - TOXENV=check
-    - TOXENV=2.6,coveralls
-    - TOXENV=2.6-nocover
     - TOXENV=2.7,coveralls
     - TOXENV=2.7-nocover
-    - TOXENV=3.3,coveralls
-    - TOXENV=3.3-nocover
     - TOXENV=3.4,coveralls
     - TOXENV=3.4-nocover
-    - TOXENV=pypy,coveralls
-    - TOXENV=pypy-nocover
 before_install:
   - python --version
   - virtualenv --version
@@ -30,4 +26,5 @@ notifications:
   email:
     on_success: never
     on_failure: always
-
+after_success:
+  - coveralls

@@ -51,7 +51,21 @@ pycrunchbase
 
 Python bindings to CrunchBase
 
-* Free software: BSD license
+Examples
+========
+
+::
+
+    cb = CrunchBase(API_KEY)
+    github = cb.organization('github')
+    funding_rounds_summary = github.funding_rounds
+
+    more_funding_rounds = cb.more(funding_rounds_summary)
+
+    funding_round_details = [
+        cb.funding_round(round.cbid) for round in funding_rounds_summary
+    ]
+
 
 Installation
 ============
@@ -71,3 +85,21 @@ Development
 To run the all tests run::
 
     tox
+
+Goals
+=====
+
+1. Support all (or almost all) of CrunchBase's API functionalities
+2. Speedy updates when CrunchBase's API changes
+3. 'Pythonic' bindings, user doesn't feel like we're requesting URLs
+
+
+TODO
+===========
+
+Support other nodes (Person, Product, FundingRound, Acquisition, IPO, FundRaise)
+
+License
+=======
+
+MIT
