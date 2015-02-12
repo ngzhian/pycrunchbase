@@ -26,5 +26,3 @@ notifications:
   email:
     on_success: never
     on_failure: always
-after_success:
-  - coveralls
