@@ -1,4 +1,5 @@
 from .node import Node
+from .utils import parse_date
 
 
 class Person(Node):
@@ -47,4 +48,4 @@ class Person(Node):
         # special cases to convert strings to pythonic value
         for attr in ['born_on', 'died_on']:
             if getattr(self, attr, None):
-                setattr(self, attr, self._parse_date(getattr(self, attr)))
+                setattr(self, attr, parse_date(getattr(self, attr)))

@@ -1,4 +1,5 @@
 from .node import Node
+from .utils import parse_date
 
 
 class Organization(Node):
@@ -50,7 +51,7 @@ class Organization(Node):
         # special cases to convert strings to pythonic value
         for attr in ['closed_on', 'founded_on']:
             if getattr(self, attr, None):
-                setattr(self, attr, self._parse_date(getattr(self, attr)))
+                setattr(self, attr, parse_date(getattr(self, attr)))
         for attr in ['number_of_employees', 'number_of_investments']:
             if getattr(self, attr, None):
                 setattr(self, attr, int(getattr(self, attr)))

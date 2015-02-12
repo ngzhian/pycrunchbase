@@ -3,6 +3,7 @@ from unittest import TestCase
 import json
 
 from pycrunchbase.resource.node import Node
+from pycrunchbase.resource.utils import parse_date
 
 
 class TestNode(Node):
@@ -12,7 +13,7 @@ class TestNode(Node):
         # intentionally coerce bad values for test purposes
         attr = 'property1'
         if getattr(self, attr, None):
-            setattr(self, attr, self._parse_date(getattr(self, attr)))
+            setattr(self, attr, parse_date(getattr(self, attr)))
 
 data = {
     'properties': {

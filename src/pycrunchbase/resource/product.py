@@ -1,4 +1,5 @@
 from .node import Node
+from .utils import parse_date
 
 
 class Product(Node):
@@ -34,4 +35,4 @@ class Product(Node):
     def _coerce_values(self):
         for attr in ['launched_on']:
             if getattr(self, attr, None):
-                setattr(self, attr, self._parse_date(getattr(self, attr)))
+                setattr(self, attr, parse_date(getattr(self, attr)))

@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 from .relationship import NoneRelationshipSingleton, Relationship
 
@@ -54,10 +53,3 @@ class Node(object):
         """Method that subclasses can override to coerce values,
         e.g. a date string to date object
         """
-
-    def _parse_date(self, datelike):
-        """Helper for parsing dates in Organization properties"""
-        try:
-            return datetime.strptime(datelike, "%Y-%m-%d")
-        except ValueError:
-            return datelike

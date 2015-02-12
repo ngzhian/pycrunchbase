@@ -1,4 +1,5 @@
 from .node import Node
+from .utils import parse_date
 
 
 class FundingRound(Node):
@@ -33,4 +34,4 @@ class FundingRound(Node):
     def _coerce_values(self):
         for attr in ['announced_on']:
             if getattr(self, attr, None):
-                setattr(self, attr, self._parse_date(getattr(self, attr)))
+                setattr(self, attr, parse_date(getattr(self, attr)))
