@@ -16,7 +16,7 @@ class Relationship(object):
 
     A call of type 1. will only get the summary of the relationships,
     to get the details we need to explicitly call methods on
-    :class:`CrunchBase` and retrieve them.
+    CrunchBase and retrieve them.
     """
     def __init__(self, name, data, crunchbase=None):
         self.name = name
@@ -59,17 +59,17 @@ class Relationship(object):
             i(int): 1-based index of the element to retrieve
 
         Returns:
-            :class:`PageItem` if valid item exists at index i
+            PageItem if valid item exists at index i
             None if the index is too small or too large
         """
-        if (i < 1 or i > len(self.items)):
+        if i < 1 or i > len(self.items):
             return None
-        if (i <= len(self.items)):
+        if i <= len(self.items):
             return self.items[i-1]
 
 
 class NoneRelationship(object):
-    def get(self, i):
+    def get(self, _):
         return NonePageItemSingleton
 
     def __len__(self):

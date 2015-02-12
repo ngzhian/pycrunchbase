@@ -8,10 +8,10 @@ class PageItem(object):
             setattr(self, k, v)
 
     @classmethod
-    def build(self, data):
+    def build(cls, data):
         path = data.get('path')
         if not path:
-            return PageItem(data)
+            return cls(data)
         if path.startswith('acquisition'):
             return AcquisitionPageItem(data)
         if path.startswith('funding-round'):
@@ -24,7 +24,7 @@ class PageItem(object):
             return PersonPageItem(data)
         if path.startswith('product'):
             return ProductPageItem(data)
-        return PageItem(data)
+        return cls(data)
 
 
 class UuidPageItem(PageItem):

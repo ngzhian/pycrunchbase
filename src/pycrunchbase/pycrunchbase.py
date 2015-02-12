@@ -31,7 +31,7 @@ class CrunchBase(object):
         Search for a organization given a name, returns details of first match
 
         Returns:
-            :class:`Organization` or None
+            Organization or None
         """
         url = self.ORGANIZATIONS_URL
         data = self._make_request(url, {'name': name})
@@ -84,7 +84,7 @@ class CrunchBase(object):
         node_data = self.get_node('product', permalink)
         return Product(node_data) if node_data else None
 
-    def get_node(self, node_type, uuid, params={}):
+    def get_node(self, node_type, uuid, params=None):
         """Get the details of a Node from CrunchBase.
         The node_type must match that of CrunchBase's, and the uuid
         is either the {uuid} or {permalink} as stated on their docs.
@@ -106,7 +106,7 @@ class CrunchBase(object):
 
         Returns:
             None if there is no more data to get or if you have all the data
-            :class:`Relationship` with the new data
+            Relationship with the new data
         """
         if relationship.total_items <= len(relationship):
             return None
@@ -128,7 +128,7 @@ class CrunchBase(object):
             url (str): url of the relationship to make the call to
 
         Returns:
-            :class:`Relationship` if we can get the data
+            Relationship if we can get the data
             None if we have an error
         """
         data = self._make_request(url)
@@ -136,18 +136,19 @@ class CrunchBase(object):
             return None
         return Relationship(name, data)
 
-    def _get_first_organization_match(self, list_of_result=[None]):
+    def _get_first_organization_match(self, list_of_result=None):
         """Returns:
-            :class:`Organization` or None
+            Organization or None
         """
-        first_match = list_of_result[0] or {}
+        first_match = list_of_result[0] if list_of_result else {}
         crunchbase_organization_path = first_match.get('path', '')
         organization_name = crunchbase_organization_path.split('/')[1]
         return self.organization(organization_name)
 
-    def _build_url(self, base_url, params={}):
+    def _build_url(self, base_url, params=None):
         """Helper to build urls by appending all queries and the API key
         """
+        params = params or {}
         base_url = '{url}?user_key={api_key}'.format(
             url=base_url, api_key=self.api_key)
         query_list = ['%s=%s' % (k, v) for k, v in six.iteritems(params)]
@@ -155,7 +156,7 @@ class CrunchBase(object):
             base_url += '&' + '&'.join(query_list)
         return base_url
 
-    def _make_request(self, url, params={}):
+    def _make_request(self, url, params=None):
         """Makes the actual API call to CrunchBase
         """
         final_url = self._build_url(url, params)

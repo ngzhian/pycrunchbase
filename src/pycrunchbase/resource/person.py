@@ -8,16 +8,16 @@ class Person(Node):
     """
 
     KNOWN_RELATIONSHIPS = [
-       "degrees",
-       "experience",
-       "primary_location",
-       "primary_affiliation",
-       "investments",
-       "advisor_at",
-       "founded_companies",
-       "primary_image",
-       "websites",
-       "news"
+        "degrees",
+        "experience",
+        "primary_location",
+        "primary_affiliation",
+        "investments",
+        "advisor_at",
+        "founded_companies",
+        "primary_image",
+        "websites",
+        "news"
     ]
 
     KNOWN_PROPERTIES = [
