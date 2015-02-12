@@ -114,4 +114,7 @@ class FundingRoundTestCase(TestCase):
         self.assertEqual(funding_round.updated_at, 1419019444)
 
     def test_relationships(self):
-        pass
+        funding_round = FundingRound(FUNDING_ROUND_DATA)
+        self.assertEqual(len(funding_round.investments), 2)
+        self.assertEqual(len(funding_round.funded_organization), 1)
+        self.assertEqual(len(funding_round.news), 1)

@@ -317,3 +317,45 @@ class CrunchBaseTestCase(TestCase):
         person = cb.person('name')
         self.assertEqual(person.last_name, "Last")
         self.assertEqual(person.first_name, "First")
+
+    @httpretty.activate
+    def test_get_product_data(self):
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.crunchbase.com/v/2/product/permalink1'
+            '?user_key=123',
+            body='''{
+                "data": {
+                    "uuid": "uuid1",
+                    "type": "Person",
+                    "properties": {
+                        "lifecycle_stage": "Stage",
+                        "permalink": "permalink1"
+                    }
+                }
+            }''')
+        cb = CrunchBase('123')
+        product = cb.product('permalink1')
+        self.assertEqual(product.lifecycle_stage, "Stage")
+        self.assertEqual(product.permalink, "permalink1")
+
+    @httpretty.activate
+    def test_get_acquisition_data(self):
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.crunchbase.com/v/2/acquisition/uuid1'
+            '?user_key=123',
+            body='''{
+                "data": {
+                    "uuid": "uuid1",
+                    "type": "Person",
+                    "properties": {
+                        "disposition_of_acquired": "Combined",
+                        "acquisition_type": "Acqui-hire"
+                    }
+                }
+            }''')
+        cb = CrunchBase('uuid1')
+        acquisition = cb.acquisition('uuid1')
+        self.assertEqual(acquisition.disposition_of_acquired, "Combined")
+        self.assertEqual(acquisition.acquisition_type, "Acqui-hire")

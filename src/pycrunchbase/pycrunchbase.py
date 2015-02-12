@@ -1,7 +1,14 @@
 import requests
 from requests.exceptions import HTTPError
 import six
-from .resource import FundingRound, Organization, Person, Relationship
+from .resource import (
+    Acquisition,
+    FundingRound,
+    Organization,
+    Person,
+    Product,
+    Relationship,
+)
 
 import logging as log
 
@@ -33,44 +40,66 @@ class CrunchBase(object):
             return None
         return self._get_first_organization_match(data.get('items'))
 
-    def organization(self, name):
-        '''
-        Get the details of a organization given a organization name.
-        The organization name should match the permalink on CrunchBase.
+    def organization(self, permalink):
+        """Get the details of a organization given a organization's permalink.
 
         Returns:
-            :class:`Organization` or None
-        '''
-        org_url = self.ORGANIZATION_URL + '/' + name
-        data = self._make_request(org_url)
-        if not data or data.get('error'):
-            return None
-        return Organization(data)
-
-    def person(self, name):
-        """Get the details of a person given a person name.
-        The person's name should match the path on CrunchBase.
-
-        Returns:
-            :class:`Person` or None
+            Organization or None
         """
-        person_url = self.PERSON_URL + '/' + name
-        data = self._make_request(person_url)
-        if not data or data.get('error'):
-            return None
-        return Person(data)
+        node_data = self.get_node('organization', permalink)
+        return Organization(node_data) if node_data else None
+
+    def person(self, permalink):
+        """Get the details of a person given a person's permalink
+
+        Returns:
+            Person or None
+        """
+        node_data = self.get_node('person', permalink)
+        return Person(node_data) if node_data else None
 
     def funding_round(self, uuid):
         """Get the details of a FundingRound given the uuid.
 
         Returns
-            :class:`FundingRound` or None
+            FundingRound or None
         """
-        funding_round_url = self.FUNDING_ROUND_URL + '/' + uuid
-        data = self._make_request(funding_round_url)
+        node_data = self.get_node('funding-round', uuid)
+        return FundingRound(node_data) if node_data else None
+
+    def acquisition(self, uuid):
+        """Get the details of a acquisition given a uuid.
+
+        Returns:
+            Acquisition or None
+        """
+        node_data = self.get_node('acquisition', uuid)
+        return Acquisition(node_data) if node_data else None
+
+    def product(self, permalink):
+        """Get the details of a product given a product permalink.
+
+        Returns:
+            Product or None
+        """
+        node_data = self.get_node('product', permalink)
+        return Product(node_data) if node_data else None
+
+    def get_node(self, node_type, uuid, params={}):
+        """Get the details of a Node from CrunchBase.
+        The node_type must match that of CrunchBase's, and the uuid
+        is either the {uuid} or {permalink} as stated on their docs.
+        Returns:
+            A dict containing the data describing this node.
+            It has the keys: uuid, type, properties, relationships.
+
+            Or None if there's an error.
+        """
+        node_url = self.BASE_URL + node_type + '/' + uuid
+        data = self._make_request(node_url, params=params)
         if not data or data.get('error'):
             return None
-        return FundingRound(data)
+        return data
 
     def more(self, relationship):
         """Given a Relationship, tries to get more data using the
