@@ -49,9 +49,8 @@ Examples
 
     more_funding_rounds = cb.more(funding_rounds_summary)
 
-    funding_round_details = [
-        cb.funding_round(round.cbid) for round in funding_rounds_summary
-    ]
+    round_uuid = funding_rounds_summary.get(1)
+    round_details = cb.funding_round(round_uuid)
 
 
 Installation
@@ -86,6 +85,7 @@ TODO
 
 Support other nodes (IPO, FundRaise)
 Coerce values in relationships page item to python types (datetime)
+explore other ways to set properties and relationships such that we can tab complete those values
 
 License
 =======
