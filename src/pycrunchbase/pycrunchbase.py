@@ -1,6 +1,7 @@
 import requests
-from requests.exceptions import HTTPError
 import six
+from requests.exceptions import HTTPError
+
 from .resource import (
     Acquisition,
     FundingRound,
@@ -10,11 +11,9 @@ from .resource import (
     Relationship,
 )
 
-import logging as log
-
 
 class CrunchBase(object):
-    '''Class that manages talking to CrunchBase API'''
+    """Class that manages talking to CrunchBase API"""
     BASE_URL = 'https://api.crunchbase.com/v/2/'
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
     ORGANIZATION_URL = BASE_URL + 'organization'
@@ -121,15 +120,6 @@ class CrunchBase(object):
         else:
             return None
 
-    def _get_first_organization_match(self, list_of_result=[None]):
-        """Returns:
-            :class:`Organization` or None
-        """
-        first_match = list_of_result[0] or {}
-        crunchbase_organization_path = first_match.get('path', '')
-        organization_name = crunchbase_organization_path.split('/')[1]
-        return self.organization(organization_name)
-
     def _relationship(self, name, url):
         """Loads a relationship for a Node
 
@@ -146,22 +136,32 @@ class CrunchBase(object):
             return None
         return Relationship(name, data)
 
-    def _make_request(self, url, params={}):
-        """Makes the actual API call to CrunchBase"""
-        final_url = self._build_url(url, params)
-        try:
-            response = requests.get(final_url)
-            response.raise_for_status()
-        except HTTPError:
-            log.exception('call to %s failed', final_url)
-            return None
-        return response.json().get('data')
+    def _get_first_organization_match(self, list_of_result=[None]):
+        """Returns:
+            :class:`Organization` or None
+        """
+        first_match = list_of_result[0] or {}
+        crunchbase_organization_path = first_match.get('path', '')
+        organization_name = crunchbase_organization_path.split('/')[1]
+        return self.organization(organization_name)
 
     def _build_url(self, base_url, params={}):
-        """Helper to build urls by appending all queries and the API key"""
+        """Helper to build urls by appending all queries and the API key
+        """
         base_url = '{url}?user_key={api_key}'.format(
             url=base_url, api_key=self.api_key)
         query_list = ['%s=%s' % (k, v) for k, v in six.iteritems(params)]
         if query_list:
             base_url += '&' + '&'.join(query_list)
         return base_url
+
+    def _make_request(self, url, params={}):
+        """Makes the actual API call to CrunchBase
+        """
+        final_url = self._build_url(url, params)
+        try:
+            response = requests.get(final_url)
+            response.raise_for_status()
+        except HTTPError:
+            return None
+        return response.json().get('data')
