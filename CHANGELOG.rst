@@ -2,6 +2,14 @@
 Changelog
 =========
 
+0.1.3 (2015-02-12)
+-----------------------------------------
+
+* Fix Relationship: wasn't using the right build method of PageItem
+* Add test to checkk for the above
+* remove unused reference to CrunchBase in Relationship
+
+
 0.1.2 (2015-02-12)
 -----------------------------------------
 

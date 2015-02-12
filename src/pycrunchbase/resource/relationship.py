@@ -18,7 +18,7 @@ class Relationship(object):
     to get the details we need to explicitly call methods on
     CrunchBase and retrieve them.
     """
-    def __init__(self, name, data, crunchbase=None):
+    def __init__(self, name, data):
         self.name = name
         paging = data.get('paging')
         self.total_items = safe_int(paging.get('total_items')) or 0
@@ -33,9 +33,8 @@ class Relationship(object):
         # being on page 0 means this is a summary returned as part of the node
         self.number_of_pages = safe_int(paging.get('number_of_pages')) or 0
 
-        self.items = [PageItem(item) for item in data.get('items')]
+        self.items = [PageItem.build(item) for item in data.get('items')]
         self.current_page = paging.get('current_page') or 1
-        self.crunchbase = crunchbase
 
     def __getitem__(self, key):
         if not isinstance(key, int):

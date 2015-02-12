@@ -31,6 +31,7 @@ class RelationshipTestCase(TestCase):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
         one = past_team.get(1)
         self.assertEqual(one.first_name, "First")
+        self.assertEqual(one.permalink, "first-last")
 
     def test_relationship_exceed_total_items(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
