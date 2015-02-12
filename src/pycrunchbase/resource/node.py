@@ -57,6 +57,7 @@ class Node(object):
 
     def _parse_date(self, datelike):
         """Helper for parsing dates in Organization properties"""
-        if datelike is None:
-            return None
-        return datetime.strptime(datelike, "%Y-%m-%d")
+        try:
+            return datetime.strptime(datelike, "%Y-%m-%d")
+        except ValueError:
+            return datelike
