@@ -84,7 +84,8 @@ Goals
 TODO
 ===========
 
-Support other nodes (Person, Product, FundingRound, Acquisition, IPO, FundRaise)
+Support other nodes (IPO, FundRaise)
+Coerce values in relationships page item to python types (datetime)
 
 License
 =======
