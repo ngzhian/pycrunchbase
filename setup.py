@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 setup(
     name="pycrunchbase",
     version="0.1.0",
-    license="BSD",
+    license="MIT",
     description="Python bindings to CrunchBase",
     long_description="{0}\n{1}".format(read("README.rst"), re.sub(":obj:`~?(.*?)`", r"``\1``", read("CHANGELOG.rst"))),
     author="Ng Zhi An",
@@ -38,9 +38,9 @@ setup(
     zip_safe=False,
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",
         "Operating System :: POSIX",
         "Operating System :: Microsoft :: Windows",
@@ -56,12 +56,4 @@ setup(
     install_requires=[
         "requests==2.5.1", "six==1.9.0"
     ],
-    extras_require={
-        # eg: "rst": ["docutils>=0.11"],
-    },
-    entry_points={
-        "console_scripts": [
-            "pycrunchbase = pycrunchbase.__main__:main"
-        ]
-    },
 )
