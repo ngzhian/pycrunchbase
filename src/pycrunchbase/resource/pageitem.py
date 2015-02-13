@@ -6,6 +6,8 @@ class PageItem(object):
         self.data = data
         for k, v in six.iteritems(data):
             setattr(self, k, v)
+        if 'path' in self.data:
+            setattr(self, 'cb_url', 'crunchbase.com/' + data.get('path'))
 
     @classmethod
     def build(cls, data):

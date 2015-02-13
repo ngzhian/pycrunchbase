@@ -31,6 +31,9 @@ class PageItemTestCase(TestCase):
             page_item.path, "acquisition/4292239d4dbbc52eeee0856612ed9c47")
         self.assertEqual(
             page_item.uuid, "4292239d4dbbc52eeee0856612ed9c47")
+        self.assertEqual(
+            page_item.cb_url,
+            "crunchbase.com/acquisition/4292239d4dbbc52eeee0856612ed9c47")
 
     def test_funding_round_page_item(self):
         data = {
@@ -48,6 +51,9 @@ class PageItemTestCase(TestCase):
             page_item.path, "funding-round/37bd05f961af726ba3c1b279da842805")
         self.assertEqual(
             page_item.uuid, "37bd05f961af726ba3c1b279da842805")
+        self.assertEqual(
+            page_item.cb_url,
+            "crunchbase.com/funding-round/37bd05f961af726ba3c1b279da842805")
 
     def test_ipo_page_item(self):
         data = {
@@ -65,6 +71,9 @@ class PageItemTestCase(TestCase):
             page_item.path, "ipo/a3bc391490d52ba8529d1cfc20550a87")
         self.assertEqual(
             page_item.uuid, "a3bc391490d52ba8529d1cfc20550a87")
+        self.assertEqual(
+            page_item.cb_url,
+            "crunchbase.com/ipo/a3bc391490d52ba8529d1cfc20550a87")
 
     def test_organization_page_item(self):
         data = {
@@ -80,6 +89,8 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.name, "Example")
         self.assertEqual(page_item.path, "organization/example")
         self.assertEqual(page_item.permalink, "example")
+        self.assertEqual(
+            page_item.cb_url, "crunchbase.com/organization/example")
 
     def test_person_page_item(self):
         data = {
@@ -101,6 +112,7 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.ended_on, None)
         self.assertEqual(page_item.path, "person/first-last")
         self.assertEqual(page_item.permalink, "first-last")
+        self.assertEqual(page_item.cb_url, "crunchbase.com/person/first-last")
 
     def test_product_page_item(self):
         data = {
@@ -116,6 +128,8 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.name, "Product Name")
         self.assertEqual(page_item.path, "product/product-permalink")
         self.assertEqual(page_item.permalink, "product-permalink")
+        self.assertEqual(
+            page_item.cb_url, "crunchbase.com/product/product-permalink")
 
     def test_news_page_item(self):
         data = {
@@ -168,3 +182,6 @@ class PageItemTestCase(TestCase):
             page_item.investor.name, "Example")
         self.assertEqual(
             page_item.investor.path, "organization/example")
+        self.assertEqual(
+            page_item.investor.cb_url,
+            "crunchbase.com/organization/example")
