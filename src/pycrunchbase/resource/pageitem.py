@@ -41,36 +41,59 @@ class PermalinkPageItem(PageItem):
         super(PermalinkPageItem, self).__init__(data)
 
 
+@six.python_2_unicode_compatible
 class AcquisitionPageItem(UuidPageItem):
-    pass
+    def __str__(self):
+        return '{name} {announced_on}'.format(
+            name=self.name,
+            announced_on=self.announced_on,
+        )
 
 
+@six.python_2_unicode_compatible
 class FundingRoundPageItem(UuidPageItem):
-    pass
+    def __str__(self):
+        return self.name
 
 
+@six.python_2_unicode_compatible
 class IpoPageItem(UuidPageItem):
-    pass
+    def __str__(self):
+        return self.name
 
 
+@six.python_2_unicode_compatible
 class OrganizationPageItem(PermalinkPageItem):
-    pass
+    def __str__(self):
+        return self.name
 
 
+@six.python_2_unicode_compatible
 class PersonPageItem(PermalinkPageItem):
-    pass
+    def __str__(self):
+        return '{first} {last} {title}'.format(
+            first=self.first_name,
+            last=self.last_name,
+            title=self.title,
+        )
 
 
+@six.python_2_unicode_compatible
 class ProductPageItem(PermalinkPageItem):
-    pass
+    def __str__(self):
+        return self.name
 
 
+@six.python_2_unicode_compatible
 class NonePageItem(object):
     def __getattr__(self, attr):
         return None
 
     def __len__(self):
         return 0
+
+    def __str__(self):
+        return 'NonePageItem'
 
 
 NonePageItemSingleton = NonePageItem()

@@ -1,16 +1,17 @@
-from six.moves import range
+import six
 
 from .utils import safe_int
 from .pageitem import NonePageItemSingleton, PageItem
 
 
+@six.python_2_unicode_compatible
 class Relationship(object):
     """A Relationhip represents relationship between a Node and interesting
     information regarding the Node.
     Relationships can be retrieved in two ways, via a call to a Node
-        1. /organization/name
+    1. /organization/name
     or a direct call to a relationship page
-        2. /organization/name/current_team
+    2. /organization/name/current_team
     We try to make this object easy to use by making this iterable,
     hiding the complexities of paging.
 
@@ -67,11 +68,15 @@ class Relationship(object):
             return self.items[i-1]
 
 
+@six.python_2_unicode_compatible
 class NoneRelationship(object):
     def get(self, _):
         return NonePageItemSingleton
 
     def __len__(self):
         return 0
+
+    def __str__(self):
+        return "NoneRelationship"
 
 NoneRelationshipSingleton = NoneRelationship()

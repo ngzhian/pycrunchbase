@@ -1,7 +1,10 @@
+import six
+
 from .node import Node
 from .utils import parse_date
 
 
+@six.python_2_unicode_compatible
 class Product(Node):
     """Represents a Product on CrunchBase
     API Docs: https://developer.crunchbase.com/docs
@@ -36,3 +39,9 @@ class Product(Node):
         for attr in ['launched_on']:
             if getattr(self, attr, None):
                 setattr(self, attr, parse_date(getattr(self, attr)))
+
+    def __str__(self):
+        return '{name} by {owner}'.format(
+            name=self.name,
+            owner=self.owner_name
+        )

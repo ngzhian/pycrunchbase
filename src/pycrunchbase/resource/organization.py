@@ -1,7 +1,10 @@
+import six
+
 from .node import Node
 from .utils import parse_date
 
 
+@six.python_2_unicode_compatible
 class Organization(Node):
     """Represents an Organization on CrunchBase
     API Docs: https://developer.crunchbase.com/docs
@@ -55,3 +58,6 @@ class Organization(Node):
         for attr in ['number_of_employees', 'number_of_investments']:
             if getattr(self, attr, None):
                 setattr(self, attr, int(getattr(self, attr)))
+
+    def __str__(self):
+        return self.name

@@ -1,7 +1,10 @@
+import six
+
 from .node import Node
 from .utils import parse_date
 
 
+@six.python_2_unicode_compatible
 class Person(Node):
     """Represents a Person on CrunchBase
     API Docs: https://developer.crunchbase.com/docs
@@ -49,3 +52,10 @@ class Person(Node):
         for attr in ['born_on', 'died_on']:
             if getattr(self, attr, None):
                 setattr(self, attr, parse_date(getattr(self, attr)))
+
+    def __str__(self):
+        return '{first} {last} ({permalink})'.format(
+            first=self.first_name,
+            last=self.last_name,
+            permalink=self.permalink,
+        )

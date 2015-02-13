@@ -1,7 +1,10 @@
+import six
+
 from .node import Node
 from .utils import parse_date
 
 
+@six.python_2_unicode_compatible
 class FundingRound(Node):
     """Represents a FundingRound on CrunchBase
     API Docs: https://developer.crunchbase.com/docs
@@ -35,3 +38,10 @@ class FundingRound(Node):
         for attr in ['announced_on']:
             if getattr(self, attr, None):
                 setattr(self, attr, parse_date(getattr(self, attr)))
+
+    def __str__(self):
+        return '{funding_type} {money} {currency}'.format(
+            funding_type=self.funding_type,
+            money=self.money_raised,
+            currency=self.money_raised_currency_code,
+        )

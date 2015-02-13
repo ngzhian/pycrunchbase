@@ -12,6 +12,7 @@ from .resource import (
 )
 
 
+@six.python_2_unicode_compatible
 class CrunchBase(object):
     """Class that manages talking to CrunchBase API"""
     BASE_URL = 'https://api.crunchbase.com/v/2/'
@@ -88,10 +89,10 @@ class CrunchBase(object):
         """Get the details of a Node from CrunchBase.
         The node_type must match that of CrunchBase's, and the uuid
         is either the {uuid} or {permalink} as stated on their docs.
-        Returns:
-            A dict containing the data describing this node.
-            It has the keys: uuid, type, properties, relationships.
 
+        Returns:
+            dict: containing the data describing this node with the keys
+            uuid, type, properties, relationships.
             Or None if there's an error.
         """
         node_url = self.BASE_URL + node_type + '/' + uuid
@@ -166,3 +167,6 @@ class CrunchBase(object):
         except HTTPError:
             return None
         return response.json().get('data')
+
+    def __str__(self):
+        return "pycrunchbase CrunchBase API"
