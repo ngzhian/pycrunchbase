@@ -2,4 +2,4 @@
 Authors
 =======
 
-* Ng Zhi An - http://ngzhian.com
+* Ng Zhi An - http://github.com/ngzhian

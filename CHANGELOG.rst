@@ -2,6 +2,23 @@
 Changelog
 =========
 
+0.1.5 (2015-02-13)
+-----------------------------------------
+
+* Add a `cb_url` attribute for all PageItem, this url is a CrunchBase page
+  (not the API) that holds more information for a particular PageItem
+  Allows you to make calls like::
+
+    company.funding_rounds[0].cb_url
+
+  to get the url of the page for the first funding round of `company`.
+
+* A new page item, InvestorInvestmentPageItem, that is useful for FundingRound info::
+
+    round = cb.funding_round('round_uuid')
+    an_investor = round.investments[0]  # a InvestorInvestmentPageItem
+    print(str(an_investor))  # prints: Investor Name $100000
+
 0.1.4 (2015-02-13)
 -----------------------------------------
 

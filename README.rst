@@ -43,14 +43,39 @@ Examples
 
 ::
 
+    # initialize the API using your API Key, will throw ValueError if missing
     cb = CrunchBase(API_KEY)
+    # look up an organization by name
     github = cb.organization('github')
+
+    # the response contains snippets of data regarding relationships
+    # that the organization has, an example is the funding_rounds
     funding_rounds_summary = github.funding_rounds
 
+    # all relationships are paged, and only 8 is returned initially
+    # to get more data do this, it handles paging for you
+    # and returns a False-y value if there are no more pages
     more_funding_rounds = cb.more(funding_rounds_summary)
 
-    round_uuid = funding_rounds_summary.get(1)
-    round_details = cb.funding_round(round_uuid)
+    # data in relations are just summaries, and you probably want more details
+    # For example funding_rounds returns 5 values: type, name, path
+    # created_at, updated_at.
+    # If you actually want to know who invested, you have to get to make
+    # more API calls
+
+    # first get the uuid of the round
+    round_uuid = funding_rounds_summary[0].uuid
+
+    # then use the CrunchBase API to make that call
+    round = cb.funding_round(round_uuid)
+
+    # again, investments is a relationship on a FundingRound,
+    # so we can get the first item in that relationship
+    an_investor = round.investments[0]  # a InvestorInvestmentPageItem
+
+    # and printing that gives us the name of the investor, and the amount
+    # invested in USD
+    print(str(an_investor))  # prints: Investor Name $100000
 
 
 Installation
@@ -85,6 +110,7 @@ TODO
 
 * Support other nodes (IPO, FundRaise)
 * Coerce values in relationships page item to python types (datetime)
+* Document our usage of returning None vs NonePageItem or NoneRelationship
 
 License
 =======
