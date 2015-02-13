@@ -9,9 +9,7 @@ class PageItem(object):
 
     @classmethod
     def build(cls, data):
-        path = data.get('path')
-        if not path:
-            return cls(data)
+        path = data.get('path', '')
         if path.startswith('acquisition'):
             return AcquisitionPageItem(data)
         if path.startswith('funding-round'):
@@ -24,6 +22,8 @@ class PageItem(object):
             return PersonPageItem(data)
         if path.startswith('product'):
             return ProductPageItem(data)
+        if data.get('type') == 'InvestorInvestment':
+            return InvestorInvestmentPageItem(data)
         return cls(data)
 
 
@@ -54,6 +54,19 @@ class AcquisitionPageItem(UuidPageItem):
 class FundingRoundPageItem(UuidPageItem):
     def __str__(self):
         return self.name
+
+
+@six.python_2_unicode_compatible
+class InvestorInvestmentPageItem(PageItem):
+    def __init__(self, data):
+        super(InvestorInvestmentPageItem, self).__init__(data)
+        self.investor = PageItem.build(self.investor)
+
+    def __str__(self):
+        return '{name} ${money}'.format(
+            name=self.investor.name,
+            money=self.money_invested_usd,
+        )
 
 
 @six.python_2_unicode_compatible

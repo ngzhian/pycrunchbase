@@ -4,6 +4,7 @@ from pycrunchbase import PageItem
 from pycrunchbase.resource.pageitem import (
     AcquisitionPageItem,
     FundingRoundPageItem,
+    InvestorInvestmentPageItem,
     IpoPageItem,
     OrganizationPageItem,
     PersonPageItem,
@@ -143,3 +144,27 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.type, "Unknown")
         self.assertEqual(page_item.name, "Unknown Name")
         self.assertEqual(page_item.path, "unknown/unknown-permalink")
+
+    def test_investor_investment(self):
+        data = {
+            "type": "InvestorInvestment",
+            "money_invested": 1234567,
+            "money_invested_currency_code": "USD",
+            "money_invested_usd": 1234567,
+            "investor": {
+                "type": "Organization",
+                "name": "Example",
+                "path": "organization/example"
+            }
+        }
+        page_item = PageItem.build(data)
+        self.assertIsInstance(page_item, InvestorInvestmentPageItem)
+        self.assertEqual(page_item.type, "InvestorInvestment")
+        self.assertEqual(page_item.money_invested, 1234567)
+        self.assertEqual(page_item.money_invested_currency_code, "USD")
+        self.assertEqual(page_item.money_invested_usd, 1234567)
+        self.assertEqual(page_item.investor.type, "Organization")
+        self.assertEqual(
+            page_item.investor.name, "Example")
+        self.assertEqual(
+            page_item.investor.path, "organization/example")
