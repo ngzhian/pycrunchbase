@@ -83,11 +83,8 @@ Goals
 TODO
 ===========
 
-Support other nodes (IPO, FundRaise)
-Coerce values in relationships page item to python types (datetime)
-explore other ways to set properties and relationships such that we can tab complete those values
-better __str__
-remove crunchbase ref from relationship
+* Support other nodes (IPO, FundRaise)
+* Coerce values in relationships page item to python types (datetime)
 
 License
 =======
