@@ -30,30 +30,33 @@ organization/example/past_team",
 class RelationshipTestCase(TestCase):
     def test_relationship(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
-        one = past_team.get(1)
+        one = past_team.get(0)
         self.assertEqual(one.first_name, "First")
         self.assertEqual(one.permalink, "first-last")
 
     def test_relationship_exceed_total_items(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
-        one = past_team.get(3)
-        self.assertIsNone(one)
+        one = past_team.get(2)
+        self.assertFalse(one)
+        self.assertIsInstance(one, NonePageItem)
 
     @patch.object(CrunchBase, '_make_request')
     def test_load_more_error(self, mock_response):
         mock_response.return_value = {'data': {'error': 'error'}}
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
-        one = past_team.get(3)
-        self.assertIsNone(one)
+        one = past_team.get(2)
+        self.assertFalse(one)
+        self.assertIsInstance(one, NonePageItem)
 
     def test_retrieval(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
         with self.assertRaises(TypeError):
             past_team['bad']
 
-        self.assertEqual(past_team[1], past_team.get(1))
+        self.assertEqual(past_team[0], past_team.get(0))
 
     def test_iterate(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
         members = [member for member in past_team]
         self.assertEqual(1, len(members))
+        self.assertEqual(past_team[0], members[0])

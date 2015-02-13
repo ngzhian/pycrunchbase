@@ -210,7 +210,7 @@ class CrunchBaseTestCase(TestCase):
         organization = cb.organizations('organization')
         self.assertEqual('Description', organization.description)
         self.assertTrue(organization.news)
-        self.assertEqual('Article Title', organization.news.get(1).title)
+        self.assertEqual('Article Title', organization.news.get(0).title)
 
     def test_exception_raised_when_making_calls(self):
         with patch('pycrunchbase.pycrunchbase.requests') as mock_request:

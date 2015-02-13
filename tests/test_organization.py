@@ -67,7 +67,7 @@ class OrganizationTestCase(TestCase):
     def test_organization_relationships_built(self):
         org = Organization(TEST_DATA)
         self.assertIsNotNone(org.past_team)
-        self.assertEqual('First', org.past_team.get(1).first_name)
+        self.assertEqual('First', org.past_team.get(0).first_name)
         self.assertFalse(org.news)
-        self.assertFalse(org.news.get(1))
-        self.assertIsNone(org.news.get(1).first_name)
+        self.assertFalse(org.news.get(0))
+        self.assertIsNone(org.news.get(0).first_name)

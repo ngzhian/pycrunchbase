@@ -47,25 +47,32 @@ class Relationship(object):
 
     def __iter__(self):
         """Allows callers to iterate through a relationship like this:
+
             team_members = [member for member in company.current_team]
         """
-        for item in range(len(self)):
-            yield self.get(item - 1)
+        for item in six.moves.range(len(self)):
+            yield self.get(item)
 
     def get(self, i):
         """Gets the i-th element of this relationship
 
         Args:
-            i(int): 1-based index of the element to retrieve
+            i (int): 0-based index of the element to retrieve
 
         Returns:
-            PageItem if valid item exists at index i
+            PageItem: if valid item exists at index i
             None if the index is too small or too large
         """
-        if i < 1 or i > len(self.items):
-            return None
-        if i <= len(self.items):
-            return self.items[i-1]
+        if i < 0 or i >= len(self.items):
+            return NonePageItemSingleton
+        return self.items[i]
+
+    def __str__(self):
+        return "{name} {count}/{total}".format(
+            name=self.name,
+            count=len(self),
+            total=self.total_items
+        )
 
 
 @six.python_2_unicode_compatible
