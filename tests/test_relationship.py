@@ -3,6 +3,7 @@ from unittest import TestCase
 from mock import patch
 
 from pycrunchbase import CrunchBase, Relationship
+from pycrunchbase.resource.pageitem import NonePageItem
 
 PAST_TEAM_RELATIONSHIP = {
     "paging": {

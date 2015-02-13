@@ -123,8 +123,8 @@ class ProductTestCase(TestCase):
         self.assertEqual(product.owner_path, "organization/facebook")
 
     def test_relationships(self):
-            product = Product(PRODUCT_DATA)
-            self.assertEqual(len(product.primary_image), 1)
-            self.assertEqual(len(product.images), 1)
-            self.assertEqual(len(product.websites), 1)
-            self.assertEqual(len(product.news), 2)
+        product = Product(PRODUCT_DATA)
+        self.assertEqual(len(product.primary_image), 1)
+        self.assertEqual(len(product.images), 1)
+        self.assertEqual(len(product.websites), 1)
+        self.assertEqual(len(product.news), 2)
