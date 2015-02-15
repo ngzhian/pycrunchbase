@@ -117,7 +117,6 @@ TODO
 
 * Support other nodes (IPO, FundRaise)
 * Coerce values in relationships page item to python types (datetime)
-* Document our usage of returning None vs NonePageItem or NoneRelationship
 
 License
 =======
