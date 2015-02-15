@@ -12,6 +12,7 @@ from requests.exceptions import HTTPError
 import httpretty
 
 from pycrunchbase import CrunchBase, Relationship
+from pycrunchbase.resource.relationship import NoneRelationship
 
 MOCK_RELATIONSHIP_PAGE = '''{
     "paging": {
@@ -225,58 +226,6 @@ class CrunchBaseTestCase(TestCase):
             cb.organizations('organization')
 
     @httpretty.activate
-    def test_more_relationship_for_relationship_summary(self):
-        """Load more relationship data from summary"""
-        data = {'data': json.loads(MOCK_RELATIONSHIP_PAGE)}
-        httpretty.register_uri(
-            httpretty.GET,
-            'https://api.crunchbase.com/v/2/organization/example/past_team'
-            '?user_key=123',
-            body=json.dumps(data))
-
-        rs = Relationship('past_team', json.loads(PAST_TEAM_RELATIONSHIP))
-        cb = CrunchBase('123')
-
-        rs = cb.more(rs)
-        self.assertIsNotNone(rs)
-        self.assertEquals(3, len(rs))
-
-    def test_more_relationship_for_relationship_page1(self):
-        """At summary page, there is no more next page, so return None"""
-        past_team = json.loads(PAST_TEAM_RELATIONSHIP)
-        past_team['paging']['total_items'] = 1
-        rs = Relationship('past_team', past_team)
-        cb = CrunchBase('123')
-
-        self.assertIsNone(cb.more(rs))
-
-    @httpretty.activate
-    def test_more_relationship_for_relationship_page2(self):
-        """At page 1, there is no more next page, so return None"""
-        return_data = json.loads(MOCK_RELATIONSHIP_PAGE)
-        return_data['paging']['total_items'] = 6
-        return_data['paging']['first_page_url'] = None
-        return_data['paging']['items_per_page'] = 3
-        return_data['paging']['next_page_url'] = (
-            'https://api.crunchbase.com/v/2/organization/example/past_team'
-            'user_key=123&page=2')
-        rs = Relationship('past_team', return_data)
-
-        return_data['paging']['next_page_url'] = None
-        return_data['paging']['current_page'] = 2
-        data = {'data': return_data}
-        httpretty.register_uri(
-            httpretty.GET,
-            'https://api.crunchbase.com/v/2/organization/example/past_team'
-            'user_key=123&page=2',
-            body=json.dumps(data))
-        cb = CrunchBase('123')
-        rs = cb.more(rs)
-
-        self.assertIsNotNone(rs)
-        self.assertEqual(2, rs.current_page)
-
-    @httpretty.activate
     def test_get_funding_round_data(self):
         httpretty.register_uri(
             httpretty.GET,
@@ -359,3 +308,89 @@ class CrunchBaseTestCase(TestCase):
         acquisition = cb.acquisition('uuid1')
         self.assertEqual(acquisition.disposition_of_acquired, "Combined")
         self.assertEqual(acquisition.acquisition_type, "Acqui-hire")
+
+
+class LoadMoreTestCase(TestCase):
+    def setUp(self):
+        self.cb = CrunchBase('123')
+
+    def test_more_from_relationship_summary_but_no_more(self):
+        """At summary page, there is no more next page,
+        because the summary already contains everything,
+        i.e. total_items < 8 since CrunchBase defaults to returning
+        8 in the relationship summary, so return NoneRelationship"""
+        past_team = json.loads(PAST_TEAM_RELATIONSHIP)
+        past_team['paging']['total_items'] = 1
+        rs = Relationship('past_team', past_team)
+
+        self.assertIsInstance(self.cb.more(rs), NoneRelationship)
+
+    @httpretty.activate
+    def test_more_from_relationship_summary_returns_error(self):
+        """Load more relationship data from summary"""
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.crunchbase.com/v/2/organization/example/past_team'
+            '?user_key=123',
+            body=json.dumps({'data': {'error': 'error'}}))
+
+        rs = Relationship('past_team', json.loads(PAST_TEAM_RELATIONSHIP))
+
+        rs = self.cb.more(rs)
+        self.assertIsInstance(rs, NoneRelationship)
+
+    @httpretty.activate
+    def test_more_relationship_for_relationship_summary(self):
+        """Load more relationship data from summary"""
+        data = {'data': json.loads(MOCK_RELATIONSHIP_PAGE)}
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.crunchbase.com/v/2/organization/example/past_team'
+            '?user_key=123',
+            body=json.dumps(data))
+
+        rs = Relationship('past_team', json.loads(PAST_TEAM_RELATIONSHIP))
+
+        rs = self.cb.more(rs)
+        self.assertIsNotNone(rs)
+        self.assertEquals(3, len(rs))
+
+    @httpretty.activate
+    def test_more_relationship_for_relationship_page2(self):
+        """At page 1, there a next_page, get it and return the Relationship"""
+        data = {
+            "paging": {
+                "items_per_page": 8,
+                "current_page": 1,
+                "number_of_pages": 2,
+                "next_page_url": "https://api.crunchbase.com/v/2/"
+                "organization/example/past_team?user_key=123&page=2",
+                "prev_page_url": None,
+                "total_items": 10,
+                "sort_order": "custom"
+            },
+            "items": [{}, {}, {}, {}, {}, {}, {}, {}]
+        }
+        rs = Relationship('past_team', data)
+
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.crunchbase.com/v/2/organization/example/past_team'
+            '?user_key=123&page=2',
+            body=json.dumps({
+                "data": {
+                    "paging": {
+                        "items_per_page": 8,
+                        "current_page": 2,
+                        "number_of_pages": 2,
+                        "next_page_url": None,
+                        "prev_page_url": None,
+                        "total_items": 10,
+                        "sort_order": "custom"
+                    },
+                    "items": [{}, {}]
+                }}))
+
+        more_rs = self.cb.more(rs)
+
+        self.assertEqual(2, len(more_rs))

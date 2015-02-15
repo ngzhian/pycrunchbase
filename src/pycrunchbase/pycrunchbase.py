@@ -10,6 +10,7 @@ from .resource import (
     Product,
     Relationship,
 )
+from .resource.relationship import NoneRelationshipSingleton
 
 
 @six.python_2_unicode_compatible
@@ -110,7 +111,7 @@ class CrunchBase(object):
             Relationship with the new data
         """
         if relationship.total_items <= len(relationship):
-            return None
+            return NoneRelationshipSingleton
 
         if relationship.first_page_url:
             url_to_call = relationship.first_page_url
@@ -119,7 +120,7 @@ class CrunchBase(object):
             url_to_call = relationship.next_page_url
             return self._relationship(relationship.name, url_to_call)
         else:
-            return None
+            return NoneRelationshipSingleton
 
     def _relationship(self, name, url):
         """Loads a relationship for a Node
@@ -134,7 +135,7 @@ class CrunchBase(object):
         """
         data = self._make_request(url)
         if not data or data.get('error'):
-            return None
+            return NoneRelationshipSingleton
         return Relationship(name, data)
 
     def _get_first_organization_match(self, list_of_result=None):
