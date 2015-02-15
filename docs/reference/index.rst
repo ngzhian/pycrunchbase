@@ -5,3 +5,5 @@ Reference
     :glob:
 
     pycrunchbase*
+    relationship
+    none_types
