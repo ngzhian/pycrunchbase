@@ -103,7 +103,10 @@ class ProductPageItem(PermalinkPageItem):
 
 
 @six.python_2_unicode_compatible
-class NonePageItem(object):
+class NonePageItem(PageItem):
+    def __init__(self):
+        super(NonePageItem, self).__init__({})
+
     def __getattr__(self, attr):
         return None
 

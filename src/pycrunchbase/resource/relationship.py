@@ -76,7 +76,11 @@ class Relationship(object):
 
 
 @six.python_2_unicode_compatible
-class NoneRelationship(object):
+class NoneRelationship(Relationship):
+    def __init__(self):
+        super(NoneRelationship, self).__init__(
+            None, {'paging': {}, 'items': {}})
+
     def get(self, _):
         return NonePageItemSingleton
 
