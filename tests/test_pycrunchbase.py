@@ -223,7 +223,8 @@ class CrunchBaseTestCase(TestCase):
                 body='''{
                 }''')
             cb = CrunchBase('123')
-            cb.organizations('organization')
+            with self.assertRaises(HTTPError):
+                cb.organizations('organization')
 
     @httpretty.activate
     def test_get_funding_round_data(self):

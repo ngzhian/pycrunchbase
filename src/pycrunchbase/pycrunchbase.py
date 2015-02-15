@@ -162,11 +162,8 @@ class CrunchBase(object):
         """Makes the actual API call to CrunchBase
         """
         final_url = self._build_url(url, params)
-        try:
-            response = requests.get(final_url)
-            response.raise_for_status()
-        except HTTPError:
-            return None
+        response = requests.get(final_url)
+        response.raise_for_status()
         return response.json().get('data')
 
     def __str__(self):
