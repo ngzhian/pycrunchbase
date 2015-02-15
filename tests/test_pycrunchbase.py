@@ -11,8 +11,7 @@ from requests.exceptions import HTTPError
 
 import httpretty
 
-from pycrunchbase import CrunchBase, Relationship
-from pycrunchbase.resource.relationship import NoneRelationship
+from pycrunchbase import CrunchBase, Relationship, Page
 
 MOCK_RELATIONSHIP_PAGE = '''{
     "paging": {
@@ -208,10 +207,8 @@ class CrunchBaseTestCase(TestCase):
               }}''')
 
         cb = CrunchBase('123')
-        organization = cb.organizations('organization')
-        self.assertEqual('Description', organization.description)
-        self.assertTrue(organization.news)
-        self.assertEqual('Article Title', organization.news.get(0).title)
+        orgs = cb.organizations('organization')
+        self.assertIsInstance(orgs, Page)
 
     def test_exception_raised_when_making_calls(self):
         with patch('pycrunchbase.pycrunchbase.requests') as mock_request:
@@ -319,12 +316,12 @@ class LoadMoreTestCase(TestCase):
         """At summary page, there is no more next page,
         because the summary already contains everything,
         i.e. total_items < 8 since CrunchBase defaults to returning
-        8 in the relationship summary, so return NoneRelationship"""
+        8 in the relationship summary, so return None"""
         past_team = json.loads(PAST_TEAM_RELATIONSHIP)
         past_team['paging']['total_items'] = 1
         rs = Relationship('past_team', past_team)
 
-        self.assertIsInstance(self.cb.more(rs), NoneRelationship)
+        self.assertIsNone(self.cb.more(rs))
 
     @httpretty.activate
     def test_more_from_relationship_summary_returns_error(self):
@@ -338,7 +335,7 @@ class LoadMoreTestCase(TestCase):
         rs = Relationship('past_team', json.loads(PAST_TEAM_RELATIONSHIP))
 
         rs = self.cb.more(rs)
-        self.assertIsInstance(rs, NoneRelationship)
+        self.assertIsNone(rs)
 
     @httpretty.activate
     def test_more_relationship_for_relationship_summary(self):

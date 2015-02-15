@@ -5,11 +5,10 @@ from .resource import (
     Acquisition,
     FundingRound,
     Organization,
+    Page,
     Person,
     Product,
-    Relationship,
 )
-from .resource.relationship import NoneRelationshipSingleton
 
 
 @six.python_2_unicode_compatible
@@ -38,7 +37,7 @@ class CrunchBase(object):
         data = self._make_request(url, {'name': name})
         if not data or data.get('error'):
             return None
-        return self._get_first_organization_match(data.get('items'))
+        return Page(name, data)
 
     def organization(self, permalink):
         """Get the details of a organization given a organization's permalink.
@@ -101,50 +100,41 @@ class CrunchBase(object):
             return None
         return data
 
-    def more(self, relationship):
-        """Given a Relationship, tries to get more data using the
-        next_page_url given in the response.
+    def more(self, page):
+        """Given a Page, tries to get more data using the
+        first_page_url or next_page_url given in the response.
 
         Returns:
             None if there is no more data to get or if you have all the data
             Relationship with the new data
         """
-        if relationship.total_items <= len(relationship):
-            return NoneRelationshipSingleton
+        if page.total_items <= len(page):
+            return None
 
-        if relationship.first_page_url:
-            url_to_call = relationship.first_page_url
-            return self._relationship(relationship.name, url_to_call)
-        elif relationship.next_page_url:
-            url_to_call = relationship.next_page_url
-            return self._relationship(relationship.name, url_to_call)
+        if page.first_page_url:
+            url_to_call = page.first_page_url
+            return self._page(page.name, url_to_call)
+        elif page.next_page_url:
+            url_to_call = page.next_page_url
+            return self._page(page.name, url_to_call)
         else:
-            return NoneRelationshipSingleton
+            return None
 
-    def _relationship(self, name, url):
-        """Loads a relationship for a Node
+    def _page(self, name, url):
+        """Loads a page for a Node
 
         Args:
-            name (str): name of relationship we are getting
-            url (str): url of the relationship to make the call to
+            name (str): name of page we are getting
+            url (str): url of the page to make the call to
 
         Returns:
-            Relationship if we can get the data
+            page if we can get the data
             None if we have an error
         """
         data = self._make_request(url)
         if not data or data.get('error'):
-            return NoneRelationshipSingleton
-        return Relationship(name, data)
-
-    def _get_first_organization_match(self, list_of_result=None):
-        """Returns:
-            Organization or None
-        """
-        first_match = list_of_result[0] if list_of_result else {}
-        crunchbase_organization_path = first_match.get('path', '')
-        organization_name = crunchbase_organization_path.split('/')[1]
-        return self.organization(organization_name)
+            return None
+        return Page(name, data)
 
     def _build_url(self, base_url, params=None):
         """Helper to build urls by appending all queries and the API key
