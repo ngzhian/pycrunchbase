@@ -1,6 +1,5 @@
 import requests
 import six
-from requests.exceptions import HTTPError
 
 from .resource import (
     Acquisition,
