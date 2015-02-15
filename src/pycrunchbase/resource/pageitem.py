@@ -62,7 +62,10 @@ class FundingRoundPageItem(UuidPageItem):
 class InvestorInvestmentPageItem(PageItem):
     def __init__(self, data):
         super(InvestorInvestmentPageItem, self).__init__(data)
-        self.investor = PageItem.build(self.investor)
+        if 'investor' in data:
+            self.investor = PageItem.build(self.investor)
+        if 'invested_in' in data:
+            self.invested_in = PageItem.build(self.invested_in)
 
     def __str__(self):
         return '{name} ${money}'.format(

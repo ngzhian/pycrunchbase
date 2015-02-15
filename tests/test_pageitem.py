@@ -159,7 +159,7 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.name, "Unknown Name")
         self.assertEqual(page_item.path, "unknown/unknown-permalink")
 
-    def test_investor_investment(self):
+    def test_investor_investment_investor(self):
         data = {
             "type": "InvestorInvestment",
             "money_invested": 1234567,
@@ -184,4 +184,31 @@ class PageItemTestCase(TestCase):
             page_item.investor.path, "organization/example")
         self.assertEqual(
             page_item.investor.cb_url,
+            "crunchbase.com/organization/example")
+
+    def test_investor_investment_invested_in(self):
+        data = {
+            "type": "InvestorInvestment",
+            "money_invested": 1234567,
+            "money_invested_currency_code": "USD",
+            "money_invested_usd": 1234567,
+            "invested_in": {
+                "type": "Organization",
+                "name": "Example",
+                "path": "organization/example"
+            }
+        }
+        page_item = PageItem.build(data)
+        self.assertIsInstance(page_item, InvestorInvestmentPageItem)
+        self.assertEqual(page_item.type, "InvestorInvestment")
+        self.assertEqual(page_item.money_invested, 1234567)
+        self.assertEqual(page_item.money_invested_currency_code, "USD")
+        self.assertEqual(page_item.money_invested_usd, 1234567)
+        self.assertEqual(page_item.invested_in.type, "Organization")
+        self.assertEqual(
+            page_item.invested_in.name, "Example")
+        self.assertEqual(
+            page_item.invested_in.path, "organization/example")
+        self.assertEqual(
+            page_item.invested_in.cb_url,
             "crunchbase.com/organization/example")
