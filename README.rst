@@ -97,6 +97,13 @@ To run the all tests run::
 
     tox
 
+Contributions are always welcome!
+
+Use `GitHub issues <https://github.com/ngzhian/pycrunchbase/issues>`_
+to report a bug or send feedback.
+
+The best way to send feedback is to file an issue at https://github.com/ngzhian/pycrunchbase/issues.
+
 Goals
 =====
 

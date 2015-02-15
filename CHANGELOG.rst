@@ -19,6 +19,8 @@ Changelog
     an_investor = round.investments[0]  # a InvestorInvestmentPageItem
     print(str(an_investor))  # prints: Investor Name $100000
 
+* Add simplified Contribution guidelines in README
+
 0.1.4 (2015-02-13)
 -----------------------------------------
 
