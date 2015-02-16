@@ -16,10 +16,6 @@ class CrunchBase(object):
     """Class that manages talking to CrunchBase API"""
     BASE_URL = 'https://api.crunchbase.com/v/2/'
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
-    ORGANIZATION_URL = BASE_URL + 'organization'
-    PEOPLE_URL = BASE_URL + 'people'
-    PERSON_URL = BASE_URL + 'person'
-    FUNDING_ROUND_URL = BASE_URL + 'funding-round'
 
     def __init__(self, api_key=None):
         if not api_key:
