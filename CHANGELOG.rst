@@ -2,6 +2,17 @@
 Changelog
 =========
 
+0.1.9 (2015-02-15)
+------------------
+
+* Add `series` to the `FundingRound` node.
+
+0.1.8 (2015-02-15)
+------------------
+
+* Update `__str__` for nodes and relationships
+
+
 0.1.7 (2015-02-15)
 ------------------
 
