@@ -1,7 +1,7 @@
 import requests
 import six
 
-from .resource import (
+from resource import (
     Acquisition,
     FundingRound,
     Organization,

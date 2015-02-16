@@ -5,7 +5,7 @@ class PageItem(object):
     """A item within a Page.
 
     A page is a homogenous collection of PageItem, and there are many
-    kinds of PageItem. :method:`build` is a helper class method to
+    kinds of PageItem. :meth:`build` is a helper class method to
     help build the correct type of PageItem based on
 
     1. path, or

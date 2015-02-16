@@ -13,7 +13,7 @@ class Relationship(Page):
     relationships.
 
     To get more details of this relationship, call :class:`CrunchBase`'s
-    :method:`more`.
+    :meth:`more`.
     """
 
 
