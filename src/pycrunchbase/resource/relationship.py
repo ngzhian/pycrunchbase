@@ -16,6 +16,12 @@ class Relationship(Page):
     :meth:`more`.
     """
 
+    def __str__(self):
+        return ("Relationship {name} Total items: {total}").format(
+            name=self.name,
+            total=self.total_items,
+        )
+
 
 @six.python_2_unicode_compatible
 class NoneRelationship(Relationship):

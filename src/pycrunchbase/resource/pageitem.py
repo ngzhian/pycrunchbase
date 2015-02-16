@@ -37,6 +37,9 @@ class PageItem(object):
             return InvestorInvestmentPageItem(data)
         return cls(data)
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class UuidPageItem(PageItem):
     def __init__(self, data):

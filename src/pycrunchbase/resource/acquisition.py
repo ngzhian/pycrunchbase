@@ -46,3 +46,6 @@ class Acquisition(Node):
             announced_on=self.announced_on,
             price=self.price,
         )
+
+    def __repr__(self):
+        return self.__str__()

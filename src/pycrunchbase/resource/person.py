@@ -59,3 +59,6 @@ class Person(Node):
             last=self.last_name,
             permalink=self.permalink,
         )
+
+    def __repr__(self):
+        return self.__str__()

@@ -94,10 +94,14 @@ class Page(object):
         return self[i]
 
     def __str__(self):
-        return ("Page {current}/{pages} Per Page: {per_page} "
+        return ("Page {name} {current}/{pages} Per Page: {per_page} "
                 "Total items: {total}").format(
+            name=self.name,
             current=self.current_page,
             pages=self.number_of_pages,
             per_page=self.items_per_page,
             total=self.total_items,
         )
+
+    def __repr__(self):
+        return self.__str__()
