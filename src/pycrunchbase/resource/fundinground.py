@@ -22,6 +22,7 @@ class FundingRound(Node):
         "money_raised",
         "money_raised_currency_code",
         "permalink",
+        "series",
         "name",
         "post_money_valuation_currency_code",
         "created_at",

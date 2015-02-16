@@ -20,6 +20,7 @@ FUNDING_ROUND_DATA = {
   "permalink": "uuid1",
   "name": "funding round name",
   "post_money_valuation_currency_code": "USD",
+  "series": "c",
   "created_at": 1295843747,
   "updated_at": 1419019444
  },
