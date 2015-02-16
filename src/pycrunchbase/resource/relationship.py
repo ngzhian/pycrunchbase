@@ -17,9 +17,10 @@ class Relationship(Page):
     """
 
     def __str__(self):
-        return ("Relationship {name} Total items: {total}").format(
-            name=self.name,
+        return ("{total} {name} {items}").format(
             total=self.total_items,
+            name=self.name,
+            items=self.items,
         )
 
 

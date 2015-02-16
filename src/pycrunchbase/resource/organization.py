@@ -60,7 +60,7 @@ class Organization(Node):
                 setattr(self, attr, int(getattr(self, attr)))
 
     def __str__(self):
-        return self.name
+        return 'Organization: %s' % self.name
 
     def __repr__(self):
         return self.__str__()
