@@ -2,8 +2,32 @@
 Changelog
 =========
 
+0.1.7 (2015-02-15)
+------------------
+
+* `Relationship` is now a subclass of `Page`, although this strictly isn't true.
+  The benefit is that this allows us to reuse a lot of logic.
+  Relationship can be thought of as Page 0, which is a summary of potentially
+  multiple pages of `PageItem`. The only time we get a relationship is when we
+  query for a particular `Node`, e.g. organiation, and we grab the relationships
+  returned by the API. After this, to get more details we call `Crunchbase.more`,
+  and this returns us a `Page`.
+
+* Added `__repr__` methods to all the `Node`, `Relationship`, `PageItem`.
+  Previously we only defined `__str__`, but these didn't show up in places
+  like the REPL. This fixes that. We try to make it obvious what object it is
+  based on what is printed, but also don't want to be too verbose.
+
+0.1.6 (2015-02-15)
+------------------
+
+* `InvestorInvestmentPageItem` now has the possibility of being either a
+  `investor`, or a `invested_in` relationship
+
+* Propogates any exception when making the actual HTTP call to CrunchBase
+
 0.1.5 (2015-02-13)
------------------------------------------
+------------------
 
 * Add a `cb_url` attribute for all PageItem, this url is a CrunchBase page
   (not the API) that holds more information for a particular PageItem
