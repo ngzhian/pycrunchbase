@@ -24,10 +24,11 @@ class CrunchBase(object):
 
     def organizations(self, name):
         """
-        Search for a organization given a name, returns details of first match
+        Search for a organization given a name, returns the first
+        :class:`Page` of results
 
         Returns:
-            Organization or None
+            Page or None
         """
         url = self.ORGANIZATIONS_URL
         data = self._make_request(url, {'name': name})
