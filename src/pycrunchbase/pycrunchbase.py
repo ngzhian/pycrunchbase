@@ -101,13 +101,13 @@ class CrunchBase(object):
         """Given a Page, tries to get more data using the
         first_page_url or next_page_url given in the response.
 
+        If page happens to be a Relationship, i.e. page.first_page_url
+        is not None, we just call that url to retrieve the first page.
+
         Returns:
-            None if there is no more data to get or if you have all the data
+            None if there is no more page to get, else
             Relationship with the new data
         """
-        if page.total_items <= len(page):
-            return None
-
         if page.first_page_url:
             url_to_call = page.first_page_url
             return self._page(page.name, url_to_call)
@@ -134,8 +134,7 @@ class CrunchBase(object):
         return Page(name, data)
 
     def _build_url(self, base_url, params=None):
-        """Helper to build urls by appending all queries and the API key
-        """
+        """Helper to build urls by appending all queries and the API key"""
         params = params or {}
         base_url = '{url}?user_key={api_key}'.format(
             url=base_url, api_key=self.api_key)
@@ -145,8 +144,7 @@ class CrunchBase(object):
         return base_url
 
     def _make_request(self, url, params=None):
-        """Makes the actual API call to CrunchBase
-        """
+        """Makes the actual API call to CrunchBase"""
         final_url = self._build_url(url, params)
         response = requests.get(final_url)
         response.raise_for_status()
@@ -154,3 +152,6 @@ class CrunchBase(object):
 
     def __str__(self):
         return "pycrunchbase CrunchBase API"
+
+    def __repr__(self):
+        return self.__str__()

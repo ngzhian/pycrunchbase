@@ -312,17 +312,6 @@ class LoadMoreTestCase(TestCase):
     def setUp(self):
         self.cb = CrunchBase('123')
 
-    def test_more_from_relationship_summary_but_no_more(self):
-        """At summary page, there is no more next page,
-        because the summary already contains everything,
-        i.e. total_items < 8 since CrunchBase defaults to returning
-        8 in the relationship summary, so return None"""
-        past_team = json.loads(PAST_TEAM_RELATIONSHIP)
-        past_team['paging']['total_items'] = 1
-        rs = Relationship('past_team', past_team)
-
-        self.assertIsNone(self.cb.more(rs))
-
     @httpretty.activate
     def test_more_from_relationship_summary_returns_error(self):
         """Load more relationship data from summary"""
