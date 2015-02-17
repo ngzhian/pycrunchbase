@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name="pycrunchbase",
-    version="0.1.9",
+    version="0.2.0",
     license="MIT",
     description="Python bindings to CrunchBase",
     long_description="{0}\n{1}".format(read("README.rst"), re.sub(":obj:`~?(.*?)`", r"``\1``", read("CHANGELOG.rst"))),
@@ -38,7 +38,7 @@ setup(
     zip_safe=False,
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",

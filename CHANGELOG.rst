@@ -2,6 +2,15 @@
 Changelog
 =========
 
+0.2.0 (2015-02-15)
+------------------
+
+* The API is now considered relatively *stabled*. Updated the classifier to
+  reflect so
+* Change to how `CrunchBase.more` reacts to a `Relationship`, we no longer
+  optimize when the `Relationship` has all items, just call
+  `first_page_url`
+
 0.1.9 (2015-02-15)
 ------------------
 
