@@ -117,6 +117,7 @@ TODO
 
 * Support other nodes (IPO, FundRaise)
 * Coerce values in relationships page item to python types (datetime)
+* helper methods to grab node details from a list of PageItem that are nodes
 
 License
 =======
