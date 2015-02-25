@@ -40,7 +40,7 @@ class Acquisition(Node):
                 setattr(self, attr, parse_date(getattr(self, attr)))
 
     def __str__(self):
-        return '{acq_type} {status} {announced_on} ${price}'.format(
+        return u'{acq_type} {status} {announced_on} ${price}'.format(
             acq_type=self.acquisition_type,
             status=self.acquisition_status,
             announced_on=self.announced_on,

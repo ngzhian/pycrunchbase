@@ -58,7 +58,7 @@ class PermalinkPageItem(PageItem):
 @six.python_2_unicode_compatible
 class AcquisitionPageItem(UuidPageItem):
     def __str__(self):
-        return '{name} {announced_on}'.format(
+        return u'{name} {announced_on}'.format(
             name=self.name,
             announced_on=self.announced_on,
         )
@@ -80,7 +80,7 @@ class InvestorInvestmentPageItem(PageItem):
             self.invested_in = PageItem.build(self.invested_in)
 
     def __str__(self):
-        return '{investor} ${money}'.format(
+        return u'{investor} ${money}'.format(
             investor=self.investor,
             money=self.money_invested_usd,
         )
@@ -101,7 +101,7 @@ class OrganizationPageItem(PermalinkPageItem):
 @six.python_2_unicode_compatible
 class PersonPageItem(PermalinkPageItem):
     def __str__(self):
-        return '{first} {last}'.format(
+        return u'{first} {last}'.format(
             first=self.first_name,
             last=self.last_name,
         )

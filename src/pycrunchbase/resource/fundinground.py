@@ -41,7 +41,8 @@ class FundingRound(Node):
                 setattr(self, attr, parse_date(getattr(self, attr)))
 
     def __str__(self):
-        return '{funding_type} ${money} on {announced} by {investments}'.format(
+        return (u'{funding_type} ${money} on '
+                u'{announced} by {investments}').format(
             funding_type=self.funding_type,
             money=self.money_raised_usd,
             announced=self.announced_on,

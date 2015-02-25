@@ -54,7 +54,7 @@ class Person(Node):
                 setattr(self, attr, parse_date(getattr(self, attr)))
 
     def __str__(self):
-        return '{first} {last} ({permalink})'.format(
+        return u'{first} {last} ({permalink})'.format(
             first=self.first_name,
             last=self.last_name,
             permalink=self.permalink,

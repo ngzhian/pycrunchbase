@@ -1,3 +1,5 @@
+# vim: set fileencoding=utf-8 :
+
 from unittest import TestCase
 
 from pycrunchbase import PageItem
@@ -212,3 +214,23 @@ class PageItemTestCase(TestCase):
         self.assertEqual(
             page_item.invested_in.cb_url,
             "crunchbase.com/organization/example")
+
+    def test_unicode(self):
+        data = {
+            "first_name": u"å",
+            "last_name": "Last",
+            "title": "Title",
+            "started_on": None,
+            "ended_on": None,
+            "path": "person/first-last",
+            "created_at": 1233300345,
+            "updated_at": 1419596914
+        }
+        page_item = PageItem.build(data)
+        try:
+            _ = unicode('')  #py2
+            import codecs
+            self.assertEqual(codecs.encode(u'å Last', 'utf8'), str(page_item))
+        except:
+            # py3
+            self.assertEqual(u'å Last', str(page_item))

@@ -136,7 +136,7 @@ class CrunchBase(object):
     def _build_url(self, base_url, params=None):
         """Helper to build urls by appending all queries and the API key"""
         params = params or {}
-        base_url = '{url}?user_key={api_key}'.format(
+        base_url = u'{url}?user_key={api_key}'.format(
             url=base_url, api_key=self.api_key)
         query_list = ['%s=%s' % (k, v) for k, v in six.iteritems(params)]
         if query_list:
