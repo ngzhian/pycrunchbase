@@ -134,14 +134,20 @@ class CrunchBase(object):
         return Page(name, data)
 
     def _build_url(self, base_url, params=None):
-        """Helper to build urls by appending all queries and the API key"""
-        params = params or {}
-        base_url = u'{url}?user_key={api_key}'.format(
-            url=base_url, api_key=self.api_key)
-        query_list = ['%s=%s' % (k, v) for k, v in six.iteritems(params)]
-        if query_list:
-            base_url += '&' + '&'.join(query_list)
-        return base_url
+        """Helper to build urls by appending all queries and the API key.
+        The API key is always the last query parameter."""
+
+        join_char = '&' if '?' in base_url else '?'
+
+        params_string = '&'.join(
+            '%s=%s' % (k, v) for k, v in six.iteritems(params or {}))
+
+        if params_string:
+            params_string += "&user_key=%s" % self.api_key
+        else:
+            params_string = "user_key=%s" % self.api_key
+
+        return base_url + join_char + params_string
 
     def _make_request(self, url, params=None):
         """Makes the actual API call to CrunchBase"""
