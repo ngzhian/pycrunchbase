@@ -35,6 +35,8 @@ class PageItem(object):
             return ProductPageItem(data)
         if data.get('type') == 'InvestorInvestment':
             return InvestorInvestmentPageItem(data)
+        if path.startswith('location'):
+            return LocationPageItem(data)
         return cls(data)
 
     def __repr__(self):
@@ -88,6 +90,12 @@ class InvestorInvestmentPageItem(PageItem):
 
 @six.python_2_unicode_compatible
 class IpoPageItem(UuidPageItem):
+    def __str__(self):
+        return self.name
+
+
+@six.python_2_unicode_compatible
+class LocationPageItem(UuidPageItem):
     def __str__(self):
         return self.name
 

@@ -321,6 +321,60 @@ class CrunchBaseTestCase(TestCase):
             'https://api.crunchbase.com/v/2/fund-raise/uuidfundraise'
             '?user_key=123')
 
+    @patch('pycrunchbase.pycrunchbase.requests.get')
+    def test_get_locations(self, mock_get):
+        mock_json = make_mock_response_json({
+            "metadata": {
+                "image_path_prefix": "https://example.com/",
+                "www_path_prefix": "https://www.crunchbase.com/",
+                "api_path_prefix": "https://api.crunchbase.com/v/2/",
+                "version": 2
+                },
+            "data": {
+                "paging": {
+                    "items_per_page": 1000,
+                    "current_page": 1,
+                    "number_of_pages": 1,
+                    "next_page_url": None,
+                    "prev_page_url": None,
+                    "total_items": 2,
+                    "sort_order": "name ASC"
+                    },
+                "items": [
+                    {
+                        "updated_at": 1415895087,
+                        "created_at": 1371717055,
+                        "path": "location/loc-1/uuid1",
+                        "name": "loc 1",
+                        "type": "Location",
+                        "uuid": "uuid1",
+                        },
+                    {
+                        "updated_at": 1415768560,
+                        "created_at": 1310530681,
+                        "path": "location/loc-2/uuid2",
+                        "name": "loc 2",
+                        "type": "Location",
+                        "uuid": "uuid2",
+                        }
+                    ]
+                }
+            })
+        mock_get.return_value = mock_json
+
+        cb = CrunchBase('123')
+        locations = cb.locations()
+        mock_get.assert_called_with(
+            'https://api.crunchbase.com/v/2/locations?user_key=123')
+
+        self.assertIsInstance(locations, Page)
+        self.assertEqual(2, len(locations))
+        self.assertEqual(locations[0].name, "loc 1")
+        self.assertEqual(locations[0].path, "location/loc-1/uuid1")
+        self.assertEqual(locations[1].name, "loc 2")
+        self.assertEqual(locations[1].path, "location/loc-2/uuid2")
+        self.assertIn('loc 1', str(locations[0]))
+
 
 class LoadMoreTestCase(TestCase):
     def setUp(self):

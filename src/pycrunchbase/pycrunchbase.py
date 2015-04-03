@@ -18,6 +18,7 @@ class CrunchBase(object):
     """Class that manages talking to CrunchBase API"""
     BASE_URL = 'https://api.crunchbase.com/v/2/'
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
+    LOCATIONS_URL = BASE_URL + 'locations'
 
     def __init__(self, api_key=None):
         if not api_key:
@@ -100,6 +101,18 @@ class CrunchBase(object):
         """
         node_data = self.get_node('fund-raise', permalink)
         return FundRaise(node_data) if node_data else None
+
+    def locations(self):
+        """
+        Queries for a list of all active Locations,
+        returns the first :class:`Page` of results.
+
+        Returns:
+            Page or None
+        """
+        url = self.LOCATIONS_URL
+        page = self._page('Locations', url)
+        return page
 
 
     def get_node(self, node_type, uuid, params=None):
