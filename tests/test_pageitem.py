@@ -8,6 +8,7 @@ from pycrunchbase.resource.pageitem import (
     FundingRoundPageItem,
     InvestorInvestmentPageItem,
     IpoPageItem,
+    LocationPageItem,
     OrganizationPageItem,
     PersonPageItem,
     ProductPageItem,
@@ -148,6 +149,23 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.url, "http://example.com/1/")
         self.assertEqual(page_item.author, "Author 1")
         self.assertEqual(page_item.title, "Title 1")
+
+    def test_location_page_item(self):
+        data = {
+                "created_at": 1398124800,
+                "updated_at": 1398124800,
+                "type": "Location",
+                "name": "loc 1",
+                "path": "location/loc-1/uuid1",
+                "location_type": "city",
+                "uuid": "uuid1",
+                "parent_location_uuid": "uuidparent"
+        }
+        page_item = PageItem.build(data)
+        self.assertIsInstance(page_item, LocationPageItem)
+        self.assertEqual(page_item.name, "loc 1")
+        self.assertEqual(page_item.path, "location/loc-1/uuid1")
+        self.assertEqual(page_item.location_type, "city")
 
     def test_unknown_node_item(self):
         data = {
