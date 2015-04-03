@@ -4,6 +4,7 @@ from .pycrunchbase import (
 from .resource import (
     Acquisition,
     FundingRound,
+    FundRaise,
     IPO,
     Organization,
     Page,
@@ -19,6 +20,7 @@ __version__ = "0.2.4"
 __all__ = [
     'Acquisition',
     'FundingRound',
+    'FundRaise',
     'IPO',
     'Organization',
     'Page',

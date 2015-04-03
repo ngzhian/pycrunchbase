@@ -300,6 +300,27 @@ class CrunchBaseTestCase(TestCase):
             'https://api.crunchbase.com/v/2/ipo/uuid1'
             '?user_key=123')
 
+    @patch('pycrunchbase.pycrunchbase.requests.get')
+    def test_get_fundraise_data(self, mock_get):
+        mock_json = make_mock_response_json({
+            "data": {
+                "uuid": "uuidfundraise",
+                "type": "FundRaise",
+                "properties": {
+                    "name": "Raise Round I",
+                }
+            }
+        })
+        mock_get.return_value = mock_json
+
+        cb = CrunchBase('123')
+        fundraise = cb.fundraise('uuidfundraise')
+
+        self.assertEqual(fundraise.name, "Raise Round I")
+        mock_get.assert_called_with(
+            'https://api.crunchbase.com/v/2/fund-raise/uuidfundraise'
+            '?user_key=123')
+
 
 class LoadMoreTestCase(TestCase):
     def setUp(self):
