@@ -4,6 +4,7 @@ import six
 from .resource import (
     Acquisition,
     FundingRound,
+    IPO,
     Organization,
     Page,
     Person,
@@ -80,6 +81,15 @@ class CrunchBase(object):
         """
         node_data = self.get_node('product', permalink)
         return Product(node_data) if node_data else None
+
+    def ipo(self, permalink):
+        """Get the details of an ipo given a ipo uuid.
+
+        Returns:
+            IPO or None
+        """
+        node_data = self.get_node('ipo', permalink)
+        return IPO(node_data) if node_data else None
 
     def get_node(self, node_type, uuid, params=None):
         """Get the details of a Node from CrunchBase.
