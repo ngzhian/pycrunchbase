@@ -279,6 +279,27 @@ class CrunchBaseTestCase(TestCase):
             'https://api.crunchbase.com/v/2/acquisition/uuid1'
             '?user_key=123')
 
+    @patch('pycrunchbase.pycrunchbase.requests.get')
+    def test_get_ipo_data(self, mock_get):
+        mock_json = make_mock_response_json({
+            "data": {
+                "uuid": "uuid1",
+                "type": "Ipo",
+                "properties": {
+                    "stock_symbol": "SS",
+                }
+            }
+        })
+        mock_get.return_value = mock_json
+
+        cb = CrunchBase('123')
+        ipo = cb.ipo('uuid1')
+
+        self.assertEqual(ipo.stock_symbol, "SS")
+        mock_get.assert_called_with(
+            'https://api.crunchbase.com/v/2/ipo/uuid1'
+            '?user_key=123')
+
 
 class LoadMoreTestCase(TestCase):
     def setUp(self):
