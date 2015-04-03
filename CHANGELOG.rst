@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.2.4 (2015-04-03)
+------------------
+
+* Added: IPO - you can now use a uuid to grab IPO data
+
+
 0.2.3 (2015-03-01)
 ------------------
 
