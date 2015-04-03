@@ -19,6 +19,7 @@ class CrunchBase(object):
     BASE_URL = 'https://api.crunchbase.com/v/2/'
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
     LOCATIONS_URL = BASE_URL + 'locations'
+    CATEGORIES_URL = BASE_URL + 'categories'
 
     def __init__(self, api_key=None):
         if not api_key:
@@ -114,6 +115,17 @@ class CrunchBase(object):
         page = self._page('Locations', url)
         return page
 
+    def categories(self):
+        """
+        Queries for a list of all active Categories,
+        returns the first :class:`Page` of results.
+
+        Returns:
+            Page or None
+        """
+        url = self.CATEGORIES_URL
+        page = self._page('Categories', url)
+        return page
 
     def get_node(self, node_type, uuid, params=None):
         """Get the details of a Node from CrunchBase.

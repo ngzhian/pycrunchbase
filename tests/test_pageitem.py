@@ -5,6 +5,7 @@ from unittest import TestCase
 from pycrunchbase import PageItem
 from pycrunchbase.resource.pageitem import (
     AcquisitionPageItem,
+    CategoryPageItem,
     FundingRoundPageItem,
     InvestorInvestmentPageItem,
     IpoPageItem,
@@ -166,6 +167,22 @@ class PageItemTestCase(TestCase):
         self.assertEqual(page_item.name, "loc 1")
         self.assertEqual(page_item.path, "location/loc-1/uuid1")
         self.assertEqual(page_item.location_type, "city")
+
+    def test_category_page_item(self):
+        data = {
+            "updated_at": 1415768560,
+            "created_at": 1310530681,
+            "path": "category/cat-1/uuid1",
+            "name": "cat 1",
+            "type": "Category",
+            "uuid": "uuid1",
+            "number_of_organizations": 100,
+        }
+        page_item = PageItem.build(data)
+        self.assertIsInstance(page_item, CategoryPageItem)
+        self.assertEqual(page_item.name, "cat 1")
+        self.assertEqual(page_item.path, "category/cat-1/uuid1")
+        self.assertEqual(page_item.number_of_organizations, 100)
 
     def test_unknown_node_item(self):
         data = {

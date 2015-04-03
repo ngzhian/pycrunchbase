@@ -37,6 +37,8 @@ class PageItem(object):
             return InvestorInvestmentPageItem(data)
         if path.startswith('location'):
             return LocationPageItem(data)
+        if path.startswith('category'):
+            return CategoryPageItem(data)
         return cls(data)
 
     def __repr__(self):
@@ -96,6 +98,12 @@ class IpoPageItem(UuidPageItem):
 
 @six.python_2_unicode_compatible
 class LocationPageItem(UuidPageItem):
+    def __str__(self):
+        return self.name
+
+
+@six.python_2_unicode_compatible
+class CategoryPageItem(UuidPageItem):
     def __str__(self):
         return self.name
 

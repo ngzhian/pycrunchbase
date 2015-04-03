@@ -348,6 +348,8 @@ class CrunchBaseTestCase(TestCase):
                         "name": "loc 1",
                         "type": "Location",
                         "uuid": "uuid1",
+                        "location_type": "city",
+                        "parent_location_uuid": "uuidparent",
                         },
                     {
                         "updated_at": 1415768560,
@@ -356,6 +358,8 @@ class CrunchBaseTestCase(TestCase):
                         "name": "loc 2",
                         "type": "Location",
                         "uuid": "uuid2",
+                        "location_type": "city",
+                        "parent_location_uuid": "uuidparent",
                         }
                     ]
                 }
@@ -371,9 +375,69 @@ class CrunchBaseTestCase(TestCase):
         self.assertEqual(2, len(locations))
         self.assertEqual(locations[0].name, "loc 1")
         self.assertEqual(locations[0].path, "location/loc-1/uuid1")
+        self.assertEqual(locations[0].parent_location_uuid, "uuidparent")
         self.assertEqual(locations[1].name, "loc 2")
         self.assertEqual(locations[1].path, "location/loc-2/uuid2")
+        self.assertEqual(locations[1].parent_location_uuid, "uuidparent")
         self.assertIn('loc 1', str(locations[0]))
+
+    @patch('pycrunchbase.pycrunchbase.requests.get')
+    def test_get_categories(self, mock_get):
+        mock_json = make_mock_response_json({
+            "metadata": {
+                "image_path_prefix": "https://example.com/",
+                "www_path_prefix": "https://www.crunchbase.com/",
+                "api_path_prefix": "https://api.crunchbase.com/v/2/",
+                "version": 2
+                },
+            "data": {
+                "paging": {
+                    "items_per_page": 1000,
+                    "current_page": 1,
+                    "number_of_pages": 1,
+                    "next_page_url": None,
+                    "prev_page_url": None,
+                    "total_items": 2,
+                    "sort_order": "name ASC"
+                    },
+                "items": [
+                    {
+                        "updated_at": 1415895087,
+                        "created_at": 1371717055,
+                        "path": "category/cat-1/uuid1",
+                        "name": "cat 1",
+                        "type": "Category",
+                        "uuid": "uuid1",
+                        "number_of_organizations": 100,
+                        },
+                    {
+                        "updated_at": 1415768560,
+                        "created_at": 1310530681,
+                        "path": "category/cat-2/uuid2",
+                        "name": "cat 2",
+                        "type": "Category",
+                        "uuid": "uuid2",
+                        "number_of_organizations": 200,
+                        }
+                    ]
+                }
+            })
+        mock_get.return_value = mock_json
+
+        cb = CrunchBase('123')
+        categories = cb.categories()
+        mock_get.assert_called_with(
+            'https://api.crunchbase.com/v/2/categories?user_key=123')
+
+        self.assertIsInstance(categories, Page)
+        self.assertEqual(2, len(categories))
+        self.assertEqual(categories[0].name, "cat 1")
+        self.assertEqual(categories[0].path, "category/cat-1/uuid1")
+        self.assertEqual(categories[0].number_of_organizations, 100)
+        self.assertEqual(categories[1].name, "cat 2")
+        self.assertEqual(categories[1].path, "category/cat-2/uuid2")
+        self.assertEqual(categories[1].number_of_organizations, 200)
+        self.assertIn('cat 1', str(categories[0]))
 
 
 class LoadMoreTestCase(TestCase):
