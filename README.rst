@@ -112,13 +112,6 @@ Goals
 3. 'Pythonic' bindings, user doesn't feel like we're requesting URLs
 
 
-TODO
-===========
-
-* Support other nodes (FundRaise)
-* Coerce values in relationships page item to python types (datetime)
-* helper methods to grab node details from a list of PageItem that are nodes
-
 License
 =======
 

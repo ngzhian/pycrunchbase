@@ -2,6 +2,14 @@
 Changelog
 =========
 
+0.2.5 (2015-04-04)
+------------------
+
+* Added: Locations - get a list of active locations from CrunchBase
+* Added: LocationPageItem - each location in the Page of Locations
+* Added: Categories - get a list of active categories from CrunchBase
+* Added: CategoryPageItem - each location in the Page of Categories
+
 0.2.4 (2015-04-03)
 ------------------
 
