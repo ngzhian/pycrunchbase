@@ -8,3 +8,4 @@ Reference
     relationship
     none_types
     page
+    addnode
