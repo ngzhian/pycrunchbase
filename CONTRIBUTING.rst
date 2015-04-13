@@ -87,3 +87,14 @@ To run a subset of tests::
 To run all the test environments in *parallel* (you need to ``pip install detox``)::
 
     detox
+
+New version checklist
+---------------------
+
+1. Update `CHANGELOG.rst` with changes
+2. Update version in `pycrunchbase.__init__`
+3. Update version in `setup.py`
+4. Commit with messasge `Bump to vX.X.X`
+5. Tag commit with `vX.X.X`
+6. Push to origin master `git push origin master --tags`
+7. Release to pypi `python setup.py release`
