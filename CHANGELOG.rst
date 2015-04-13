@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.6 (2015-04-13)
+------------------
+* Fixed: #8 printing `PageItem` leads to unbounded recursion (@dustinfarris)
+
 0.2.5 (2015-04-04)
 ------------------
 
