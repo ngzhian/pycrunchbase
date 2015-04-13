@@ -106,7 +106,10 @@ The best way to send feedback is to file an issue at https://github.com/ngzhian/
 
 Contributors
 ============
-* `dustinfarris <https://github.com/dustinfarris`_
+
+Thanks to these contributors:
+
+* `dustinfarris <https://github.com/dustinfarris>`_
 
 Goals
 =====
