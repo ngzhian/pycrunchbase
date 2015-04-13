@@ -269,3 +269,11 @@ class PageItemTestCase(TestCase):
         except:
             # py3
             self.assertEqual(u'å Last', str(page_item))
+
+    def test_repr(self):
+        page_item = PageItem.build({'sample': 'data'})
+        assert repr(page_item) == "PageItem: {'sample': 'data'}"
+
+    def test_str(self):
+        page_item = PageItem.build({'sample': 'data'})
+        assert str(page_item) == "PageItem: {'sample': 'data'}"

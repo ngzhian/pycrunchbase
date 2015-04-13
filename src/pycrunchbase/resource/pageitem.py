@@ -44,6 +44,9 @@ class PageItem(object):
     def __repr__(self):
         return self.__str__()
 
+    def __str__(self):
+        return 'PageItem: %s' % self.data
+
 
 class UuidPageItem(PageItem):
     def __init__(self, data):
