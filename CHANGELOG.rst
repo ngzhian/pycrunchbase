@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.7 (2015-04-23)
+------------------
+* Fixed: #9 `sub_organization` and `websites` relationship of `Organization`
+
 0.2.6 (2015-04-13)
 ------------------
 * Fixed: #8 printing `PageItem` leads to unbounded recursion (@dustinfarris)
