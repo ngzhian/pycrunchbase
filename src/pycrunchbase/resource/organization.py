@@ -29,7 +29,7 @@ class Organization(Node):
         'past_team',
         'primary_image',
         'products',
-        'sub_organizations'
+        'sub_organizations',
         'websites',
     ]
 
