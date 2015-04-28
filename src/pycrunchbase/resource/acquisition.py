@@ -7,7 +7,7 @@ from .utils import parse_date
 @six.python_2_unicode_compatible
 class Acquisition(Node):
     """Represents a Acquisition on CrunchBase
-    API Docs: https://developer.crunchbase.com/docs
+    API Docs: https://data.crunchbase.com/docs
     """
 
     KNOWN_PROPERTIES = [
