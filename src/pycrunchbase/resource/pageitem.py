@@ -42,6 +42,9 @@ class PageItem(object):
         if path == 'Job':
             from .job import JobRelationship
             return JobRelationship(data)
+        if path == 'Address':
+            from .address import Address
+            return Address(data)
         return cls(data)
 
     def __repr__(self):
