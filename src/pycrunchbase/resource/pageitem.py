@@ -20,7 +20,7 @@ class PageItem(object):
 
     @classmethod
     def build(cls, data):
-        path = data.get('path', '')
+        path = data.get('type', '')
         if path.startswith('acquisition'):
             return AcquisitionPageItem(data)
         if path.startswith('funding-round'):
@@ -53,14 +53,14 @@ class PageItem(object):
 
 class UuidPageItem(PageItem):
     def __init__(self, data):
-        uuid = data.get('path').split('/')[-1]
+        uuid = data.get('uuid')
         setattr(self, 'uuid', uuid)
         super(UuidPageItem, self).__init__(data)
 
 
 class PermalinkPageItem(PageItem):
     def __init__(self, data):
-        permalink = data.get('path').split('/')[-1]
+        permalink = data.get('properties', {}).get('permalink')
         setattr(self, 'permalink', permalink)
         super(PermalinkPageItem, self).__init__(data)
 
@@ -153,6 +153,5 @@ class NonePageItem(PageItem):
 
     def __str__(self):
         return 'NonePageItem'
-
 
 NonePageItemSingleton = NonePageItem()
