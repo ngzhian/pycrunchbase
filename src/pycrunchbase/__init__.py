@@ -3,8 +3,10 @@ from .pycrunchbase import (
 )
 from .resource import (
     Acquisition,
+    Address,
     FundingRound,
     Fund,
+    Investment,
     IPO,
     Job,
     Organization,
@@ -20,8 +22,10 @@ __version__ = "0.2.7"
 
 __all__ = [
     'Acquisition',
+    'Address',
     'FundingRound',
     'Fund',
+    'Investment',
     'IPO',
     'Job',
     'Organization',
