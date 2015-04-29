@@ -5,9 +5,7 @@ from .node import Node
 
 @six.python_2_unicode_compatible
 class Category(Node):
-    """Represents a Category on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Category on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "path",
