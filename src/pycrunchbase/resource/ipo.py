@@ -12,30 +12,31 @@ class IPO(Node):
 
     KNOWN_RELATIONSHIPS = [
         'funded_company',
+        'stock_exchange',
+        'images',
+        'videos',
+        'news',
     ]
 
     KNOWN_PROPERTIES = [
-        "opening_share_price_currency_code",
-        "went_public_on_month",
-        "went_public_on_day",
-        "went_public_on_year",
+        "api_path",
+        "web_path",
         "went_public_on",
         "went_public_on_trust_code",
-        "canonical_currency_code",
-        "money_raised_currency_code",
-        "opening_valuation_currency_code",
-        "stock_symbol",
-        "permalink",
-        "name",
         "stock_exchange_symbol",
-        "shares_outstanding",
-        "money_raised_usd",
-        "money_raised",
-        "opening_share_price_usd",
+        "stock_symbol",
         "shares_sold",
         "opening_share_price",
-        "opening_valuation_usd",
+        "opening_share_price_currency_code",
+        "opening_share_price_usd",
         "opening_valuation",
+        "opening_valuation_currency_code",
+        "opening_valuation_usd",
+        "money_raised",
+        "money_raised_currency_code",
+        "money_raised_usd",
+        "created_at",
+        "updated_at",
     ]
 
     def _coerce_values(self):
