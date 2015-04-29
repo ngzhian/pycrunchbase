@@ -16,16 +16,16 @@ class TestNode(Node):
             setattr(self, attr, parse_date(getattr(self, attr)))
 
 data = {
+    "type": "TestNode",
+    "uuid": "uuid",
     'properties': {
         'property1': 'one',
         'property2': 'two'
     },
     'relationships': {
         'unknown': {
-            'paging': {
-            },
-            'items': {
-            }
+            'paging': {},
+            'items': {}
         }
     },
 }

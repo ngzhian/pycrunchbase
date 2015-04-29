@@ -23,55 +23,59 @@ MOCK_RELATIONSHIP_PAGE = '''{
     },
     "items": [
      {
-      "first_name": "First",
-      "last_name": "Last",
-      "title": "Director of Title",
-      "started_on": null,
-      "ended_on": null,
-      "path": "person/first-last",
-      "created_at": 1234567890,
-      "updated_at": 1234567890
+      "type": "Job",
+      "uuid": "befc22dec7892096e4d6919935cf4204",
+      "properties": {
+        "title": "Title 1",
+        "started_on": null,
+        "ended_on": null,
+        "created_at": 1234567890,
+        "updated_at": 1234567890
+      }
      },
      {
-      "first_name": "First",
-      "last_name": "Last",
-      "title": "Director of Title",
-      "started_on": null,
-      "ended_on": null,
-      "path": "person/first-last",
-      "created_at": 1234567890,
-      "updated_at": 1234567890
+      "type": "Job",
+      "uuid": "a0e3eb89f81bc79ee797deae68e6ade7",
+      "properties": {
+        "title": "Title 2",
+        "started_on": null,
+        "ended_on": null,
+        "created_at": 1234567890,
+        "updated_at": 1234567890
+      }
      },
      {
-      "first_name": "First",
-      "last_name": "Last",
-      "title": "Director of Title",
-      "started_on": null,
-      "ended_on": null,
-      "path": "person/first-last",
-      "created_at": 1234567890,
-      "updated_at": 1234567890
+       "type": "Job",
+       "uuid": "570bed9be95838b52045d84b30b80490",
+       "properties": {
+         "title": "Title 3",
+         "started_on": null,
+         "ended_on": null,
+         "created_at": 1234567890,
+         "updated_at": 1234567890
+     }
      }
     ]
 }'''
 
 PAST_TEAM_RELATIONSHIP = '''{
+    "cardinality": "OneToMany",
     "paging": {
      "total_items": 3,
-     "first_page_url": "https://api.crunchbase.com/v/3/\
-organization/example/past_team",
+     "first_page_url": "https://api.crunchbase.com/v/3/organizations/example/past_team",
      "sort_order": "created_at DESC"
     },
     "items": [
      {
-      "first_name": "First",
-      "last_name": "Last",
-      "title": "Director of Title",
-      "started_on": null,
-      "ended_on": null,
-      "path": "person/first-last",
-      "created_at": 1234567890,
-      "updated_at": 1234567890
+       "type": "Job",
+       "uuid": "570bed9be95838b52045d84b30b80490",
+       "properties": {
+         "title": "Title 3",
+         "started_on": null,
+         "ended_on": null,
+         "created_at": 1234567890,
+         "updated_at": 1234567890
+       }
      }
     ]
    }'''
@@ -342,25 +346,27 @@ class CrunchBaseTestCase(TestCase):
                     },
                 "items": [
                     {
-                        "updated_at": 1415895087,
-                        "created_at": 1371717055,
-                        "path": "location/loc-1/uuid1",
-                        "name": "loc 1",
                         "type": "Location",
-                        "uuid": "uuid1",
-                        "location_type": "city",
-                        "parent_location_uuid": "uuidparent",
-                        },
-                    {
-                        "updated_at": 1415768560,
-                        "created_at": 1310530681,
-                        "path": "location/loc-2/uuid2",
-                        "name": "loc 2",
-                        "type": "Location",
-                        "uuid": "uuid2",
-                        "location_type": "city",
-                        "parent_location_uuid": "uuidparent",
+                        "uuid": "uuid",
+                        "properties": {
+                            "name": "loc 1",
+                            "location_type": "city",
+                            "parent_location_uuid": "uuidp1",
+                            "created_at": 1229781627,
+                            "updated_at": 1397990749
                         }
+                    },
+                    {
+                        "type": "Location",
+                        "uuid": "uuid",
+                        "properties": {
+                            "name": "loc 2",
+                            "location_type": "city",
+                            "parent_location_uuid": "uuidp2",
+                            "created_at": 1229781627,
+                            "updated_at": 1397990749
+                        }
+                    },
                     ]
                 }
             })
@@ -374,11 +380,9 @@ class CrunchBaseTestCase(TestCase):
         self.assertIsInstance(locations, Page)
         self.assertEqual(2, len(locations))
         self.assertEqual(locations[0].name, "loc 1")
-        self.assertEqual(locations[0].path, "location/loc-1/uuid1")
-        self.assertEqual(locations[0].parent_location_uuid, "uuidparent")
+        self.assertEqual(locations[0].parent_location_uuid, "uuidp1")
         self.assertEqual(locations[1].name, "loc 2")
-        self.assertEqual(locations[1].path, "location/loc-2/uuid2")
-        self.assertEqual(locations[1].parent_location_uuid, "uuidparent")
+        self.assertEqual(locations[1].parent_location_uuid, "uuidp2")
         self.assertIn('loc 1', str(locations[0]))
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -402,26 +406,30 @@ class CrunchBaseTestCase(TestCase):
                     },
                 "items": [
                     {
-                        "updated_at": 1415895087,
-                        "created_at": 1371717055,
-                        "path": "category/cat-1/uuid1",
-                        "name": "cat 1",
                         "type": "Category",
-                        "uuid": "uuid1",
-                        "number_of_organizations": 100,
-                        },
-                    {
-                        "updated_at": 1415768560,
-                        "created_at": 1310530681,
-                        "path": "category/cat-2/uuid2",
-                        "name": "cat 2",
-                        "type": "Category",
-                        "uuid": "uuid2",
-                        "number_of_organizations": 200,
+                        "uuid": "uuid",
+                        "properties": {
+                            "name": "cat 1",
+                            "organizations_in_category": 10,
+                            "products_in_category": 9,
+                            "created_at": 1229781627,
+                            "updated_at": 1397990749
                         }
-                    ]
-                }
-            })
+                    },
+                    {
+                        "type": "Category",
+                        "uuid": "uuid",
+                        "properties": {
+                            "name": "cat 2",
+                            "organizations_in_category": 10,
+                            "products_in_category": 9,
+                            "created_at": 1229781627,
+                            "updated_at": 1397990749
+                        }
+                    }
+                ]
+            }
+        })
         mock_get.return_value = mock_json
 
         cb = CrunchBase('123')
@@ -432,11 +440,11 @@ class CrunchBaseTestCase(TestCase):
         self.assertIsInstance(categories, Page)
         self.assertEqual(2, len(categories))
         self.assertEqual(categories[0].name, "cat 1")
-        self.assertEqual(categories[0].path, "category/cat-1/uuid1")
-        self.assertEqual(categories[0].number_of_organizations, 100)
+        self.assertEqual(categories[0].organizations_in_category, 10)
+        self.assertEqual(categories[0].products_in_category, 9)
         self.assertEqual(categories[1].name, "cat 2")
-        self.assertEqual(categories[1].path, "category/cat-2/uuid2")
-        self.assertEqual(categories[1].number_of_organizations, 200)
+        self.assertEqual(categories[1].organizations_in_category, 10)
+        self.assertEqual(categories[1].products_in_category, 9)
         self.assertIn('cat 1', str(categories[0]))
 
 
@@ -481,6 +489,7 @@ class LoadMoreTestCase(TestCase):
         """At page 1, there a next_page, get it and return the Relationship"""
         mock_json = make_mock_response_json({
             "data": {
+                "cardinality": "OneToMany",
                 "paging": {
                     "items_per_page": 8,
                     "current_page": 2,
@@ -496,12 +505,13 @@ class LoadMoreTestCase(TestCase):
         mock_get.return_value = mock_json
 
         data = {
+            "cardinality": "OneToMany",
             "paging": {
                 "items_per_page": 8,
                 "current_page": 1,
                 "number_of_pages": 2,
                 "next_page_url": "https://api.crunchbase.com/v/3/"
-                "organization/example/past_team?page=2",
+                "organizations/example/past_team?page=2",
                 "prev_page_url": None,
                 "total_items": 10,
                 "sort_order": "custom"

@@ -1,10 +1,13 @@
 from .acquisition import Acquisition
 from .address import Address
+from .category import Category
 from .fundinground import FundingRound
 from .fund import Fund
 from .investment import Investment
 from .ipo import IPO
 from .job import Job
+from .location import Location
+from .news import News
 from .organization import Organization
 from .page import Page
 from .pageitem import PageItem
@@ -15,11 +18,14 @@ from .relationship import Relationship
 __all__ = [
     'Acquisition',
     'Address',
+    'Category',
     'FundingRound',
     'Fund',
     'Investment',
     'IPO',
     'Job',
+    'Location',
+    'News',
     'Organization',
     'Page',
     'PageItem',

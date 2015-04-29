@@ -1,6 +1,5 @@
 import six
 
-from .page import Page
 from .pageitem import PageItem
 from .pageitem import NonePageItemSingleton
 from .utils import safe_int
@@ -49,6 +48,8 @@ class Relationship(object):
         self.items = [PageItem.build(item) for item in data.get('items')]
 
     def buildPageItem(self, item):
+        if not item:
+            return NonePageItemSingleton
         node = PageItem.build(item)
         for prop in node.KNOWN_PROPERTIES:
             setattr(self, prop, getattr(node, prop))
@@ -108,11 +109,12 @@ class Relationship(object):
     def __repr__(self):
         return self.__str__()
 
+
 @six.python_2_unicode_compatible
 class NoneRelationship(Relationship):
     def __init__(self):
         super(NoneRelationship, self).__init__(
-        None, {'cardinality': 'OneToMany', 'paging': {}, 'items': {}})
+            None, {'cardinality': 'OneToMany', 'paging': {}, 'items': {}})
 
     def get(self, _):
         return NonePageItemSingleton

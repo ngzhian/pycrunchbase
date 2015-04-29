@@ -15,6 +15,7 @@ class Node(object):
             self.data = json.loads(data)
         else:
             self.data = data
+        self.uuid = self.data.get('uuid')
         self._parse_properties()
         self._parse_relationship()
         self._coerce_values()

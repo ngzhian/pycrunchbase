@@ -1,265 +1,250 @@
 # vim: set fileencoding=utf-8 :
 
+from datetime import datetime
 from unittest import TestCase
 
 from pycrunchbase import PageItem
-from pycrunchbase.resource.pageitem import (
-    AcquisitionPageItem,
-    CategoryPageItem,
-    FundingRoundPageItem,
-    InvestorInvestmentPageItem,
-    IpoPageItem,
-    LocationPageItem,
-    OrganizationPageItem,
-    PersonPageItem,
-    ProductPageItem,
+
+from pycrunchbase import (
+    Acquisition,
+    Category,
+    FundingRound,
+    IPO,
+    Investment,
+    Location,
+    News,
+    Organization,
+    Person,
+    Product,
 )
 
 
 class PageItemTestCase(TestCase):
     def test_acquisition_page_item(self):
         data = {
-            "announced_on": "2015-01-16",
             "type": "Acquisition",
-            "name": "Acquisition",
-            "path": "acquisition/4292239d4dbbc52eeee0856612ed9c47",
-            "created_at": 1421443747,
-            "updated_at": 1421689170
+            "uuid": "4292239d4dbbc52eeee0856612ed9c47",
+            "properties": {
+                "announced_on": "2015-01-16",
+                "api_path": "acquisition/4292239d4dbbc52eeee0856612ed9c47",
+                "created_at": 1421443747,
+                "updated_at": 1421689170,
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, AcquisitionPageItem)
-        self.assertEqual(page_item.announced_on, "2015-01-16")
-        self.assertEqual(page_item.type, "Acquisition")
-        self.assertEqual(page_item.name, "Acquisition")
+        self.assertIsInstance(page_item, Acquisition)
+        self.assertEqual(page_item.announced_on, datetime(2015, 1, 16))
         self.assertEqual(
-            page_item.path, "acquisition/4292239d4dbbc52eeee0856612ed9c47")
+            page_item.api_path, "acquisition/4292239d4dbbc52eeee0856612ed9c47")
         self.assertEqual(
             page_item.uuid, "4292239d4dbbc52eeee0856612ed9c47")
-        self.assertEqual(
-            page_item.cb_url,
-            "crunchbase.com/acquisition/4292239d4dbbc52eeee0856612ed9c47")
 
     def test_funding_round_page_item(self):
         data = {
             "type": "FundingRound",
-            "name": "Funding Round Name",
-            "path": "funding-round/37bd05f961af726ba3c1b279da842805",
-            "created_at": 1295843747,
-            "updated_at": 1419019444
+            "uuid": "37bd05f961af726ba3c1b279da842805",
+            "properties": {
+                "api_path": "funding-rounds/37bd05f961af726ba3c1b279da842805",
+                "funding_type": "private_equity",
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, FundingRoundPageItem)
-        self.assertEqual(page_item.type, "FundingRound")
-        self.assertEqual(page_item.name, "Funding Round Name")
+        self.assertIsInstance(page_item, FundingRound)
+        self.assertEqual(page_item.funding_type, "private_equity")
         self.assertEqual(
-            page_item.path, "funding-round/37bd05f961af726ba3c1b279da842805")
+            page_item.api_path,
+            "funding-rounds/37bd05f961af726ba3c1b279da842805")
         self.assertEqual(
             page_item.uuid, "37bd05f961af726ba3c1b279da842805")
-        self.assertEqual(
-            page_item.cb_url,
-            "crunchbase.com/funding-round/37bd05f961af726ba3c1b279da842805")
 
     def test_ipo_page_item(self):
         data = {
             "type": "Ipo",
-            "name": "Ipo Name",
-            "path": "ipo/a3bc391490d52ba8529d1cfc20550a87",
-            "created_at": 1407165772,
-            "updated_at": 1412285699
+            "uuid": "a3bc391490d52ba8529d1cfc20550a87",
+            "properties": {
+                "stock_symbol": "FB",
+                "api_path": "ipo/a3bc391490d52ba8529d1cfc20550a87",
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, IpoPageItem)
-        self.assertEqual(page_item.type, "Ipo")
-        self.assertEqual(page_item.name, "Ipo Name")
+        self.assertIsInstance(page_item, IPO)
+        self.assertEqual(page_item.stock_symbol, "FB")
         self.assertEqual(
-            page_item.path, "ipo/a3bc391490d52ba8529d1cfc20550a87")
-        self.assertEqual(
-            page_item.uuid, "a3bc391490d52ba8529d1cfc20550a87")
-        self.assertEqual(
-            page_item.cb_url,
-            "crunchbase.com/ipo/a3bc391490d52ba8529d1cfc20550a87")
+            page_item.api_path, "ipo/a3bc391490d52ba8529d1cfc20550a87")
 
     def test_organization_page_item(self):
         data = {
             "type": "Organization",
-            "name": "Example",
-            "path": "organization/example",
-            "created_at": 1419162865,
-            "updated_at": 1419596914
+            "uuid": "df6628127f970b439d3e12f64f504fbb",
+            "properties": {
+                "api_path": "organizations/example",
+                "web_path": "organization/example",
+                "name": "Facebook",
+            },
+            "relationships": {
+                "investors": {
+                    "cardinality": "OneToMany",
+                    "paging": {
+                        "total_items": 17,
+                        "first_page_url": "https://api.crunchbase.com/v/3/organizations/facebook/investors",
+                        "sort_order": "created_at DESC"
+                    },
+                    "items": [
+                        {
+                            "type": "Organization",
+                            "uuid": "8ce2fd0305ddab1d19e1826840e305f1",
+                            "properties": {
+                                "permalink": "elevation-partners",
+                            },
+                        }
+                    ]
+                },
+                "headquarters": {
+                    "cardinality": "OneToOne",
+                    "item": {
+                        "type": "Address",
+                        "uuid": "31adbab5e90fc45a47ae873e0656fadd",
+                        "properties": {
+                            "name": "Headquarters",
+                            "street_1": "1601 Willow Road",
+                        }
+                    }
+                }
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, OrganizationPageItem)
-        self.assertEqual(page_item.type, "Organization")
-        self.assertEqual(page_item.name, "Example")
-        self.assertEqual(page_item.path, "organization/example")
-        self.assertEqual(page_item.permalink, "example")
+        self.assertIsInstance(page_item, Organization)
+        self.assertEqual(page_item.name, "Facebook")
+        self.assertEqual(page_item.api_path, "organizations/example")
+        self.assertEqual(page_item.web_path, "organization/example")
+        self.assertEqual(1, len(page_item.investors))
         self.assertEqual(
-            page_item.cb_url, "crunchbase.com/organization/example")
+            page_item.investors[0].permalink, "elevation-partners")
+        self.assertEqual(
+            page_item.headquarters.name, "Headquarters")
+        self.assertEqual(
+            page_item.headquarters.street_1, "1601 Willow Road")
 
     def test_person_page_item(self):
         data = {
-            "first_name": "First",
-            "last_name": "Last",
-            "title": "Title",
-            "started_on": None,
-            "ended_on": None,
-            "path": "person/first-last",
-            "created_at": 1233300345,
-            "updated_at": 1419596914
+            "type": "Person",
+            "uuid": "b189fb60acc9668402e4c2e83b0de3f4",
+            "properties": {
+                "permalink": "louis-botes",
+                "api_path": "people/louis-botes",
+                "web_path": "person/louis-botes",
+                "first_name": "Louis",
+                "last_name": "Botes",
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, PersonPageItem)
-        self.assertEqual(page_item.first_name, "First")
-        self.assertEqual(page_item.last_name, "Last")
-        self.assertEqual(page_item.title, "Title")
-        self.assertEqual(page_item.started_on, None)
-        self.assertEqual(page_item.ended_on, None)
-        self.assertEqual(page_item.path, "person/first-last")
-        self.assertEqual(page_item.permalink, "first-last")
-        self.assertEqual(page_item.cb_url, "crunchbase.com/person/first-last")
+        self.assertIsInstance(page_item, Person)
+        self.assertEqual(page_item.first_name, "Louis")
+        self.assertEqual(page_item.last_name, "Botes")
+        self.assertEqual(page_item.permalink, "louis-botes")
+        self.assertEqual(page_item.api_path, "people/louis-botes")
+        self.assertEqual(page_item.web_path, "person/louis-botes")
 
     def test_product_page_item(self):
         data = {
             "type": "Product",
-            "name": "Product Name",
-            "path": "product/product-permalink",
-            "created_at": 1422955389,
-            "updated_at": 1422955417
+            "uuid": "71d7b04af6944553e845101d720e87a1",
+            "properties": {
+                "permalink": "hello",
+                "api_path": "products/hello",
+                "web_path": "product/hello",
+                "name": "Hello",
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, ProductPageItem)
-        self.assertEqual(page_item.type, "Product")
-        self.assertEqual(page_item.name, "Product Name")
-        self.assertEqual(page_item.path, "product/product-permalink")
-        self.assertEqual(page_item.permalink, "product-permalink")
-        self.assertEqual(
-            page_item.cb_url, "crunchbase.com/product/product-permalink")
+        self.assertIsInstance(page_item, Product)
+        self.assertEqual(page_item.uuid, "71d7b04af6944553e845101d720e87a1")
+        self.assertEqual(page_item.name, "Hello")
+        self.assertEqual(page_item.permalink, "hello")
+        self.assertEqual(page_item.api_path, "products/hello")
+        self.assertEqual(page_item.web_path, "product/hello")
 
     def test_news_page_item(self):
         data = {
-            "url": "http://example.com/1/",
-            "author": "Author 1",
-            "posted_on": "2015-02-05",
-            "type": "PressReference",
-            "title": "Title 1",
-            "created_at": 1423206060,
-            "updated_at": 1423207820
+            "type": "News",
+            "uuid": "3610c416c22e446380b3a4ef4b3c5fc1",
+            "properties": {
+                "title": "Title",
+                "author": "Author 1",
+                "posted_on": "2015-04-27",
+                }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, PageItem)
-        self.assertEqual(page_item.url, "http://example.com/1/")
+        self.assertIsInstance(page_item, News)
+        self.assertEqual(page_item.title, "Title")
         self.assertEqual(page_item.author, "Author 1")
-        self.assertEqual(page_item.title, "Title 1")
+        self.assertEqual(page_item.posted_on, datetime(2015, 4, 27))
 
     def test_location_page_item(self):
         data = {
-                "created_at": 1398124800,
-                "updated_at": 1398124800,
-                "type": "Location",
-                "name": "loc 1",
-                "path": "location/loc-1/uuid1",
+            "type": "Location",
+            "uuid": "uuid",
+            "properties": {
+                "name": "New York",
                 "location_type": "city",
-                "uuid": "uuid1",
-                "parent_location_uuid": "uuidparent"
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, LocationPageItem)
-        self.assertEqual(page_item.name, "loc 1")
-        self.assertEqual(page_item.path, "location/loc-1/uuid1")
+        self.assertIsInstance(page_item, Location)
+        self.assertEqual(page_item.name, "New York")
         self.assertEqual(page_item.location_type, "city")
 
     def test_category_page_item(self):
         data = {
-            "updated_at": 1415768560,
-            "created_at": 1310530681,
-            "path": "category/cat-1/uuid1",
-            "name": "cat 1",
             "type": "Category",
-            "uuid": "uuid1",
-            "number_of_organizations": 100,
+            "uuid": "uuid",
+            "properties": {
+                "name": "Social",
+                "organizations_in_category": 10,
+                "products_in_category": 9,
+            }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, CategoryPageItem)
-        self.assertEqual(page_item.name, "cat 1")
-        self.assertEqual(page_item.path, "category/cat-1/uuid1")
-        self.assertEqual(page_item.number_of_organizations, 100)
-
-    def test_unknown_node_item(self):
-        data = {
-            "type": "Unknown",
-            "name": "Unknown Name",
-            "path": "unknown/unknown-permalink",
-        }
-        page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, PageItem)
-        self.assertEqual(page_item.type, "Unknown")
-        self.assertEqual(page_item.name, "Unknown Name")
-        self.assertEqual(page_item.path, "unknown/unknown-permalink")
+        self.assertIsInstance(page_item, Category)
+        self.assertEqual(page_item.name, "Social")
+        self.assertEqual(page_item.organizations_in_category, 10)
+        self.assertEqual(page_item.products_in_category, 9)
 
     def test_investor_investment_investor(self):
         data = {
             "type": "InvestorInvestment",
-            "money_invested": 1234567,
-            "money_invested_currency_code": "USD",
-            "money_invested_usd": 1234567,
-            "investor": {
-                "type": "Organization",
-                "name": "Example",
-                "path": "organization/example"
+            "uuid": "5807c4efa810655939cfda6f6d48f5a6",
+            "properties": {
+                "money_invested": 1234567,
+                "money_invested_currency_code": "USD",
+                "money_invested_usd": 1234567,
+            },
+            "relationships": {
+                "funding_round": {
+                    "type": "FundingRound",
+                    "uuid": "8aeb5e3f786a23676ba62c8a00263ba6",
+                    "properties": {
+                        "funding_type": "seed",
+                    }
+                }
             }
         }
         page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, InvestorInvestmentPageItem)
-        self.assertEqual(page_item.type, "InvestorInvestment")
+        self.assertIsInstance(page_item, Investment)
         self.assertEqual(page_item.money_invested, 1234567)
         self.assertEqual(page_item.money_invested_currency_code, "USD")
         self.assertEqual(page_item.money_invested_usd, 1234567)
-        self.assertEqual(page_item.investor.type, "Organization")
-        self.assertEqual(
-            page_item.investor.name, "Example")
-        self.assertEqual(
-            page_item.investor.path, "organization/example")
-        self.assertEqual(
-            page_item.investor.cb_url,
-            "crunchbase.com/organization/example")
-
-    def test_investor_investment_invested_in(self):
-        data = {
-            "type": "InvestorInvestment",
-            "money_invested": 1234567,
-            "money_invested_currency_code": "USD",
-            "money_invested_usd": 1234567,
-            "invested_in": {
-                "type": "Organization",
-                "name": "Example",
-                "path": "organization/example"
-            }
-        }
-        page_item = PageItem.build(data)
-        self.assertIsInstance(page_item, InvestorInvestmentPageItem)
-        self.assertEqual(page_item.type, "InvestorInvestment")
-        self.assertEqual(page_item.money_invested, 1234567)
-        self.assertEqual(page_item.money_invested_currency_code, "USD")
-        self.assertEqual(page_item.money_invested_usd, 1234567)
-        self.assertEqual(page_item.invested_in.type, "Organization")
-        self.assertEqual(
-            page_item.invested_in.name, "Example")
-        self.assertEqual(
-            page_item.invested_in.path, "organization/example")
-        self.assertEqual(
-            page_item.invested_in.cb_url,
-            "crunchbase.com/organization/example")
+        self.assertEqual(page_item.funding_round.funding_type, "seed")
 
     def test_unicode(self):
         data = {
-            "first_name": u"å",
-            "last_name": "Last",
-            "title": "Title",
-            "started_on": None,
-            "ended_on": None,
-            "path": "person/first-last",
-            "created_at": 1233300345,
-            "updated_at": 1419596914
+            "type": "Person",
+            "uuid": "b189fb60acc9668402e4c2e83b0de3f4",
+            "properties": {
+                "first_name": u"å",
+                "last_name": "Last",
+                "permalink": "permalink",
+            }
         }
         page_item = PageItem.build(data)
         try:
@@ -268,7 +253,7 @@ class PageItemTestCase(TestCase):
             self.assertEqual(codecs.encode(u'å Last', 'utf8'), str(page_item))
         except:
             # py3
-            self.assertEqual(u'å Last', str(page_item))
+            self.assertEqual(u'å Last (permalink)', str(page_item))
 
     def test_repr(self):
         page_item = PageItem.build({'sample': 'data'})

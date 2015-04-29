@@ -22,29 +22,32 @@ class PageItem(object):
     def build(cls, data):
         path = data.get('type', '')
         if path == 'Acquisition':
-            from .acquisition import AcquisitionRelationship
-            return AcquisitionRelationship(data)
+            from .acquisition import Acquisition
+            return Acquisition(data)
         if path == 'FundingRound':
             from .fundinground import FundingRound
             return FundingRound(data)
         if path == 'Ipo':
             from .ipo import IPO
             return IPO(data)
-        if path == 'Organization':
+        if path == 'Organization' or path == 'OrganizationSummary':
             from .organization import Organization
             return Organization(data)
-        if path == 'Person':
+        if path == 'Person' or path == 'PersonSummary':
             from .person import Person
             return Person(data)
-        if path.startswith('product'):
+        if path == 'Product' or path == 'ProductSummary':
             from .product import Product
             return Product(data)
-        if data.get('type') == 'InvestorInvestment':
-            return InvestorInvestmentPageItem(data)
-        if path.startswith('location'):
-            return LocationPageItem(data)
-        if path.startswith('category'):
-            return CategoryPageItem(data)
+        if path == 'InvestorInvestment':
+            from .investment import Investment
+            return Investment(data)
+        if path == 'Location':
+            from .location import Location
+            return Location(data)
+        if path == 'Category':
+            from .category import Category
+            return Category(data)
         if path == 'Fund':
             from .fund import Fund
             return Fund(data)
@@ -54,6 +57,9 @@ class PageItem(object):
         if path == 'Address':
             from .address import Address
             return Address(data)
+        if path == 'News':
+            from .news import News
+            return News(data)
         return cls(data)
 
     def __repr__(self):
@@ -75,49 +81,6 @@ class PermalinkPageItem(PageItem):
         permalink = data.get('properties', {}).get('permalink')
         setattr(self, 'permalink', permalink)
         super(PermalinkPageItem, self).__init__(data)
-
-
-@six.python_2_unicode_compatible
-class AcquisitionPageItem(UuidPageItem):
-    def __str__(self):
-        return u'{name} {announced_on}'.format(
-            name=self.name,
-            announced_on=self.announced_on,
-        )
-
-
-@six.python_2_unicode_compatible
-class FundingRoundPageItem(UuidPageItem):
-    def __str__(self):
-        return self.name
-
-
-@six.python_2_unicode_compatible
-class InvestorInvestmentPageItem(PageItem):
-    def __init__(self, data):
-        super(InvestorInvestmentPageItem, self).__init__(data)
-        if 'investor' in data:
-            self.investor = PageItem.build(self.investor)
-        if 'invested_in' in data:
-            self.invested_in = PageItem.build(self.invested_in)
-
-    def __str__(self):
-        return u'{investor} ${money}'.format(
-            investor=self.investor,
-            money=self.money_invested_usd,
-        )
-
-
-@six.python_2_unicode_compatible
-class LocationPageItem(UuidPageItem):
-    def __str__(self):
-        return self.name
-
-
-@six.python_2_unicode_compatible
-class CategoryPageItem(UuidPageItem):
-    def __str__(self):
-        return self.name
 
 
 @six.python_2_unicode_compatible

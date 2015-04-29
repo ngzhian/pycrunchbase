@@ -15,11 +15,14 @@ DATA = {
     },
     "items": [
      {
-         "updated_at": 1423666090,
-         "created_at": 1371717055,
-         "path": "organization/example",
-         "name": "Example",
-         "type": "Organization"
+         "type": "OrganizationSummary",
+         "uuid": "df6628127f970b439d3e12f64f504fbb",
+         "properties": {
+             "permalink": "facebook",
+             "api_path": "organizations/facebook",
+             "web_path": "organization/facebook",
+             "name": "Facebook",
+         }
      }
     ]
 }
@@ -29,8 +32,10 @@ class PageTestCase(TestCase):
     def test_can_retrieve_valid_index(self):
         past_team = Page('data', DATA)
         one = past_team.get(0)
-        self.assertEqual(one.name, "Example")
-        self.assertEqual(one.permalink, "example")
+        self.assertEqual(one.name, "Facebook")
+        self.assertEqual(one.permalink, "facebook")
+        self.assertEqual(one.api_path, "organizations/facebook")
+        self.assertEqual(one.web_path, "organization/facebook")
 
     def test_retrieving_out_of_bound_index(self):
         past_team = Page('data', DATA)
