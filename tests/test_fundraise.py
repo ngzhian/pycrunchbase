@@ -1,16 +1,15 @@
 from datetime import datetime
 from unittest import TestCase
 
-from pycrunchbase import FundRaise
+from pycrunchbase import Fund
 
 TEST_DATA = {
     "uuid": "5807c4efa810655939cfda6f6d48f5a6",
-    "type": "FundRaise",
+    "type": "Fund",
     "properties": {
         "money_raised_usd": 550000000,
         "money_raised": 550000000,
         "money_raised_currency_code": "USD",
-        "permalink": "5807c4efa810655939cfda6f6d48f5a6",
         "name": "Early-stage Fund VII",
         "announced_on_year": 2014,
         "announced_on_day": 10,
@@ -57,23 +56,23 @@ TEST_DATA = {
 }
 
 
-class FundRaiseTestCase(TestCase):
+class FundTestCase(TestCase):
     def test_fundraise_built(self):
-        fundraise = FundRaise(TEST_DATA)
-        self.assertEqual(fundraise.money_raised_usd, 550000000)
-        self.assertEqual(fundraise.money_raised, 550000000)
-        self.assertEqual(fundraise.money_raised_currency_code, "USD")
-        self.assertEqual(fundraise.permalink, "5807c4efa810655939cfda6f6d48f5a6")
+        fundraise = Fund(TEST_DATA)
         self.assertEqual(fundraise.name, "Early-stage Fund VII")
-        self.assertEqual(fundraise.announced_on_year, 2014)
-        self.assertEqual(fundraise.announced_on_day, 10)
-        self.assertEqual(fundraise.announced_on_month, 6)
         self.assertEqual(fundraise.announced_on, datetime(2014, 6, 10))
         self.assertEqual(fundraise.announced_on_trust_code, 7)
+        self.assertEqual(fundraise.money_raised, 550000000)
+        self.assertEqual(fundraise.money_raised_currency_code, "USD")
+        self.assertEqual(fundraise.money_raised_usd, 550000000)
 
     def test_fundraise_relationships_built(self):
-        fundraise = FundRaise(TEST_DATA)
+        fundraise = Fund(TEST_DATA)
         self.assertIsNotNone(fundraise.venture_firm)
         self.assertEqual('Index Ventures', fundraise.venture_firm.get(0).name)
         self.assertIsNotNone(fundraise.news)
         self.assertIn('Index Ventures Raise', fundraise.news.get(0).title)
+
+    def test_string(self):
+        fundraise = Fund(TEST_DATA)
+        str(fundraise)

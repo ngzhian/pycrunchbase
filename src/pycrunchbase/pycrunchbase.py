@@ -4,7 +4,7 @@ import six
 from .resource import (
     Acquisition,
     FundingRound,
-    FundRaise,
+    Fund,
     IPO,
     Organization,
     Page,
@@ -98,10 +98,10 @@ class CrunchBase(object):
         """Get the details of an fundraise given a fundraise uuid.
 
         Returns:
-            FundRaise or None
+            Fund or None
         """
         node_data = self.get_node('fund-raise', permalink)
-        return FundRaise(node_data) if node_data else None
+        return Fund(node_data) if node_data else None
 
     def locations(self):
         """

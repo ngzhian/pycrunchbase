@@ -1,6 +1,6 @@
 from .acquisition import Acquisition
 from .fundinground import FundingRound
-from .fundraise import FundRaise
+from .fundraise import Fund
 from .ipo import IPO
 from .job import Job
 from .organization import Organization
@@ -13,7 +13,7 @@ from .relationship import Relationship
 __all__ = [
     'Acquisition',
     'FundingRound',
-    'FundRaise',
+    'Fund',
     'IPO',
     'Job',
     'Organization',

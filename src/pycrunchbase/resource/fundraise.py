@@ -5,27 +5,31 @@ from .utils import parse_date
 
 
 @six.python_2_unicode_compatible
-class FundRaise(Node):
-    """Represents an FundRaise on CrunchBase
+class Fund(Node):
+    """Represents an Fund on CrunchBase
     API Docs: https://data.crunchbase.com/docs
+    Previously known as a FundRaise.
     """
 
     KNOWN_RELATIONSHIPS = [
         'venture_firm',
+        'investor',
+        'images',
+        'videos',
         'news',
     ]
 
     KNOWN_PROPERTIES = [
-        "money_raised_usd",
-        "money_raised",
-        "money_raised_currency_code",
-        "permalink",
+        "api_path",
+        "web_path",
         "name",
-        "announced_on_year",
-        "announced_on_day",
-        "announced_on_month",
         "announced_on",
         "announced_on_trust_code",
+        "money_raised",
+        "money_raised_currency_code",
+        "money_raised_usd",
+        "created_at",
+        "updated_at",
     ]
 
     def _coerce_values(self):
