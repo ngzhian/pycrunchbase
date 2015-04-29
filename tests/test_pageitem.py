@@ -250,7 +250,7 @@ class PageItemTestCase(TestCase):
         try:
             _ = unicode('')  #py2
             import codecs
-            self.assertEqual(codecs.encode(u'å Last', 'utf8'), str(page_item))
+            self.assertEqual(codecs.encode(u'å Last (permalink)', 'utf8'), str(page_item))
         except:
             # py3
             self.assertEqual(u'å Last (permalink)', str(page_item))
