@@ -11,37 +11,37 @@ class Person(Node):
     """
 
     KNOWN_RELATIONSHIPS = [
-        "degrees",
-        "experience",
-        "primary_location",
         "primary_affiliation",
-        "investments",
-        "advisor_at",
-        "founded_companies",
+        "primary_location",
         "primary_image",
         "websites",
-        "news"
+        "degrees",
+        "jobs",
+        "advisory_roles",
+        "founded_companies",
+        "investments",
+        "memberships",
+        "images",
+        "videos",
+        "news",
     ]
 
     KNOWN_PROPERTIES = [
-        "role_investor",
+        "permalink",
+        "api_path",
+        "web_path",
         "last_name",
         "first_name",
-        "permalink",
-        "died_on_trust_code",
-        "died_on_day",
-        "died_on_month",
-        "died_on_year",
-        "died_on",
+        "also_known_as",
         "bio",
-        "born_on_trust_code",
-        "born_on_day",
-        "born_on_month",
-        "born_on_year",
+        "role_investor",
         "born_on",
+        "born_on_trust_code",
+        "is_deceased",
+        "died_on",
+        "died_on_trust_code",
         "created_at",
         "updated_at",
-        "location_uuid",
     ]
 
     def _coerce_values(self):
