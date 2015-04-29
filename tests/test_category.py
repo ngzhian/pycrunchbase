@@ -15,7 +15,7 @@ TEST_DATA = {
 }
 
 
-class LocationTestCae(TestCase):
+class LocationTestCase(TestCase):
     def test_location_built(self):
         category = Category(TEST_DATA)
         self.assertEqual(category.name, "Social")
