@@ -11,20 +11,22 @@ class FundingRound(Node):
     """
 
     KNOWN_PROPERTIES = [
+        "permalink",  # check that this is actually returned
+        "api_path",
+        "web_path",
         "funding_type",
-        "money_raised_usd",
-        "announced_on_year",
-        "announced_on_day",
-        "announced_on_month",
+        "series",
+        "series_qualifier",
         "announced_on",
         "announced_on_trust_code",
-        "canonical_currency_code",
+        "closed_on",
+        "closed_on_trust_code",
         "money_raised",
         "money_raised_currency_code",
-        "permalink",
-        "series",
-        "name",
-        "post_money_valuation_currency_code",
+        "money_raised_usd",
+        "target_money_raised",
+        "target_money_raised_currency_code",
+        "target_money_raised_usd",
         "created_at",
         "updated_at",
     ]
@@ -32,6 +34,8 @@ class FundingRound(Node):
     KNOWN_RELATIONSHIPS = [
         "investments",
         "funded_organization",
+        "images",
+        "videos",
         "news",
     ]
 

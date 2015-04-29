@@ -7,22 +7,21 @@ FUNDING_ROUND_DATA = {
  "uuid": "uuid1",
  "type": "FundingRound",
  "properties": {
+  "permalink": "uuid1",
   "funding_type": "private_equity",
-  "money_raised_usd": 1500000000,
-  "announced_on_year": 2011,
-  "announced_on_day": 21,
-  "announced_on_month": 1,
+  "series": "c",
   "announced_on": "2011-01-21",
   "announced_on_trust_code": 7,
-  "canonical_currency_code": "USD",
+  "closed_on": None,
+  "closed_on_trust_code": 7,
   "money_raised": 1500000000,
   "money_raised_currency_code": "USD",
-  "permalink": "uuid1",
-  "name": "funding round name",
-  "post_money_valuation_currency_code": "USD",
-  "series": "c",
+  "money_raised_usd": 1500000000,
+  "target_money_raised": 1500000000,
+  "target_money_raised_currency_code": "USD",
+  "target_money_raised_usd": 1500000000,
   "created_at": 1295843747,
-  "updated_at": 1419019444
+  "updated_at": 1419019444,
  },
  "relationships": {
   "investments": {
@@ -97,20 +96,19 @@ FUNDING_ROUND_DATA = {
 class FundingRoundTestCase(TestCase):
     def test_properties(self):
         funding_round = FundingRound(FUNDING_ROUND_DATA)
+        self.assertEqual(funding_round.permalink, "uuid1")
         self.assertEqual(funding_round.funding_type, "private_equity")
-        self.assertEqual(funding_round.money_raised_usd, 1500000000)
-        self.assertEqual(funding_round.announced_on_year, 2011)
-        self.assertEqual(funding_round.announced_on_day, 21)
-        self.assertEqual(funding_round.announced_on_month, 1)
+        self.assertEqual(funding_round.series, "c")
         self.assertEqual(funding_round.announced_on, datetime(2011, 1, 21))
         self.assertEqual(funding_round.announced_on_trust_code, 7)
-        self.assertEqual(funding_round.canonical_currency_code, "USD")
+        self.assertEqual(funding_round.closed_on, None)
+        self.assertEqual(funding_round.closed_on_trust_code, 7)
         self.assertEqual(funding_round.money_raised, 1500000000)
         self.assertEqual(funding_round.money_raised_currency_code, "USD")
-        self.assertEqual(funding_round.permalink, "uuid1")
-        self.assertEqual(funding_round.name, "funding round name")
-        self.assertEqual(
-            funding_round.post_money_valuation_currency_code, "USD")
+        self.assertEqual(funding_round.money_raised_usd, 1500000000)
+        self.assertEqual(funding_round.target_money_raised, 1500000000)
+        self.assertEqual(funding_round.target_money_raised_currency_code, "USD")
+        self.assertEqual(funding_round.target_money_raised_usd, 1500000000)
         self.assertEqual(funding_round.created_at, 1295843747)
         self.assertEqual(funding_round.updated_at, 1419019444)
 
