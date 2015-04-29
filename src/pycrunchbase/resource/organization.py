@@ -6,9 +6,7 @@ from .utils import parse_date
 
 @six.python_2_unicode_compatible
 class Organization(Node):
-    """Represents an Organization on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents an Organization on CrunchBase"""
 
     KNOWN_RELATIONSHIPS = [
         'primary_image',

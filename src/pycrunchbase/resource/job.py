@@ -6,9 +6,7 @@ from .utils import parse_date
 
 @six.python_2_unicode_compatible
 class Job(Node):
-    """Represents a Job on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Job on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "title",

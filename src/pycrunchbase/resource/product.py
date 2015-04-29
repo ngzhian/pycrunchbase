@@ -6,9 +6,7 @@ from .utils import parse_date
 
 @six.python_2_unicode_compatible
 class Product(Node):
-    """Represents a Product on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Product on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "permalink",

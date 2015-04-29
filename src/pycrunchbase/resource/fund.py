@@ -7,7 +7,6 @@ from .utils import parse_date
 @six.python_2_unicode_compatible
 class Fund(Node):
     """Represents an Fund on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
     Previously known as a FundRaise.
     """
 

@@ -5,9 +5,7 @@ from .node import Node
 
 @six.python_2_unicode_compatible
 class Investment(Node):
-    """Represents a Investment (investor-investment) on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Investment (investor-investment) on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         'type',

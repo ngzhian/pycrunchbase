@@ -6,9 +6,7 @@ from .utils import parse_date
 
 @six.python_2_unicode_compatible
 class FundingRound(Node):
-    """Represents a FundingRound on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a FundingRound on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "permalink",  # check that this is actually returned

@@ -5,9 +5,7 @@ from .node import Node
 
 @six.python_2_unicode_compatible
 class Address(Node):
-    """Represents a Address on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Address on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "name",

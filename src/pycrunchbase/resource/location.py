@@ -5,9 +5,7 @@ from .node import Node
 
 @six.python_2_unicode_compatible
 class Location(Node):
-    """Represents a Location on CrunchBase
-    API Docs: https://data.crunchbase.com/docs
-    """
+    """Represents a Location on CrunchBase"""
 
     KNOWN_PROPERTIES = [
         "web_path",
