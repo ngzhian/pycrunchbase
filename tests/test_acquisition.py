@@ -7,19 +7,17 @@ ACQUISITION_DATA = {
   "uuid": "4292239d4dbbc52eeee0856612ed9c47",
   "type": "Acquisition",
   "properties": {
-   "disposition_of_acquired": "Combined",
-   "acquisition_type": "Acqui-hire",
-   "acquisition_status": "Pending",
-   "payment_type": None,
-   "announced_on_year": 2015,
-   "announced_on_day": 16,
-   "announced_on_month": 1,
-   "announced_on": "2015-01-16",
-   "announced_on_trust_code": 7,
    "price": None,
    "price_currency_code": "USD",
-   "permalink": "4292239d4dbbc52eeee0856612ed9c47",
-   "name": "Acquisition",
+   "price_usd": None,
+   "payment_type": None,
+   "acquisition_type": "Acqui-hire",
+   "acquisition_status": "Pending",
+   "disposition_of_acquired": "Combined",
+   "announced_on": "2015-01-16",
+   "announced_on_trust_code": 7,
+   "completed_on": "2015-01-20",
+   "completed_on_trust_code": 7,
    "created_at": 1421443747,
    "updated_at": 1421689170
  },
@@ -56,24 +54,6 @@ ACQUISITION_DATA = {
     }
    ]
   },
-  "news": {
-   "paging": {
-    "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/2/acquisition/4292239d4dbbc52eeee0856612ed9c47/news",
-    "sort_order": "created_at DESC"
-   },
-   "items": [
-    {
-     "url": "http://techcrunch.com/2015/01/16/partners-at-teehanlax-the-design-firm-behind-medium-join-facebook/",
-     "author": "Darrell Etherington",
-     "posted_on": "2015-01-16",
-     "type": "PressReference",
-     "title": "Partners At Teehan+Lax, The Design Firm Behind Medium, Join Facebook",
-     "created_at": 1421444079,
-     "updated_at": 1423382296
-    }
-   ]
-  }
  }
 }
 
@@ -81,19 +61,17 @@ ACQUISITION_DATA = {
 class AcquisitionTestCase(TestCase):
     def test_properties(self):
         acquisition = Acquisition(ACQUISITION_DATA)
-        self.assertEqual(acquisition.disposition_of_acquired, "Combined")
-        self.assertEqual(acquisition.acquisition_type, "Acqui-hire")
-        self.assertEqual(acquisition.acquisition_status, "Pending")
-        self.assertEqual(acquisition.payment_type, None)
-        self.assertEqual(acquisition.announced_on_year, 2015)
-        self.assertEqual(acquisition.announced_on_day, 16)
-        self.assertEqual(acquisition.announced_on_month, 1)
-        self.assertEqual(acquisition.announced_on, datetime(2015, 1, 16))
-        self.assertEqual(acquisition.announced_on_trust_code, 7)
         self.assertEqual(acquisition.price, None)
         self.assertEqual(acquisition.price_currency_code, "USD")
-        self.assertEqual(acquisition.permalink, "4292239d4dbbc52eeee0856612ed9c47")
-        self.assertEqual(acquisition.name, "Acquisition")
+        self.assertEqual(acquisition.price_usd, None)
+        self.assertEqual(acquisition.payment_type, None)
+        self.assertEqual(acquisition.acquisition_type, "Acqui-hire")
+        self.assertEqual(acquisition.acquisition_status, "Pending")
+        self.assertEqual(acquisition.disposition_of_acquired, "Combined")
+        self.assertEqual(acquisition.announced_on, datetime(2015, 1, 16))
+        self.assertEqual(acquisition.announced_on_trust_code, 7)
+        self.assertEqual(acquisition.completed_on, datetime(2015, 1, 20))
+        self.assertEqual(acquisition.completed_on_trust_code, 7)
         self.assertEqual(acquisition.created_at, 1421443747)
         self.assertEqual(acquisition.updated_at, 1421689170)
 
@@ -101,4 +79,3 @@ class AcquisitionTestCase(TestCase):
         acquisition = Acquisition(ACQUISITION_DATA)
         self.assertEqual(len(acquisition.acquirer), 1)
         self.assertEqual(len(acquisition.acquiree), 1)
-        self.assertEqual(len(acquisition.news), 1)

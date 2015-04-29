@@ -11,31 +11,31 @@ class Acquisition(Node):
     """
 
     KNOWN_PROPERTIES = [
-        "disposition_of_acquired",
-        "acquisition_type",
-        "acquisition_status",
-        "payment_type",
-        "announced_on_year",
-        "announced_on_day",
-        "announced_on_month",
-        "announced_on",
-        "announced_on_trust_code",
+        "api_path",
+        "web_path",
         "price",
         "price_currency_code",
-        "permalink",
-        "name",
+        "price_usd",
+        "payment_type",
+        "acquisition_type",
+        "acquisition_status",
+        "disposition_of_acquired",
+        "announced_on",
+        "announced_on_trust_code",
+        "completed_on",
+        "completed_on_trust_code",
         "created_at",
         "updated_at",
+        "permalink",
     ]
 
     KNOWN_RELATIONSHIPS = [
         "acquirer",
         "acquiree",
-        "news",
     ]
 
     def _coerce_values(self):
-        for attr in ['announced_on']:
+        for attr in ['announced_on', 'completed_on']:
             if getattr(self, attr, None):
                 setattr(self, attr, parse_date(getattr(self, attr)))
 
