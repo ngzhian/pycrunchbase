@@ -11,27 +11,32 @@ class Product(Node):
     """
 
     KNOWN_PROPERTIES = [
-        "lifecycle_stage",
-        "short_description",
         "permalink",
-        "homepage_url",
+        "api_path",
+        "web_path",
         "name",
-        "description",
-        "launched_on_year",
-        "launched_on_day",
-        "launched_on_month",
+        "also_known_as",
+        "lifecycle_stage",
         "launched_on",
         "launched_on_trust_code",
+        "closed_on",
+        "closed_on_trust_code",
+        "homepage_url",
+        "short_description",
+        "description",
         "created_at",
         "updated_at",
-        "owner_name",
-        "owner_path",
     ]
 
     KNOWN_RELATIONSHIPS = [
+        "owner",
+        "categories",
         "primary_image",
-        "images",
+        "competitors",
+        "customers",
         "websites",
+        "images",
+        "videos",
         "news",
     ]
 
