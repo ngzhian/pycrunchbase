@@ -21,27 +21,36 @@ class PageItem(object):
     @classmethod
     def build(cls, data):
         path = data.get('type', '')
-        if path.startswith('acquisition'):
-            return AcquisitionPageItem(data)
-        if path.startswith('funding-round'):
-            return FundingRoundPageItem(data)
-        if path.startswith('ipo'):
-            return IpoPageItem(data)
-        if path.startswith('organization'):
-            return OrganizationPageItem(data)
-        if path.startswith('person'):
-            return PersonPageItem(data)
+        if path == 'Acquisition':
+            from .acquisition import AcquisitionRelationship
+            return AcquisitionRelationship(data)
+        if path == 'FundingRound':
+            from .fundinground import FundingRound
+            return FundingRound(data)
+        if path == 'Ipo':
+            from .ipo import IPO
+            return IPO(data)
+        if path == 'Organization':
+            from .organization import Organization
+            return Organization(data)
+        if path == 'Person':
+            from .person import Person
+            return Person(data)
         if path.startswith('product'):
-            return ProductPageItem(data)
+            from .product import Product
+            return Product(data)
         if data.get('type') == 'InvestorInvestment':
             return InvestorInvestmentPageItem(data)
         if path.startswith('location'):
             return LocationPageItem(data)
         if path.startswith('category'):
             return CategoryPageItem(data)
+        if path == 'Fund':
+            from .fund import Fund
+            return Fund(data)
         if path == 'Job':
-            from .job import JobRelationship
-            return JobRelationship(data)
+            from .job import Job
+            return Job(data)
         if path == 'Address':
             from .address import Address
             return Address(data)
@@ -100,12 +109,6 @@ class InvestorInvestmentPageItem(PageItem):
 
 
 @six.python_2_unicode_compatible
-class IpoPageItem(UuidPageItem):
-    def __str__(self):
-        return self.name
-
-
-@six.python_2_unicode_compatible
 class LocationPageItem(UuidPageItem):
     def __str__(self):
         return self.name
@@ -116,32 +119,6 @@ class CategoryPageItem(UuidPageItem):
     def __str__(self):
         return self.name
 
-
-@six.python_2_unicode_compatible
-class OrganizationPageItem(PermalinkPageItem):
-    def __str__(self):
-        return self.name
-
-
-@six.python_2_unicode_compatible
-class PersonPageItem(PermalinkPageItem):
-    def __str__(self):
-        return u'{first} {last}'.format(
-            first=self.first_name,
-            last=self.last_name,
-        )
-
-
-@six.python_2_unicode_compatible
-class ProductPageItem(PermalinkPageItem):
-    def __str__(self):
-        return self.name
-
-@six.python_2_unicode_compatible
-class JobPageItem(UuidPageItem):
-    def __init__(self, data):
-        from .job import JobRelationship
-        self.node = JobRelationship(data)
 
 @six.python_2_unicode_compatible
 class NonePageItem(PageItem):

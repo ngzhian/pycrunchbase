@@ -6,7 +6,7 @@ PAST_TEAM_RELATIONSHIP = {
     "cardinality": "OneToMany",
     "paging": {
         "total_items": 3,
-        "first_page_url": "https://api.crunchbase.com/v/2/"
+        "first_page_url": "https://api.crunchbase.com/v/3/"
         "organization/example/past_team",
         "sort_order": "created_at DESC"
     },

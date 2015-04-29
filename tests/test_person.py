@@ -22,9 +22,10 @@ PERSON_DATA = {
  },
  "relationships": {
   "news": {
+   "cardinality": "OneToMany",
    "paging": {
     "total_items": 2,
-    "first_page_url": "https://api.crunchbase.com/v/2/person/first-last/news",
+    "first_page_url": "https://api.crunchbase.com/v/3/person/first-last/news",
     "sort_order": "created_at DESC"
    },
    "items": [

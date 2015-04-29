@@ -36,7 +36,3 @@ class Job(Node):
 
     def __repr__(self):
         return self.__str__()
-
-@six.python_2_unicode_compatible
-class JobRelationship(Job):
-    KNOWN_RELATIONSHIPS = []

@@ -25,9 +25,10 @@ FUNDING_ROUND_DATA = {
  },
  "relationships": {
   "investments": {
+   "cardinality": "OneToMany",
    "paging": {
     "total_items": 2,
-    "first_page_url": "https://api.crunchbase.com/v/2/funding-round/uuid1/investments",
+    "first_page_url": "https://api.crunchbase.com/v/3/funding-round/uuid1/investments",
     "sort_order": "created_at DESC"
    },
    "items": [
@@ -56,25 +57,24 @@ FUNDING_ROUND_DATA = {
    ]
   },
   "funded_organization": {
-   "paging": {
-    "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/2/funding-round/uuid1/funded_organization",
-    "sort_order": "created_at DESC"
-   },
-   "items": [
-    {
-     "type": "Organization",
-     "name": "Facebook",
-     "path": "organization/facebook",
-     "created_at": 1180153335,
-     "updated_at": 1423385400
-    }
-   ]
+   "cardinality": "OneToOne",
+   "item": {
+       "type": "Organization",
+       "uuid": "uuidorg",
+       "properties": {
+           "name": "Facebook",
+           "path": "organization/facebook",
+           "created_at": 1180153335,
+           "updated_at": 1423385400,
+       }
+   }
+
   },
   "news": {
+   "cardinality": "OneToMany",
    "paging": {
     "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/2/funding-round/uuid1/news",
+    "first_page_url": "https://api.crunchbase.com/v/3/funding-round/uuid1/news",
     "sort_order": "created_at DESC"
    },
    "items": [
@@ -115,5 +115,5 @@ class FundingRoundTestCase(TestCase):
     def test_relationships(self):
         funding_round = FundingRound(FUNDING_ROUND_DATA)
         self.assertEqual(len(funding_round.investments), 2)
-        self.assertEqual(len(funding_round.funded_organization), 1)
+        self.assertEqual(funding_round.funded_organization.name, "Facebook")
         self.assertEqual(len(funding_round.news), 1)

@@ -26,20 +26,15 @@ TEST_DATA = {
         },
     "relationships": {
         "funded_company": {
-            "paging": {
-                "total_items": 1,
-                "first_page_url": "https://api.crunchbase.com/v/2/ipo/a3bc391490d52ba8529d1cfc20550a87/funded_company",
-                "sort_order": "created_at DESC"
-                },
-            "items": [
-                {
-                    "type": "Organization",
+            "cardinality": "OneToOne",
+            "item": {
+                "type": "Organization",
+                "uuid": "uuidorg",
+                "properties": {
                     "name": "Facebook",
                     "path": "organization/facebook",
-                    "created_at": 1180153335,
-                    "updated_at": 1428028619
                 }
-            ]
+            }
         }
     }
 }
@@ -66,4 +61,4 @@ class IPOTestCase(TestCase):
     def test_ipo_relationships_built(self):
         ipo = IPO(TEST_DATA)
         self.assertIsNotNone(ipo.funded_company)
-        self.assertEqual('Facebook', ipo.funded_company.get(0).name)
+        self.assertEqual('Facebook', ipo.funded_company.name)

@@ -18,10 +18,15 @@ class Relationship(object):
     :meth:`more`.
     """
     def __init__(self, name, data):
+        # we can have relationship from a direct query of a node, or from
+        # a node in a relationship of a node
+        # e.g. org.invesments[0].funding_round.funded_organizations
         cardinality = data.get('cardinality')
         self._name = name
         if cardinality in ['OneToMany', 'ManyToMany']:
             self.buildPage(name, data)
+        elif cardinality in ['OneToOne']:
+            self.buildPageItem(data.get('item'))
         else:
             self.buildPageItem(data)
 
@@ -43,19 +48,12 @@ class Relationship(object):
 
         self.items = [PageItem.build(item) for item in data.get('items')]
 
-    def buildPageItem(self, data):
-        node = PageItem.build(data.get('item'))
-        print(data)
+    def buildPageItem(self, item):
+        node = PageItem.build(item)
         for prop in node.KNOWN_PROPERTIES:
             setattr(self, prop, getattr(node, prop))
-
-
-    def __str__(self):
-        return u"{total} {name} {items}".format(
-            total=self.total_items,
-            name=self.name,
-            items=self.items,
-        )
+        for prop in node.KNOWN_RELATIONSHIPS:
+            setattr(self, prop, getattr(node, prop))
 
     def __getitem__(self, key):
         """Allows caller to use array indices to get a :class:`PageItem`
@@ -95,14 +93,17 @@ class Relationship(object):
         return self[i]
 
     def __str__(self):
-        return (u"Page {name} {current}/{pages} Per Page: {per_page} "
-                u"Total items: {total}").format(
-            name=self.name,
-            current=self.current_page,
-            pages=self.number_of_pages,
-            per_page=self.items_per_page,
-            total=self.total_items,
-        )
+        if hasattr(self, 'current_page'):
+            return (u"Page {name} {current}/{pages} Per Page: {per_page} "
+                    u"Total items: {total}").format(
+                name=self._name,
+                current=self.current_page,
+                pages=self.number_of_pages,
+                per_page=self.items_per_page,
+                total=self.total_items,
+            )
+        else:
+            return (u"{name}").format(name=self._name)
 
     def __repr__(self):
         return self.__str__()

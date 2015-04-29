@@ -49,7 +49,3 @@ class Fund(Node):
 
     def __repr__(self):
         return self.__str__()
-
-
-class FundRelationship(Fund):
-    KNOWN_RELATIONSHIPS = []

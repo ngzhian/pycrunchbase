@@ -23,36 +23,28 @@ ACQUISITION_DATA = {
  },
  "relationships": {
   "acquirer": {
-   "paging": {
-    "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/2/acquisition/4292239d4dbbc52eeee0856612ed9c47/acquirer",
-    "sort_order": "created_at DESC"
-   },
-   "items": [
-    {
-     "type": "Organization",
-     "name": "Facebook",
-     "path": "organization/facebook",
-     "created_at": 1180153335,
-     "updated_at": 1423701973
-    }
-   ]
+   "cardinality": "OneToOne",
+   "item": {
+       "type": "Organization",
+       "uuid": "uuidorg",
+       "properties": {
+           "name": "Facebook",
+           "created_at": 1180153335,
+           "updated_at": 1423701973
+       }
+   }
   },
   "acquiree": {
-   "paging": {
-    "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/2/acquisition/4292239d4dbbc52eeee0856612ed9c47/acquiree",
-    "sort_order": "created_at DESC"
-   },
-   "items": [
-    {
-     "type": "Organization",
-     "name": "Teehan+Lax",
-     "path": "organization/teehan-lax",
-     "created_at": 1269182020,
-     "updated_at": 1423382284
-    }
-   ]
+   "cardinality": "OneToOne",
+   "item": {
+       "type": "Organization",
+       "uuid": "uuidorg",
+       "properties": {
+           "name": "Teehan+Lax",
+           "created_at": 1269182020,
+           "updated_at": 1423382284
+       }
+       }
   },
  }
 }
@@ -77,5 +69,5 @@ class AcquisitionTestCase(TestCase):
 
     def test_relationships(self):
         acquisition = Acquisition(ACQUISITION_DATA)
-        self.assertEqual(len(acquisition.acquirer), 1)
-        self.assertEqual(len(acquisition.acquiree), 1)
+        self.assertEqual(acquisition.acquirer.name, 'Facebook')
+        self.assertEqual(acquisition.acquiree.name, "Teehan+Lax")
