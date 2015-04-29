@@ -39,7 +39,7 @@ class PageItem(object):
             return LocationPageItem(data)
         if path.startswith('category'):
             return CategoryPageItem(data)
-        if path.startswith('Job'):
+        if path == 'Job':
             from .job import JobRelationship
             return JobRelationship(data)
         return cls(data)
