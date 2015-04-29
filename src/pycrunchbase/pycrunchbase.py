@@ -16,7 +16,7 @@ from .resource import (
 @six.python_2_unicode_compatible
 class CrunchBase(object):
     """Class that manages talking to CrunchBase API"""
-    BASE_URL = 'https://api.crunchbase.com/v/2/'
+    BASE_URL = 'https://api.crunchbase.com/v/3/'
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
     LOCATIONS_URL = BASE_URL + 'locations'
     CATEGORIES_URL = BASE_URL + 'categories'
@@ -46,7 +46,7 @@ class CrunchBase(object):
         Returns:
             Organization or None
         """
-        node_data = self.get_node('organization', permalink)
+        node_data = self.get_node('organizations', permalink)
         return Organization(node_data) if node_data else None
 
     def person(self, permalink):

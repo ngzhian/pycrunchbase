@@ -37,8 +37,8 @@ TEST_DATA = {
       "cardinality": "OneToMany",
       "paging": {
        "total_items": 3,
-       "first_page_url": "https://api.crunchbase.com/v/2/\
-                          organization/example/current_team",
+       "first_page_url": "https://api.crunchbase.com/v/3/\
+                          organizations/example/current_team",
        "sort_order": "created_at DESC"
       },
       "items": [
