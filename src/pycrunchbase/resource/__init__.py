@@ -2,6 +2,7 @@ from .acquisition import Acquisition
 from .fundinground import FundingRound
 from .fundraise import FundRaise
 from .ipo import IPO
+from .job import Job
 from .organization import Organization
 from .page import Page
 from .pageitem import PageItem
@@ -14,6 +15,7 @@ __all__ = [
     'FundingRound',
     'FundRaise',
     'IPO',
+    'Job',
     'Organization',
     'Page',
     'PageItem',

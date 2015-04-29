@@ -39,6 +39,9 @@ class PageItem(object):
             return LocationPageItem(data)
         if path.startswith('category'):
             return CategoryPageItem(data)
+        if path.startswith('Job'):
+            from .job import JobRelationship
+            return JobRelationship(data)
         return cls(data)
 
     def __repr__(self):
@@ -131,6 +134,11 @@ class ProductPageItem(PermalinkPageItem):
     def __str__(self):
         return self.name
 
+@six.python_2_unicode_compatible
+class JobPageItem(UuidPageItem):
+    def __init__(self, data):
+        from .job import JobRelationship
+        self.node = JobRelationship(data)
 
 @six.python_2_unicode_compatible
 class NonePageItem(PageItem):

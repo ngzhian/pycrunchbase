@@ -11,40 +11,60 @@ class Organization(Node):
     """
 
     KNOWN_RELATIONSHIPS = [
-        'acquisitions',
-        'board_members_and_advisors',
-        'categories',
-        'competitors',
-        'current_team',
-        'customers',
-        'founders',
-        'funding_rounds',
-        'headquarters',
-        'images',
-        'investments',
-        'ipo',
-        'members',
-        'news',
-        'offices',
-        'past_team',
         'primary_image',
-        'products',
+        'founders',
+        'current_team',
+        'past_team',
+        'board_members_and_advisors',
+        'investors',
+        'owned_by',
         'sub_organizations',
+        'headquarters',
+        'offices',
+        'products',
+        'categories',
+        'customers',
+        'competitors',
+        'members',
+        'memberships',
+        'funding_rounds',
+        'investments',
+        'acquisitions',
+        'acquired_by',
+        'ipo',
+        'funds',
         'websites',
+        'images',
+        'videos',
+        'news',
     ]
 
     KNOWN_PROPERTIES = [
-        'closed_on',
-        'description',
-        'founded_on',
-        'homepage_url',
-        'name',
-        'number_of_employees',
-        'number_of_investments',
-        'permalink',
-        'short_description',
-        'stock_symbol',
-        'total_funding_usd',
+        "permalink",
+        "api_path",
+        "web_path",
+        "name",
+        "also_known_as",
+        "short_description",
+        "description",
+        "primary_role",
+        "role_company",
+        "role_investor",
+        "role_group",
+        "role_school",
+        "founded_on",
+        "founded_on_trust_code",
+        "is_closed",
+        "closed_on",
+        "closed_on_trust_code",
+        "num_employees_min",
+        "num_employees_max",
+        "total_funding_usd",
+        "number_of_investments",
+        "homepage_url",
+        "created_at",
+        "updated_at",
+        "stock_symbol",
     ]
 
     def _coerce_values(self):
@@ -55,9 +75,6 @@ class Organization(Node):
         for attr in ['closed_on', 'founded_on']:
             if getattr(self, attr, None):
                 setattr(self, attr, parse_date(getattr(self, attr)))
-        for attr in ['number_of_employees', 'number_of_investments']:
-            if getattr(self, attr, None):
-                setattr(self, attr, int(getattr(self, attr)))
 
     def __str__(self):
         return 'Organization: %s' % self.name
