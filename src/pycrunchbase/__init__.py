@@ -5,8 +5,10 @@ from .resource import (
     Acquisition,
     Address,
     Category,
+    Degree,
     FundingRound,
     Fund,
+    Image,
     Investment,
     IPO,
     Job,
@@ -18,6 +20,8 @@ from .resource import (
     Person,
     Product,
     Relationship,
+    Video,
+    Website,
 )
 
 
@@ -27,8 +31,10 @@ __all__ = [
     'Acquisition',
     'Address',
     'Category',
+    'Degree',
     'FundingRound',
     'Fund',
+    'Image',
     'Investment',
     'IPO',
     'Job',
@@ -40,5 +46,7 @@ __all__ = [
     'Person',
     'Product',
     'Relationship',
+    'Video',
+    'Website',
     'CrunchBase'
 ]
