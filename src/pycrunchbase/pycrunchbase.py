@@ -51,12 +51,16 @@ class CrunchBase(object):
         return Organization(node_data) if node_data else None
 
     def person(self, permalink):
+        """Helper to maintain backward compatability"""
+        return self.people(permalink)
+
+    def people(self, permalink):
         """Get the details of a person given a person's permalink
 
         Returns:
             Person or None
         """
-        node_data = self.get_node('person', permalink)
+        node_data = self.get_node('people', permalink)
         return Person(node_data) if node_data else None
 
     def funding_round(self, uuid):
