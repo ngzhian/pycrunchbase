@@ -69,7 +69,7 @@ class CrunchBase(object):
         Returns
             FundingRound or None
         """
-        node_data = self.get_node('funding-round', uuid)
+        node_data = self.get_node('funding-rounds', uuid)
         return FundingRound(node_data) if node_data else None
 
     def acquisition(self, uuid):
