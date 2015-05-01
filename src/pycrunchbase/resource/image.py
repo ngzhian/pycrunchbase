@@ -8,8 +8,8 @@ class Image(Node):
     """Represents a Image on CrunchBase"""
 
     KNOWN_PROPERTIES = [
-        'type',
-        'uuid',
+        # 'type',
+        # 'uuid',
         'asset_path',
         'content_type',
         'height',
