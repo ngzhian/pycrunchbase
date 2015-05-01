@@ -105,13 +105,22 @@ class CrunchBase(object):
         node_data = self.get_node('ipo', permalink)
         return IPO(node_data) if node_data else None
 
+    def fund(self, permalink):
+        """Get the details of an fundraise given a fundraise uuid.
+
+        Returns:
+            Fund or None
+        """
+        node_data = self.get_node('funds', permalink)
+        return Fund(node_data) if node_data else None
+
     def fundraise(self, permalink):
         """Get the details of an fundraise given a fundraise uuid.
 
         Returns:
             Fund or None
         """
-        node_data = self.get_node('fund-raise', permalink)
+        node_data = self.get_node('funds', permalink)
         return Fund(node_data) if node_data else None
 
     def locations(self):
