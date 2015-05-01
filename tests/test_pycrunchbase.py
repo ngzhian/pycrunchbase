@@ -158,22 +158,28 @@ class CrunchBaseTestCase(TestCase):
                     },
                 "items": [
                     {
-                        "updated_at": 1415895087,
-                        "created_at": 1371717055,
-                        "path": "organization/organization",
-                        "name": "organization",
-                        "type": "Organization"
-                        },
-                    {
-                        "updated_at": 1415768560,
-                        "created_at": 1310530681,
-                        "path": "organization/organization2",
-                        "name": "organization2",
-                        "type": "Organization"
+                        "uuid": "uuid1",
+                        "type": "Organization",
+                        "properties": {
+                            "updated_at": 1415895087,
+                            "created_at": 1371717055,
+                            "path": "organization/organization",
+                            "name": "organization",
                         }
-                    ]
-                }
-            })
+                    },
+                    {
+                        "uuid": "uuid2",
+                        "type": "Organization",
+                        "properties": {
+                            "updated_at": 1415768560,
+                            "created_at": 1310530681,
+                            "path": "organization/organization2",
+                            "name": "organization2",
+                        }
+                    }
+                ]
+            }
+        })
         mock_get.return_value = mock_json
 
         cb = CrunchBase('123')
