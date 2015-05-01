@@ -20,11 +20,11 @@ class Relationship(object):
         # we can have relationship from a direct query of a node, or from
         # a node in a relationship of a node
         # e.g. org.invesments[0].funding_round.funded_organizations
-        cardinality = data.get('cardinality')
+        self.cardinality = data.get('cardinality')
         self._name = name
-        if cardinality in ['OneToMany', 'ManyToMany']:
+        if self.cardinality in ['OneToMany', 'ManyToMany']:
             self.buildPage(name, data)
-        elif cardinality in ['OneToOne']:
+        elif self.cardinality in ['OneToOne']:
             self.buildPageItem(data.get('item'))
         else:
             self.buildPageItem(data)
@@ -36,21 +36,13 @@ class Relationship(object):
         self.first_page_url = paging.get('first_page_url')
         self.sort_order = paging.get('sort_order')
 
-        self.next_page_url = paging.get('next_page_url')
-        self.prev_page_url = paging.get('prev_page_url')
-        self.items_per_page = safe_int(paging.get('items_per_page'))
-
-        # if these 2 fields are 0, we know that this Page is a result of
-        # a call to retrieve a relationship of a Node
-        self.current_page = paging.get('current_page') or 0
-        self.number_of_pages = safe_int(paging.get('number_of_pages')) or 0
-
         self.items = [PageItem.build(item) for item in data.get('items')]
 
     def buildPageItem(self, item):
         if not item:
             return NonePageItemSingleton
         node = PageItem.build(item)
+        self._node = node
         for prop in node.KNOWN_PROPERTIES:
             setattr(self, prop, getattr(node, prop))
         for prop in node.KNOWN_RELATIONSHIPS:
@@ -94,17 +86,15 @@ class Relationship(object):
         return self[i]
 
     def __str__(self):
-        if hasattr(self, 'current_page'):
-            return (u"Page {name} {current}/{pages} Per Page: {per_page} "
-                    u"Total items: {total}").format(
-                name=self._name,
-                current=self.current_page,
-                pages=self.number_of_pages,
-                per_page=self.items_per_page,
-                total=self.total_items,
-            )
+        if self.cardinality is None or self.cardinality == 'OneToOne':
+            return str(self._node)
+
         else:
-            return (u"{name}").format(name=self._name)
+            return (u"{name} Total: {total} {url}").format(
+                name=self._name,
+                total=self.total_items,
+                url=self.first_page_url,
+            )
 
     def __repr__(self):
         return self.__str__()

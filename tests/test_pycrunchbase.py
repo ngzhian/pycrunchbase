@@ -507,13 +507,9 @@ class LoadMoreTestCase(TestCase):
         data = {
             "cardinality": "OneToMany",
             "paging": {
-                "items_per_page": 8,
-                "current_page": 1,
-                "number_of_pages": 2,
-                "next_page_url": "https://api.crunchbase.com/v/3/"
-                "organizations/example/past_team?page=2",
-                "prev_page_url": None,
                 "total_items": 10,
+                "first_page_url": "https://api.crunchbase.com/v/3/"
+                "organizations/example/past_team?page=2",
                 "sort_order": "custom"
             },
             "items": [{}, {}, {}, {}, {}, {}, {}, {}]
