@@ -1,8 +1,10 @@
 from .acquisition import Acquisition
 from .address import Address
 from .category import Category
+from .degree import Degree
 from .fundinground import FundingRound
 from .fund import Fund
+from .image import Image
 from .investment import Investment
 from .ipo import IPO
 from .job import Job
@@ -14,13 +16,17 @@ from .pageitem import PageItem
 from .person import Person
 from .product import Product
 from .relationship import Relationship
+from .video import Video
+from .website import Website
 
 __all__ = [
     'Acquisition',
     'Address',
     'Category',
+    'Degree',
     'FundingRound',
     'Fund',
+    'Image',
     'Investment',
     'IPO',
     'Job',
@@ -32,4 +38,6 @@ __all__ = [
     'Person',
     'Product',
     'Relationship',
+    'Video',
+    'Website',
 ]

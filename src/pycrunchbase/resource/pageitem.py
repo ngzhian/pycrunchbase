@@ -60,6 +60,18 @@ class PageItem(object):
         if path == 'News':
             from .news import News
             return News(data)
+        if path == 'Image':
+            from .image import Image
+            return Image(data)
+        if path == 'Degree':
+            from .degree import Degree
+            return Degree(data)
+        if path == 'Video':
+            from .video import Video
+            return Video(data)
+        if path == 'Website':
+            from .website import Website
+            return Website(data)
         return cls(data)
 
     def __repr__(self):
