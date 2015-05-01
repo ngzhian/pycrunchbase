@@ -20,6 +20,7 @@ class CrunchBase(object):
     ORGANIZATIONS_URL = BASE_URL + 'organizations'
     LOCATIONS_URL = BASE_URL + 'locations'
     CATEGORIES_URL = BASE_URL + 'categories'
+    PRODUCTS_URL = BASE_URL + 'products'
 
     def __init__(self, api_key=None):
         if not api_key:
@@ -84,6 +85,12 @@ class CrunchBase(object):
         """
         node_data = self.get_node('product', permalink)
         return Product(node_data) if node_data else None
+
+    def products(self):
+        """Gets a list of products on CrunchBase"""
+        url = self.PRODUCTS_URL
+        page = self._page('Products', url)
+        return page
 
     def ipo(self, permalink):
         """Get the details of an ipo given a ipo uuid.
