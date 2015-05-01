@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.3.0 (2015-05-01)
+------------------
+* Updated to support version 3 of CrunchBase API
+* Fix endpoint urls, e.g. 'funding-round' -> 'funding-rounds'
+* Internal cleanups, Page now subclass Relationship
+
 0.2.7 (2015-04-23)
 ------------------
 * Fixed: #9 `sub_organization` and `websites` relationship of `Organization`
