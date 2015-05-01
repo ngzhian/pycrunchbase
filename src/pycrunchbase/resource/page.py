@@ -2,10 +2,11 @@ import six
 
 from .utils import safe_int
 from .pageitem import PageItem
+from .relationship import Relationship
 
 
 @six.python_2_unicode_compatible
-class Page(object):
+class Page(Relationship):
     """A Page represents a a page of results returned by CrunchBase.
     Page contains useful information regarding how many items there are
     in total (total_items), items per page (items_per_page), etc.
@@ -26,17 +27,17 @@ class Page(object):
             },
             "items": [
              {
-                 "updated_at": 1423666090,
-                 "created_at": 1371717055,
-                 "path": "organization/example",
-                 "name": "Example",
-                 "type": "Organization"
+                "properties": {
+                    "path": "organization/example",
+                    "name": "Example",
+                    "updated_at": 1423666090,
+                    "created_at": 1371717055,
+                 },
+                 "type": "Organization",
+                 "uuid": "uuid"
              }
             ]
         }
-
-    A special note is that current_page might be 0, this is when
-    the page is returned as part of a :class:`Relationship`.
     """
     def __init__(self, name, data):
         self.name = name
@@ -55,43 +56,6 @@ class Page(object):
         self.number_of_pages = safe_int(paging.get('number_of_pages')) or 0
 
         self.items = [PageItem.build(item) for item in data.get('items')]
-
-    def __getitem__(self, key):
-        """Allows caller to use array indices to get a :class:`PageItem`
-
-        Args:
-            i (int): 0-based index of the element to retrieve
-
-        Returns:
-            PageItem: if valid item exists at index i
-            None if the index is too small or too large
-        """
-        if not isinstance(key, int):
-            raise TypeError()
-        return self.items[key]
-
-    def __len__(self):
-        """Returns the number of items this Page holds"""
-        return len(self.items)
-
-    def __iter__(self):
-        """Allows callers to iterate through the items of this page as such:
-
-            team_members = [member for member in page_of_members]
-        """
-        return iter(self.items)
-
-    def get(self, i):
-        """Gets the i-th element of this page
-
-        Args:
-            i (int): 0-based index of the element to retrieve
-
-        Returns:
-            PageItem: if valid item exists at index i
-            None if the index is too small or too large
-        """
-        return self[i]
 
     def __str__(self):
         return (u"Page {name} {current}/{pages} Per Page: {per_page} "
