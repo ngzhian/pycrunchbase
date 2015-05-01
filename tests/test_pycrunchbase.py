@@ -215,7 +215,7 @@ class CrunchBaseTestCase(TestCase):
         organization = cb.funding_round('uuid1')
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/funding-round/uuid1'
+            'https://api.crunchbase.com/v/3/funding-rounds/uuid1'
             '?user_key=123')
         self.assertEqual(organization.funding_type, "private_equity")
         self.assertEqual(organization.money_raised, 1000000)
@@ -240,7 +240,7 @@ class CrunchBaseTestCase(TestCase):
         self.assertEqual(person.last_name, "Last")
         self.assertEqual(person.first_name, "First")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/person/name'
+            'https://api.crunchbase.com/v/3/people/name'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -328,7 +328,7 @@ class CrunchBaseTestCase(TestCase):
 
         self.assertEqual(fundraise.name, "Raise Round I")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/fund-raise/uuidfundraise'
+            'https://api.crunchbase.com/v/3/funds/uuidfundraise'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
