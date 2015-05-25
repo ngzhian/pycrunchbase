@@ -20,7 +20,14 @@ class Relationship(object):
         # we can have relationship from a direct query of a node, or from
         # a node in a relationship of a node
         # e.g. org.invesments[0].funding_round.funded_organizations
-        self.cardinality = data.get('cardinality')
+
+        # some times crunchbase returns [ null ] for some relationship
+        # handle those cases
+        try:
+            self.cardinality = data.get('cardinality')
+        except Exception:
+            self.cardinality = None
+
         self._name = name
         if self.cardinality in ['OneToMany', 'ManyToMany']:
             self.buildPage(name, data)
@@ -39,7 +46,7 @@ class Relationship(object):
         self.items = [PageItem.build(item) for item in data.get('items')]
 
     def buildPageItem(self, item):
-        if not item:
+        if not item or not hasattr(item, 'get'):
             return NonePageItemSingleton
         node = PageItem.build(item)
         self._node = node
