@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.3.1 (2015-05-25)
+------------------
+* Bug fix when relationship data returned from crunchbase is `[null]`. Thanks @karlalopez
+
 0.3.0 (2015-05-01)
 ------------------
 * Updated to support version 3 of CrunchBase API
