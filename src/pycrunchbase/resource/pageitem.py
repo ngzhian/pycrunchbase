@@ -72,6 +72,9 @@ class PageItem(object):
         if path == 'Website':
             from .website import Website
             return Website(data)
+        if path == 'StockExchange':
+            from .stockexchange import StockExchange
+            return StockExchange(data)
         return cls(data)
 
     def __repr__(self):
