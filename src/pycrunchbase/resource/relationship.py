@@ -49,7 +49,7 @@ class Relationship(object):
         if not item or not hasattr(item, 'get'):
             return NonePageItemSingleton
         node = PageItem.build(item)
-        self._node = node
+        self.items = [node]
         for prop in node.KNOWN_PROPERTIES:
             setattr(self, prop, getattr(node, prop))
         for prop in node.KNOWN_RELATIONSHIPS:
@@ -96,7 +96,7 @@ class Relationship(object):
 
     def __str__(self):
         if self.cardinality is None or self.cardinality == 'OneToOne':
-            return str(self._node)
+            return str(self.items)
 
         else:
             return (u"{name} Total: {total} {url}").format(
