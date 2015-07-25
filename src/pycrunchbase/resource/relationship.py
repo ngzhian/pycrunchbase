@@ -71,7 +71,9 @@ class Relationship(object):
 
     def __len__(self):
         """Returns the number of items this Page holds"""
-        return len(self.items)
+        if hasattr(self, 'items'):
+            return len(self.items)
+        return 0
 
     def __iter__(self):
         """Allows callers to iterate through the items of this page as such:
