@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.3.2 (2015-07-25)
+------------------
+* New resource type StockExchange (fixes #18)
+* Better `__str__` for IPO
+
 0.3.1 (2015-05-25)
 ------------------
 * Bug fix when relationship data returned from crunchbase is `[null]`. Thanks @karlalopez
