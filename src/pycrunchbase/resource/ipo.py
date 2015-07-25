@@ -50,7 +50,7 @@ class IPO(Node):
                 setattr(self, attr, float(getattr(self, attr)))
 
     def __str__(self):
-        return 'IPO: %s' % self.stock_symbol
+        return 'IPO: %s' % (self.stock_symbol or self.stock_exchange_symbol, )
 
     def __repr__(self):
         return self.__str__()
