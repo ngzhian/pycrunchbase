@@ -20,6 +20,7 @@ from .resource import (
     Person,
     Product,
     Relationship,
+    StockExchange,
     Video,
     Website,
 )
@@ -46,6 +47,7 @@ __all__ = [
     'Person',
     'Product',
     'Relationship',
+    'StockExchange',
     'Video',
     'Website',
     'CrunchBase'

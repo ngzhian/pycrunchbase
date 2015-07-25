@@ -16,6 +16,7 @@ from .pageitem import PageItem
 from .person import Person
 from .product import Product
 from .relationship import Relationship
+from .stockexchange import StockExchange
 from .video import Video
 from .website import Website
 
@@ -38,6 +39,7 @@ __all__ = [
     'Person',
     'Product',
     'Relationship',
+    'StockExchange',
     'Video',
     'Website',
 ]
