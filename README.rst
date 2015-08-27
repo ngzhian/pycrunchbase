@@ -38,8 +38,10 @@ pycrunchbase
 
 Python bindings to CrunchBase
 
-pycrunchbase v0.3.0 has support for CrunchBase API version 3, but things are still flaky, so any kind of
-bug reports is greatly appreciated, for detail see notes below.
+Starting from v0.3.0, pycrunchbase has support for CrunchBase API version 3,
+but things are still flaky,
+so any kind of bug reports is greatly appreciated,
+for detail see notes below.
 
 Examples
 ========
@@ -124,7 +126,7 @@ To run the all tests run::
 
     tox
 
-Contributions are always welcome!
+Contributions are always welcome! Visit pycrunchbase's `Homepage <https://github.com/ngzhian/pycrunchbase/>`
 
 Use `GitHub issues <https://github.com/ngzhian/pycrunchbase/issues>`_
 to report a bug or send feedback.

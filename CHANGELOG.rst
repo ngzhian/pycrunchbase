@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.3.3 (2015-08-29)
+------------------
+* Added `stock_exchange` as a known property of `Organization`, ref `#19 <https://github.com/ngzhian/pycrunchbase/issues/19>`
+
 0.3.2 (2015-07-25)
 ------------------
 * New resource type StockExchange (fixes #18)
