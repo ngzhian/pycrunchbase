@@ -30,6 +30,7 @@ TEST_DATA = {
         "homepage_url": "http://www.example.com",
         "created_at": 1180153335,
         "updated_at": 1430157435,
+        "stock_exchange": "NASDAQ",
         "stock_symbol": "COY"
     },
     "relationships": {
@@ -102,6 +103,7 @@ class OrganizationTestCase(TestCase):
         self.assertEqual(org.total_funding_usd, 1234567)
         self.assertEqual(org.number_of_investments, 1)
         self.assertEqual(org.homepage_url, "http://www.example.com")
+        self.assertEqual(org.stock_exchange, "NASDAQ")
         self.assertEqual(org.stock_symbol, "COY")
 
     def test_organization_relationships_built(self):

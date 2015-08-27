@@ -62,6 +62,7 @@ class Organization(Node):
         "homepage_url",
         "created_at",
         "updated_at",
+        "stock_exchange",
         "stock_symbol",
     ]
 
