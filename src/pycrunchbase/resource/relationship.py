@@ -46,8 +46,15 @@ class Relationship(object):
         self.items = [PageItem.build(item) for item in data.get('items')]
 
     def buildPageItem(self, item):
+        # could be a list, e.g.
+        # the investments rs of a funding round has investors rs
+        if isinstance(item, list):
+            self.items = [PageItem.build(i) for i in item]
+            return
+
         if not item or not hasattr(item, 'get'):
             return NonePageItemSingleton
+
         node = PageItem.build(item)
         self.items = [node]
         for prop in node.KNOWN_PROPERTIES:
