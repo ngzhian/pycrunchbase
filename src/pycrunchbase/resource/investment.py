@@ -18,13 +18,22 @@ class Investment(Node):
     KNOWN_RELATIONSHIPS = [
         'funding_round',
         'invested_in',
+        'investors',
     ]
 
     def __str__(self):
-        return u'{series} {invested_in}'.format(
-            series=self.funding_round.series,
-            invested_in=self.invested_in.name,
-        )
+        if self.money_invested:
+            return u'{invested}'.format(
+                self.money_invested
+            )
+
+        if hasattr(self, 'investors'):
+            return u'{investors}'.format(self.investors)
+
+        if self.type:
+            return u'{type}'.format(self.type)
+
+        return u'Investment'
 
     def __repr__(self):
         return self.__str__()
