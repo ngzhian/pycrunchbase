@@ -39,7 +39,7 @@ class PageItem(object):
         if path == 'Product' or path == 'ProductSummary':
             from .product import Product
             return Product(data)
-        if path == 'InvestorInvestment':
+        if path == 'InvestorInvestment' or path == 'Investment':
             from .investment import Investment
             return Investment(data)
         if path == 'Location':
