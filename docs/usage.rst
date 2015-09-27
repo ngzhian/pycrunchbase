@@ -34,7 +34,7 @@ If the relationship has more details to it, e.g. a Person in the current team,
 we need to do a bit more to grab those information::
 
     a_founder = who_started_github[0]
-    cb.person(a_founder.cbid)
+    cb.person(a_founder.permalink)
 
-`cbid` is a special field on on an item in a relationship, this is the unique
-identifier of that node.
+`permalink` is a special field on on an item in a relationship, this is the unique
+CrunchBase identifier of that node.
