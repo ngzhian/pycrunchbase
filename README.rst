@@ -104,7 +104,7 @@ invested in USD
 
 ::
 
-    print(str(an_investor))  # prints: Investor Name $100000
+    print(str(an_investor))  # prints: Investment: [Organization: Name]
 
 
 Installation
