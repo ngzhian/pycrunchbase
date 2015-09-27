@@ -26,7 +26,7 @@ from .resource import (
 )
 
 
-__version__ = "0.3.3"
+__version__ = "0.3.4"
 
 __all__ = [
     'Acquisition',
