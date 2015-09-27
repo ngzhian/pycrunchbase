@@ -43,6 +43,9 @@ but things are still flaky,
 so any kind of bug reports is greatly appreciated,
 for detail see notes below.
 
+Note: I currently do not need to use this library, so it's feature-complete for me.
+Bug reports are welcome, and pull requests for features are still accepted.
+
 Examples
 ========
 
