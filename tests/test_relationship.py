@@ -51,6 +51,39 @@ HEADQUARTERS_RELATIONSHIP = {
     }
 }
 
+T_R = {
+    "cardinality": "OneToMany",
+    "paging": {
+        "total_items": 4,
+        "first_page_url": "https://api.crunchbase.com/v/3/funding-rounds/49182d090879aebb464ac8ed65ccb936/investments",
+        "sort_order": "created_at DESC"
+    },
+    "items": [
+        {
+            "type": "Investment",
+            "uuid": "c04e0510e80ced0708d4a3490c60cd22",
+            "properties": {
+                "money_invested": None,
+                "money_invested_currency_code": None,
+                "money_invested_usd": None,
+                "created_at": 1438215743,
+                "updated_at": 1438273006
+            },
+            "relationships": {
+                "investors": [
+                    {
+                        "type": "Organization",
+                        "uuid": "a2281da98a3eda3d56b2b8e0725b1b51",
+                        "properties": {
+                            "permalink": "institutional-venture-partners",
+                            "api_path": "organizations/institutional-venture-partners",
+                            "name": "Investor"
+                        }
+                    }]
+            }
+        }]
+}
+
 
 class RelationshipTestCase(TestCase):
     def test_one_to_many_relationship(self):
@@ -62,3 +95,7 @@ class RelationshipTestCase(TestCase):
     def test_one_to_one_relationship(self):
         hq = Relationship('headquarters', HEADQUARTERS_RELATIONSHIP)
         self.assertEqual(hq.name, "Headquarters")
+
+    def test_nested_relationships(self):
+        r = Relationship('investments', T_R)
+        self.assertEqual(r[0].investors[0].name, 'Investor')
