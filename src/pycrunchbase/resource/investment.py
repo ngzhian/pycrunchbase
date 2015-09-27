@@ -23,15 +23,12 @@ class Investment(Node):
 
     def __str__(self):
         if self.money_invested:
-            return u'{invested}'.format(
-                self.money_invested
-            )
+            return u'Investment: {invested}'.format(
+                invested=self.money_invested)
 
         if hasattr(self, 'investors'):
-            return u'{investors}'.format(self.investors)
-
-        if self.type:
-            return u'{type}'.format(self.type)
+            return u'Investment: {investors}'.format(
+                investors=self.investors)
 
         return u'Investment'
 

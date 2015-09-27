@@ -97,7 +97,7 @@ so we can get the first item in that relationship
 
 ::
 
-    an_investor = round.investments[0]  # a InvestorInvestmentPageItem
+    an_investor = round.investments[0]  # a Investment
 
 And printing that gives us the name of the investor, and the amount
 invested in USD
