@@ -37,7 +37,7 @@ Development
 
 To set up `pycrunchbase` for local development:
 
-1. `Fork pycrunchbase on GitHub <https://github.com/ngzhian/pycrunchbase/fork>`_.
+1. `Fork pycrunchbase on GitHub <https://github.com/ngzhian/pycrunchbase/`_.
 2. Clone your fork locally::
 
     git clone git@github.com:your_name_here/pycrunchbase.git

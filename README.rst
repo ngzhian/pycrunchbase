@@ -6,7 +6,7 @@ pycrunchbase
 | |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
 .. |docs| image:: https://readthedocs.org/projects/pycrunchbase/badge/?style=flat
-    :target: https://readthedocs.org/projects/pycrunchbase
+    :target: https://readthedocs.org/projects/pycrunchbase/
     :alt: Documentation Status
 
 .. |travis| image:: http://img.shields.io/travis/ngzhian/pycrunchbase/master.png?style=flat
@@ -14,7 +14,7 @@ pycrunchbase
     :target: https://travis-ci.org/ngzhian/pycrunchbase
 
 .. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg
-    :target: https://coveralls.io/r/ngzhian/pycrunchbase
+    :target: https://coveralls.io/github/ngzhian/pycrunchbase
 
 .. |version| image:: http://img.shields.io/pypi/v/pycrunchbase.png?style=flat
     :alt: PyPI Package latest release
@@ -120,7 +120,7 @@ Installation
 Documentation
 =============
 
-https://pycrunchbase.readthedocs.org/
+https://readthedocs.org/projects/pycrunchbase/
 
 Development
 ===========
