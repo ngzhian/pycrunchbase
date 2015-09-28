@@ -49,7 +49,7 @@ class Relationship(object):
         # could be a list, e.g.
         # the investments rs of a funding round has investors rs
         if isinstance(item, list):
-            self.items = [PageItem.build(i) for i in item]
+            self.items = [PageItem.build(i) for i in item if i]
             return
 
         if not item or not hasattr(item, 'get'):
