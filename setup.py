@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name="pycrunchbase",
-    version="0.3.4",
+    version="0.3.5",
     license="MIT",
     description="Python bindings to CrunchBase",
     long_description="{0}\n{1}".format(read("README.rst"), re.sub(":obj:`~?(.*?)`", r"``\1``", read("CHANGELOG.rst"))),

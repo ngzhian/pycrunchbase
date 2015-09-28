@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.3.5 (2015-09-28)
+* Fixed handling null rleationships that api returns
+* Update setup.py release alias
+
 0.3.4 (2015-09-27)
 * Fixed instructions in usage.rst (#20)
 * Support nested relationships FundingRound -> Investments -> Organization
