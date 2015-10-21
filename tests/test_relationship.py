@@ -12,16 +12,41 @@ PAST_TEAM_RELATIONSHIP = {
     },
     "items": [
         {
-            "first_name": "First",
-            "last_name": "Last",
-            "title": "Director of Title",
-            "started_on": None,
-            "ended_on": None,
-            "path": "person/first-last",
-            "created_at": 1234567890,
-            "updated_at": 1234567890,
-        }
-    ]
+            "type": "Job",
+            "uuid": "558bac9a0e484b1478762b6e32b66aaa",
+            "properties": {
+                "title": "Co-Founder / President",
+                "started_on": "2008-07-01",
+                "started_on_trust_code": 6,
+                "ended_on": None,
+                "ended_on_trust_code": None,
+                "created_at": 1401278974,
+                "updated_at": 1437762874
+                },
+            "relationships": {
+                "person": {
+                    "type": "Person",
+                    "uuid": "e37bfcba7c041eb29abf404725cf9fc9",
+                    "properties": {
+                        "permalink": "tom-preston-werner",
+                        "api_path": "people/tom-preston-werner",
+                        "web_path": "person/tom-preston-werner",
+                        "first_name": "Tom",
+                        "last_name": "Preston-Werner",
+                        "also_known_as": None,
+                        "bio": "Tom Preston-Werner is a software developer and entrepreneur who co-founded GitHub in 2008, along with Chris Wanstrath and PJ Hyett, to simplify sharing code and make it easy to collaborate on building software. Today, GitHub is the largest code host in the world, with a community of four million people building software together.\r\n\r\nBefore founding GitHub, Tom worked as a Ruby developer for Powerset, a Wikipedia search engine that was acquired by Microsoft. Additionally, Tom invented Gravatar, a service for providing unique avatars that follow you from site to site, which he sold to Automattic in 2007.\r\n\r\nTom grew up in Iowa and came to the west coast to study physics at Harvey Mudd College; he left after two years when he realized that he enjoyed programming far more than the math that was the core of his physics studies. He currently lives in San Francisco with his wife and son.",
+                        "role_investor": True,
+                        "born_on": None,
+                        "born_on_trust_code": None,
+                        "died_on": None,
+                        "died_on_trust_code": 0,
+                        "created_at": 1208251918,
+                        "updated_at": 1443777328
+                        }
+                    }
+                }
+            }
+        ]
 }
 
 HEADQUARTERS_RELATIONSHIP = {
@@ -88,8 +113,9 @@ T_R = {
 class RelationshipTestCase(TestCase):
     def test_one_to_many_relationship(self):
         past_team = Relationship('past_team', PAST_TEAM_RELATIONSHIP)
-        one = past_team.get(0)
-        self.assertEqual(one.first_name, "First")
+        job = past_team.get(0)
+        self.assertEqual(job.title, 'Co-Founder / President')
+        self.assertEqual(job.person.first_name, 'Tom')
         self.assertEqual('past_team', past_team.name)
 
     def test_one_to_one_relationship(self):
