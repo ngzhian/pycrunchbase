@@ -257,8 +257,8 @@ class PageItemTestCase(TestCase):
 
     def test_repr(self):
         page_item = PageItem.build({'sample': 'data'})
-        assert repr(page_item) == "PageItem: {'sample': 'data'}"
+        assert repr(page_item) == 'Node'
 
     def test_str(self):
         page_item = PageItem.build({'sample': 'data'})
-        assert str(page_item) == "PageItem: {'sample': 'data'}"
+        assert repr(page_item) == 'Node'
