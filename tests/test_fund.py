@@ -40,13 +40,17 @@ TEST_DATA = {
                 },
             "items": [
                 {
-                    "url": "http://techcrunch.com/2014/06/10/index-ventures-raises-new-550m-early-stage-fund-for-europe-us-israel-aims-for-the-big-league/",
-                    "author": None,
-                    "posted_on": None,
-                    "type": "PressReference",
-                    "title": "Index Ventures Raises New $550M Early-Stage Fund For Europe, The US And Israel | TechCrunch",
-                    "created_at": 1402455813,
-                    "updated_at": 1402455813
+                    "type": "News",
+                    "uuid": "dc43a8d80eb884e03feff932400094ed",
+                    "properties": {
+                        "title": "Index Ventures Raises New $550M Early-Stage Fund For Europe, The US And Israel | TechCrunch",
+                        "author": None,
+                        "posted_on": "2014-06-10",
+                        "posted_on_trust_code": None,
+                        "url": "http://techcrunch.com/2014/06/10/index-ventures-raises-new-550m-early-stage-fund-for-europe-us-israel-aims-for-the-big-league/",
+                        "created_at": 1402455813,
+                        "updated_at": 1402455813
+                        }
                     }
                 ]
             }
