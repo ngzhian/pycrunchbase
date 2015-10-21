@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.3.6 (2015-10-21)
+* Alias 'PressReference' to news
+* Fix checking for the type of a PageItem, use lowercase compare
+* Update test data, those were out of sync with what CrunchBase no returns. Specifically the test data for Fund and Relationship (Organization.past_team)
+
 0.3.5 (2015-09-28)
 * Fixed handling null rleationships that api returns
 * Update setup.py release alias
