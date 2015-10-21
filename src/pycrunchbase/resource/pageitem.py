@@ -20,62 +20,64 @@ class PageItem(object):
 
     @classmethod
     def build(cls, data):
-        path = data.get('type', '')
-        if path == 'Acquisition':
+        path = data.get('type', '').lower()
+        if path == 'acquisition':
             from .acquisition import Acquisition
             return Acquisition(data)
-        if path == 'FundingRound':
+        if path == 'fundinground':
             from .fundinground import FundingRound
             return FundingRound(data)
-        if path == 'Ipo':
+        if path == 'ipo':
             from .ipo import IPO
             return IPO(data)
-        if path == 'Organization' or path == 'OrganizationSummary':
+        if path == 'organization' or path == 'organizationsummary':
             from .organization import Organization
             return Organization(data)
-        if path == 'Person' or path == 'PersonSummary':
+        if path == 'person' or path == 'personsummary':
             from .person import Person
             return Person(data)
-        if path == 'Product' or path == 'ProductSummary':
+        if path == 'product' or path == 'productsummary':
             from .product import Product
             return Product(data)
-        if path == 'InvestorInvestment' or path == 'Investment':
+        if path == 'investorinvestment' or path == 'investment':
             from .investment import Investment
             return Investment(data)
-        if path == 'Location':
+        if path == 'location':
             from .location import Location
             return Location(data)
-        if path == 'Category':
+        if path == 'category':
             from .category import Category
             return Category(data)
-        if path == 'Fund':
+        if path == 'fund':
             from .fund import Fund
             return Fund(data)
-        if path == 'Job':
+        if path == 'job':
             from .job import Job
             return Job(data)
-        if path == 'Address':
+        if path == 'address':
             from .address import Address
             return Address(data)
-        if path == 'News':
+        if path == 'news':
             from .news import News
             return News(data)
-        if path == 'Image':
+        if path == 'image':
             from .image import Image
             return Image(data)
-        if path == 'Degree':
+        if path == 'degree':
             from .degree import Degree
             return Degree(data)
-        if path == 'Video':
+        if path == 'video':
             from .video import Video
             return Video(data)
-        if path == 'Website':
+        if path == 'website':
             from .website import Website
             return Website(data)
-        if path == 'StockExchange':
+        if path == 'stockexchange':
             from .stockexchange import StockExchange
             return StockExchange(data)
-        return cls(data)
+
+        from .node import Node
+        return Node(data)
 
     def __repr__(self):
         return self.__str__()
