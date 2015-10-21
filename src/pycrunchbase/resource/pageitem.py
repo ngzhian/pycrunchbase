@@ -57,7 +57,7 @@ class PageItem(object):
         if path == 'address':
             from .address import Address
             return Address(data)
-        if path == 'news':
+        if path == 'news' or path == 'pressreference':
             from .news import News
             return News(data)
         if path == 'image':
