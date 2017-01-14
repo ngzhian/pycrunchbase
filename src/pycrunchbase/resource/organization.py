@@ -11,6 +11,7 @@ class Organization(Node):
     KNOWN_RELATIONSHIPS = [
         'primary_image',
         'founders',
+        'featured_team',
         'current_team',
         'past_team',
         'board_members_and_advisors',
@@ -45,6 +46,7 @@ class Organization(Node):
         "also_known_as",
         "short_description",
         "description",
+        "profile_image_url",
         "primary_role",
         "role_company",
         "role_investor",

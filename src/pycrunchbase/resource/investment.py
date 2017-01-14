@@ -13,6 +13,7 @@ class Investment(Node):
         'money_invested',
         'money_invested_currency_code',
         'money_invested_usd',
+        "is_lead_investor",
     ]
 
     KNOWN_RELATIONSHIPS = [

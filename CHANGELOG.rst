@@ -1,6 +1,13 @@
 
 Changelog
 =========
+0.3.7 (2016-1-13)
+* Added `profile_image_url` known property to `Organization`, `Person`, and `Product` per CB-5541 bugfix from 2015-10-21
+* Added `featured_team` relationship for `Organization` per Crunchbase change on 2016-06-22
+* Added known properties `is_current` for `Job` and `is_lead_investor` for `Investment` per CB-9048 on 2016-10-14
+* Fixed typos in `addnode.rst`
+* Added David Tran to `AUTHORS.rst`
+
 
 0.3.6 (2015-10-21)
 * Alias 'PressReference' to news

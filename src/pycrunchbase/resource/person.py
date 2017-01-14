@@ -32,6 +32,7 @@ class Person(Node):
         "first_name",
         "also_known_as",
         "bio",
+        "profile_image_url",
         "role_investor",
         "born_on",
         "born_on_trust_code",
