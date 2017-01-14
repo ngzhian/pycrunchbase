@@ -10,6 +10,7 @@ class Job(Node):
 
     KNOWN_PROPERTIES = [
         "title",
+        "is_current",
         "started_on",
         "started_on_trust_code",
         "ended_on",
@@ -20,6 +21,7 @@ class Job(Node):
 
     KNOWN_RELATIONSHIPS = [
         "person",
+        "organization",
     ]
 
     def _coerce_values(self):

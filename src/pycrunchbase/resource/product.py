@@ -15,6 +15,7 @@ class Product(Node):
         "name",
         "also_known_as",
         "lifecycle_stage",
+        "profile_image_url",
         "launched_on",
         "launched_on_trust_code",
         "closed_on",
