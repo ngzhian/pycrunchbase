@@ -190,6 +190,59 @@ class CrunchBaseTestCase(TestCase):
 
         self.assertIsInstance(orgs, Page)
 
+    @patch('pycrunchbase.pycrunchbase.requests.get')
+    def test_search_for_organization_name_with_reserved_chars(self, mock_get):
+        mock_json = make_mock_response_json({
+            "metadata": {
+                "image_path_prefix": "https://example.com/",
+                "www_path_prefix": "https://www.crunchbase.com/",
+                "api_path_prefix": "https://api.crunchbase.com/v/3/",
+                "version": 2
+                },
+            "data": {
+                "paging": {
+                    "items_per_page": 1000,
+                    "current_page": 1,
+                    "number_of_pages": 1,
+                    "next_page_url": None,
+                    "prev_page_url": None,
+                    "total_items": 6,
+                    "sort_order": "custom"
+                    },
+                "items": [
+                    {
+                        "uuid": "uuid1",
+                        "type": "Organization",
+                        "properties": {
+                            "updated_at": 1415895087,
+                            "created_at": 1371717055,
+                            "path": "organization/organization",
+                            "name": "organization",
+                        }
+                    },
+                    {
+                        "uuid": "uuid2",
+                        "type": "Organization",
+                        "properties": {
+                            "updated_at": 1415768560,
+                            "created_at": 1310530681,
+                            "path": "organization/organization2",
+                            "name": "organization2",
+                        }
+                    }
+                ]
+            }
+        })
+        mock_get.return_value = mock_json
+
+        cb = CrunchBase('123')
+        orgs = cb.organizations('organization & co')
+        mock_get.assert_called_with(
+            'https://api.crunchbase.com/v/3/organizations?'
+            'name=organization%20%26%20co&user_key=123')
+
+        self.assertIsInstance(orgs, Page)
+
     def test_exception_raised_when_making_calls(self):
         with patch('pycrunchbase.pycrunchbase.requests') as mock_request:
             mock_request.get = Mock(side_effect=HTTPError())
