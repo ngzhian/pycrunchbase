@@ -1,6 +1,8 @@
 import requests
 import six
 
+from six.moves import urllib
+
 from .resource import (
     Acquisition,
     FundingRound,
@@ -206,7 +208,7 @@ class CrunchBase(object):
         join_char = '&' if '?' in base_url else '?'
 
         params_string = '&'.join(
-            '%s=%s' % (k, v) for k, v in six.iteritems(params or {}))
+            '%s=%s' % (k, urllib.parse.quote(v)) for k, v in six.iteritems(params or {}))
 
         if params_string:
             params_string += "&user_key=%s" % self.api_key
