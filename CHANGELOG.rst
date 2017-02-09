@@ -1,6 +1,9 @@
 
 Changelog
 =========
+0.3.8 (2017-2-9)
+* Fix #26 encode url if it has special entities
+
 0.3.7 (2016-1-13)
 * Added `profile_image_url` known property to `Organization`, `Person`, and `Product` per CB-5541 bugfix from 2015-10-21
 * Added `featured_team` relationship for `Organization` per Crunchbase change on 2016-06-22
