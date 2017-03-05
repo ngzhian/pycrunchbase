@@ -15,6 +15,6 @@ include CONTRIBUTING.rst
 include LICENSE
 include README.rst
 
-include tox.ini .travis.yml
+include tox.ini .travis.yml .python-version
 
 global-exclude *.py[co] __pycache__ *.so *.pyd *.swp
