@@ -16,7 +16,7 @@ before_install:
 install:
   - pip install tox
 script:
-  - tox -v -e "$(echo py$TRAVIS_PYTHON_VERSION | tr -d .),$(TOXENV)"
+  - tox -v -e "$(echo py$TRAVIS_PYTHON_VERSION | tr -d .),${TOXENV}"
 notifications:
   email:
     on_success: never
