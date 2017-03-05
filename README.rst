@@ -13,7 +13,8 @@ pycrunchbase
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/ngzhian/pycrunchbase
 
-.. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg
+.. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg?style=flat
+    :alt: Coveralls coverage
     :target: https://coveralls.io/github/ngzhian/pycrunchbase
 
 .. |version| image:: http://img.shields.io/pypi/v/pycrunchbase.png?style=flat
