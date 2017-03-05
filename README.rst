@@ -2,8 +2,7 @@
 pycrunchbase
 ===============================
 
-| |docs| |travis| |coveralls|
-| |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+| |docs| |travis| |coveralls| |version|
 
 .. |docs| image:: https://readthedocs.org/projects/pycrunchbase/badge/?style=flat
     :target: https://readthedocs.org/projects/pycrunchbase/
@@ -19,10 +18,6 @@ pycrunchbase
 
 .. |version| image:: http://img.shields.io/pypi/v/pycrunchbase.png?style=flat
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |downloads| image:: http://img.shields.io/pypi/dm/pycrunchbase.png?style=flat
-    :alt: PyPI Package monthly downloads
     :target: https://pypi.python.org/pypi/pycrunchbase
 
 Python bindings to CrunchBase
