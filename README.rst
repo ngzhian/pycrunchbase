@@ -25,18 +25,6 @@ pycrunchbase
     :alt: PyPI Package monthly downloads
     :target: https://pypi.python.org/pypi/pycrunchbase
 
-.. |wheel| image:: https://pypip.in/wheel/pycrunchbase/badge.png?style=flat
-    :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |supported-versions| image:: https://pypip.in/py_versions/pycrunchbase/badge.png?style=flat
-    :alt: Supported versions
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |supported-implementations| image:: https://pypip.in/implementation/pycrunchbase/badge.png?style=flat
-    :alt: Supported imlementations
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
 Python bindings to CrunchBase
 
 Starting from v0.3.0, pycrunchbase has support for CrunchBase API version 3,
