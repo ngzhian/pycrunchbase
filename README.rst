@@ -2,8 +2,7 @@
 pycrunchbase
 ===============================
 
-| |docs| |travis| |coveralls|
-| |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+| |docs| |travis| |coveralls| |version|
 
 .. |docs| image:: https://readthedocs.org/projects/pycrunchbase/badge/?style=flat
     :target: https://readthedocs.org/projects/pycrunchbase/
@@ -13,27 +12,12 @@ pycrunchbase
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/ngzhian/pycrunchbase
 
-.. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg
+.. |coveralls| image:: https://coveralls.io/repos/ngzhian/pycrunchbase/badge.svg?style=flat
+    :alt: Coveralls coverage
     :target: https://coveralls.io/github/ngzhian/pycrunchbase
 
 .. |version| image:: http://img.shields.io/pypi/v/pycrunchbase.png?style=flat
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |downloads| image:: http://img.shields.io/pypi/dm/pycrunchbase.png?style=flat
-    :alt: PyPI Package monthly downloads
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |wheel| image:: https://pypip.in/wheel/pycrunchbase/badge.png?style=flat
-    :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |supported-versions| image:: https://pypip.in/py_versions/pycrunchbase/badge.png?style=flat
-    :alt: Supported versions
-    :target: https://pypi.python.org/pypi/pycrunchbase
-
-.. |supported-implementations| image:: https://pypip.in/implementation/pycrunchbase/badge.png?style=flat
-    :alt: Supported imlementations
     :target: https://pypi.python.org/pypi/pycrunchbase
 
 Python bindings to CrunchBase

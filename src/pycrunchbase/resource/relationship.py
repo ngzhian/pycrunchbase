@@ -131,4 +131,5 @@ class NoneRelationship(Relationship):
     def __str__(self):
         return "NoneRelationship"
 
+
 NoneRelationshipSingleton = NoneRelationship()

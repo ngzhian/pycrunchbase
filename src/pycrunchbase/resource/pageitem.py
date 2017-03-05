@@ -114,4 +114,5 @@ class NonePageItem(PageItem):
     def __str__(self):
         return 'NonePageItem'
 
+
 NonePageItemSingleton = NonePageItem()
