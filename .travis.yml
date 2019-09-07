@@ -1,12 +1,13 @@
 language: python
+matrix:
+    include:
+        - python: 3.7
+          env: TOXENV=check,docs,py37
+        - python: 2.7
+          env: TOXENV=check,docs,py27
 python:
     - "2.7"
-    - "3.7"
-env:
-  matrix:
-    - TOXENV=check
-    - TOXENV=coveralls
-    - TOXENV=docs
+    - "3.7.4"
 before_install:
   - python --version
   - virtualenv --version
