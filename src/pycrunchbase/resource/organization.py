@@ -66,6 +66,9 @@ class Organization(Node):
         "updated_at",
         "stock_exchange",
         "stock_symbol",
+        "contact_email",
+        "phone_number",
+        "rank"
     ]
 
     def _coerce_values(self):

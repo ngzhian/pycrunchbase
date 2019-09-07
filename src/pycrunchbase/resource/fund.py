@@ -21,6 +21,7 @@ class Fund(Node):
     KNOWN_PROPERTIES = [
         "api_path",
         "web_path",
+        "permalink",
         "name",
         "announced_on",
         "announced_on_trust_code",
