@@ -28,7 +28,7 @@ FUNDING_ROUND_DATA = {
    "cardinality": "OneToMany",
    "paging": {
     "total_items": 2,
-    "first_page_url": "https://api.crunchbase.com/v/3/funding-round/uuid1/investments",
+    "first_page_url": "https://api.crunchbase.com/v3.1/funding-round/uuid1/investments",
     "sort_order": "created_at DESC"
    },
    "items": [
@@ -74,7 +74,7 @@ FUNDING_ROUND_DATA = {
    "cardinality": "OneToMany",
    "paging": {
     "total_items": 1,
-    "first_page_url": "https://api.crunchbase.com/v/3/funding-round/uuid1/news",
+    "first_page_url": "https://api.crunchbase.com/v3.1/funding-round/uuid1/news",
     "sort_order": "created_at DESC"
    },
    "items": [

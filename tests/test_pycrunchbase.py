@@ -62,7 +62,7 @@ PAST_TEAM_RELATIONSHIP = '''{
     "cardinality": "OneToMany",
     "paging": {
      "total_items": 3,
-     "first_page_url": "https://api.crunchbase.com/v/3/organizations/example/past_team",
+     "first_page_url": "https://api.crunchbase.com/v3.1/organizations/example/past_team",
      "sort_order": "created_at DESC"
     },
     "items": [
@@ -82,7 +82,7 @@ PAST_TEAM_RELATIONSHIP = '''{
 
 
 class CrunchBaseTestCase(TestCase):
-    base_url = 'https://api.crunchbase.com/v/3/'
+    base_url = 'https://api.crunchbase.com/v3.1/'
     organizations_url = base_url + 'organizations'
     organization_url = base_url + 'organization'
 
@@ -98,7 +98,7 @@ class CrunchBaseTestCase(TestCase):
         data = cb.organizations('organization')
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations?'
+            'https://api.crunchbase.com/v3.1/organizations?'
             'name=organization&user_key=123')
         self.assertIsNone(data)
 
@@ -120,7 +120,7 @@ class CrunchBaseTestCase(TestCase):
         organization = cb.organization('organization')
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations/organization?'
+            'https://api.crunchbase.com/v3.1/organizations/organization?'
             'user_key=123')
         self.assertEqual(organization.description, "Description")
 
@@ -133,7 +133,7 @@ class CrunchBaseTestCase(TestCase):
         data = cb.organization('organization')
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations/organization?'
+            'https://api.crunchbase.com/v3.1/organizations/organization?'
             'user_key=123')
         self.assertIsNone(data)
 
@@ -143,7 +143,7 @@ class CrunchBaseTestCase(TestCase):
             "metadata": {
                 "image_path_prefix": "https://example.com/",
                 "www_path_prefix": "https://www.crunchbase.com/",
-                "api_path_prefix": "https://api.crunchbase.com/v/3/",
+                "api_path_prefix": "https://api.crunchbase.com/v3.1/",
                 "version": 2
                 },
             "data": {
@@ -185,7 +185,7 @@ class CrunchBaseTestCase(TestCase):
         cb = CrunchBase('123')
         orgs = cb.organizations('organization')
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations?'
+            'https://api.crunchbase.com/v3.1/organizations?'
             'name=organization&user_key=123')
 
         self.assertIsInstance(orgs, Page)
@@ -196,7 +196,7 @@ class CrunchBaseTestCase(TestCase):
             "metadata": {
                 "image_path_prefix": "https://example.com/",
                 "www_path_prefix": "https://www.crunchbase.com/",
-                "api_path_prefix": "https://api.crunchbase.com/v/3/",
+                "api_path_prefix": "https://api.crunchbase.com/v3.1/",
                 "version": 2
                 },
             "data": {
@@ -238,7 +238,7 @@ class CrunchBaseTestCase(TestCase):
         cb = CrunchBase('123')
         orgs = cb.organizations('organization & co')
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations?'
+            'https://api.crunchbase.com/v3.1/organizations?'
             'name=organization%20%26%20co&user_key=123')
 
         self.assertIsInstance(orgs, Page)
@@ -268,7 +268,7 @@ class CrunchBaseTestCase(TestCase):
         organization = cb.funding_round('uuid1')
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/funding-rounds/uuid1'
+            'https://api.crunchbase.com/v3.1/funding-rounds/uuid1'
             '?user_key=123')
         self.assertEqual(organization.funding_type, "private_equity")
         self.assertEqual(organization.money_raised, 1000000)
@@ -293,7 +293,7 @@ class CrunchBaseTestCase(TestCase):
         self.assertEqual(person.last_name, "Last")
         self.assertEqual(person.first_name, "First")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/people/name'
+            'https://api.crunchbase.com/v3.1/people/name'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -316,7 +316,7 @@ class CrunchBaseTestCase(TestCase):
         self.assertEqual(product.lifecycle_stage, "Stage")
         self.assertEqual(product.permalink, "permalink1")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/product/permalink1'
+            'https://api.crunchbase.com/v3.1/product/permalink1'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -339,7 +339,7 @@ class CrunchBaseTestCase(TestCase):
         self.assertEqual(acquisition.disposition_of_acquired, "Combined")
         self.assertEqual(acquisition.acquisition_type, "Acqui-hire")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/acquisition/uuid1'
+            'https://api.crunchbase.com/v3.1/acquisitions/uuid1'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -360,7 +360,7 @@ class CrunchBaseTestCase(TestCase):
 
         self.assertEqual(ipo.stock_symbol, "SS")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/ipo/uuid1'
+            'https://api.crunchbase.com/v3.1/ipo/uuid1'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -381,7 +381,7 @@ class CrunchBaseTestCase(TestCase):
 
         self.assertEqual(fundraise.name, "Raise Round I")
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/funds/uuidfundraise'
+            'https://api.crunchbase.com/v3.1/funds/uuidfundraise'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -390,7 +390,7 @@ class CrunchBaseTestCase(TestCase):
             "metadata": {
                 "image_path_prefix": "https://example.com/",
                 "www_path_prefix": "https://www.crunchbase.com/",
-                "api_path_prefix": "https://api.crunchbase.com/v/3/",
+                "api_path_prefix": "https://api.crunchbase.com/v3.1/",
                 "version": 2
                 },
             "data": {
@@ -434,7 +434,7 @@ class CrunchBaseTestCase(TestCase):
         cb = CrunchBase('123')
         locations = cb.locations()
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/locations?user_key=123')
+            'https://api.crunchbase.com/v3.1/locations?user_key=123')
 
         self.assertIsInstance(locations, Page)
         self.assertEqual(2, len(locations))
@@ -450,7 +450,7 @@ class CrunchBaseTestCase(TestCase):
             "metadata": {
                 "image_path_prefix": "https://example.com/",
                 "www_path_prefix": "https://www.crunchbase.com/",
-                "api_path_prefix": "https://api.crunchbase.com/v/3/",
+                "api_path_prefix": "https://api.crunchbase.com/v3.1/",
                 "version": 2
                 },
             "data": {
@@ -494,7 +494,7 @@ class CrunchBaseTestCase(TestCase):
         cb = CrunchBase('123')
         categories = cb.categories()
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/categories?user_key=123')
+            'https://api.crunchbase.com/v3.1/categories?user_key=123')
 
         self.assertIsInstance(categories, Page)
         self.assertEqual(2, len(categories))
@@ -523,7 +523,7 @@ class LoadMoreTestCase(TestCase):
         rs = self.cb.more(rs)
         self.assertIsNone(rs)
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations/example/past_team'
+            'https://api.crunchbase.com/v3.1/organizations/example/past_team'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -540,7 +540,7 @@ class LoadMoreTestCase(TestCase):
         self.assertEquals(3, len(rs))
 
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations/example/past_team'
+            'https://api.crunchbase.com/v3.1/organizations/example/past_team'
             '?user_key=123')
 
     @patch('pycrunchbase.pycrunchbase.requests.get')
@@ -567,7 +567,7 @@ class LoadMoreTestCase(TestCase):
             "cardinality": "OneToMany",
             "paging": {
                 "total_items": 10,
-                "first_page_url": "https://api.crunchbase.com/v/3/"
+                "first_page_url": "https://api.crunchbase.com/v3.1/"
                 "organizations/example/past_team?page=2",
                 "sort_order": "custom"
             },
@@ -579,7 +579,7 @@ class LoadMoreTestCase(TestCase):
 
         self.assertEqual(2, len(more_rs))
         mock_get.assert_called_with(
-            'https://api.crunchbase.com/v/3/organizations/example/past_team'
+            'https://api.crunchbase.com/v3.1/organizations/example/past_team'
             '?page=2&user_key=123')
 
 

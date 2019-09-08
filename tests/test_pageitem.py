@@ -86,7 +86,7 @@ class PageItemTestCase(TestCase):
                     "cardinality": "OneToMany",
                     "paging": {
                         "total_items": 17,
-                        "first_page_url": "https://api.crunchbase.com/v/3/organizations/facebook/investors",
+                        "first_page_url": "https://api.crunchbase.com/v3.1/organizations/facebook/investors",
                         "sort_order": "created_at DESC"
                     },
                     "items": [

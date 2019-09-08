@@ -35,7 +35,7 @@ TEST_DATA = {
             "cardinality": "OneToMany",
             "paging": {
                 "total_items": 1,
-                "first_page_url": "https://api.crunchbase.com/v/3/fund-raise/5807c4efa810655939cfda6f6d48f5a6/news",
+                "first_page_url": "https://api.crunchbase.com/v3.1/fund-raise/5807c4efa810655939cfda6f6d48f5a6/news",
                 "sort_order": "created_at DESC"
                 },
             "items": [

@@ -6,7 +6,7 @@ PAST_TEAM_RELATIONSHIP = {
     "cardinality": "OneToMany",
     "paging": {
         "total_items": 3,
-        "first_page_url": "https://api.crunchbase.com/v/3/"
+        "first_page_url": "https://api.crunchbase.com/v3.1/"
         "organization/example/past_team",
         "sort_order": "created_at DESC"
     },
@@ -80,7 +80,7 @@ T_R = {
     "cardinality": "OneToMany",
     "paging": {
         "total_items": 4,
-        "first_page_url": "https://api.crunchbase.com/v/3/funding-rounds/49182d090879aebb464ac8ed65ccb936/investments",
+        "first_page_url": "https://api.crunchbase.com/v3.1/funding-rounds/49182d090879aebb464ac8ed65ccb936/investments",
         "sort_order": "created_at DESC"
     },
     "items": [

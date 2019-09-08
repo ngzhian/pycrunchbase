@@ -25,7 +25,7 @@ PRODUCT_DATA = {
     "cardinality": "OneToMany",
     "paging": {
      "total_items": 1,
-     "first_page_url": "https://api.crunchbase.com/v/3/product/internet-org/primary_image",
+     "first_page_url": "https://api.crunchbase.com/v3.1/product/internet-org/primary_image",
      "sort_order": "created_at DESC"
     },
     "items": [
@@ -42,7 +42,7 @@ PRODUCT_DATA = {
     "cardinality": "OneToMany",
     "paging": {
      "total_items": 1,
-     "first_page_url": "https://api.crunchbase.com/v/3/product/internet-org/images",
+     "first_page_url": "https://api.crunchbase.com/v3.1/product/internet-org/images",
      "sort_order": "created_at DESC"
     },
     "items": [
@@ -59,7 +59,7 @@ PRODUCT_DATA = {
     "cardinality": "OneToMany",
     "paging": {
      "total_items": 1,
-     "first_page_url": "https://api.crunchbase.com/v/3/product/internet-org/websites",
+     "first_page_url": "https://api.crunchbase.com/v3.1/product/internet-org/websites",
      "sort_order": "created_at DESC"
     },
     "items": [
@@ -76,7 +76,7 @@ PRODUCT_DATA = {
     "cardinality": "OneToMany",
     "paging": {
      "total_items": 2,
-     "first_page_url": "https://api.crunchbase.com/v/3/product/internet-org/news",
+     "first_page_url": "https://api.crunchbase.com/v3.1/product/internet-org/news",
      "sort_order": "created_at DESC"
     },
     "items": [
