@@ -130,14 +130,14 @@ Change the version number in:
 
 Add an entry to CHANGELOG.rst.
 
-```shell
-# build dist
-# https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives
-python3 setup.py sdist bdist_wheel
-# upload
-# https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives
-python3 -m twine upload --repository pycrunchbase dist/*
-```
+::
+
+  # build dist
+  # https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives
+  python3 setup.py sdist bdist_wheel
+  # upload
+  # https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives
+  python3 -m twine upload --repository pycrunchbase dist/*
 
 Contributors
 ============
