@@ -120,6 +120,25 @@ to report a bug or send feedback.
 
 The best way to send feedback is to file an issue at https://github.com/ngzhian/pycrunchbase/issues.
 
+Upgrading versions
+==================
+
+Change the version number in:
+
+- setup.py
+- src/pycrunchbase/__init__.py
+
+Add an entry to CHANGELOG.rst.
+
+```shell
+# build dist
+# https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives
+python3 setup.py sdist bdist_wheel
+# upload
+# https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives
+python3 -m twine upload --repository pycrunchbase dist/*
+```
+
 Contributors
 ============
 
