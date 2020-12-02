@@ -1,6 +1,9 @@
 
 Changelog
 =========
+0.3.9 (2020-12-02)
+* FLexible requests/six versions (#35)
+
 0.3.8 (2017-2-9)
 * Fix #26 encode url if it has special entities
 
